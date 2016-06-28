@@ -11,10 +11,16 @@
 		E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C644A1D20D14B0023E642 /* HWDiscoverTableViewController.m */; };
 		E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C644D1D20D1540023E642 /* HWMeTableViewController.m */; };
 		E10C64511D20D1680023E642 /* HWMessageTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C64501D20D1680023E642 /* HWMessageTableViewController.m */; };
+		E10C64541D20D7A40023E642 /* HWTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C64531D20D7A40023E642 /* HWTabBarController.m */; };
+		E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C64561D2118EC0023E642 /* HWTest1ViewController.m */; };
+		E10C64591D2118EC0023E642 /* HWTest1ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E10C64571D2118EC0023E642 /* HWTest1ViewController.xib */; };
+		E10C645D1D211A980023E642 /* UIView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C645C1D211A980023E642 /* UIView+Extension.m */; };
+		E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = E10C645F1D2125A10023E642 /* HWNavigationController.m */; };
 		E11471531D0E58FA00107A3E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E11471521D0E58FA00107A3E /* main.m */; };
 		E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E11471551D0E58FA00107A3E /* AppDelegate.m */; };
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
+		E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,15 @@
 		E10C644D1D20D1540023E642 /* HWMeTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWMeTableViewController.m; sourceTree = "<group>"; };
 		E10C644F1D20D1680023E642 /* HWMessageTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWMessageTableViewController.h; sourceTree = "<group>"; };
 		E10C64501D20D1680023E642 /* HWMessageTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWMessageTableViewController.m; sourceTree = "<group>"; };
+		E10C64521D20D7A40023E642 /* HWTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTabBarController.h; sourceTree = "<group>"; };
+		E10C64531D20D7A40023E642 /* HWTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTabBarController.m; sourceTree = "<group>"; };
+		E10C64551D2118EC0023E642 /* HWTest1ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTest1ViewController.h; sourceTree = "<group>"; };
+		E10C64561D2118EC0023E642 /* HWTest1ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTest1ViewController.m; sourceTree = "<group>"; };
+		E10C64571D2118EC0023E642 /* HWTest1ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HWTest1ViewController.xib; sourceTree = "<group>"; };
+		E10C645B1D211A980023E642 /* UIView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Extension.h"; sourceTree = "<group>"; };
+		E10C645C1D211A980023E642 /* UIView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Extension.m"; sourceTree = "<group>"; };
+		E10C645E1D2125A10023E642 /* HWNavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNavigationController.h; sourceTree = "<group>"; };
+		E10C645F1D2125A10023E642 /* HWNavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNavigationController.m; sourceTree = "<group>"; };
 		E114714E1D0E58FA00107A3E /* HWeibo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HWeibo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E11471521D0E58FA00107A3E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E11471541D0E58FA00107A3E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -34,6 +49,8 @@
 		E11471601D0E58FA00107A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11471621D0E58FA00107A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
+		E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
+		E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,14 +67,9 @@
 		E10C64431D20D0FB0023E642 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				E10C64461D20D1390023E642 /* HWHomeTableViewController.h */,
-				E10C64491D20D14B0023E642 /* HWDiscoverTableViewController.h */,
-				E10C644A1D20D14B0023E642 /* HWDiscoverTableViewController.m */,
-				E10C644C1D20D1540023E642 /* HWMeTableViewController.h */,
-				E10C644D1D20D1540023E642 /* HWMeTableViewController.m */,
-				E10C644F1D20D1680023E642 /* HWMessageTableViewController.h */,
-				E10C64501D20D1680023E642 /* HWMessageTableViewController.m */,
-				E10C64471D20D1390023E642 /* HWHomeTableViewController.m */,
+				E10C64551D2118EC0023E642 /* HWTest1ViewController.h */,
+				E10C64561D2118EC0023E642 /* HWTest1ViewController.m */,
+				E10C64571D2118EC0023E642 /* HWTest1ViewController.xib */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -65,6 +77,8 @@
 		E10C64441D20D10B0023E642 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				E10C64431D20D0FB0023E642 /* Controller */,
+				E10C645A1D211A3C0023E642 /* Tool */,
 				E11471541D0E58FA00107A3E /* AppDelegate.h */,
 				E11471551D0E58FA00107A3E /* AppDelegate.m */,
 			);
@@ -74,10 +88,22 @@
 		E10C64451D20D1140023E642 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				E10C64431D20D0FB0023E642 /* Controller */,
+				E1BB11CB1D224DFB0030EC5C /* Main */,
+				E1BB11CA1D224DEC0030EC5C /* Home */,
+				E1BB11C91D224DE10030EC5C /* Message */,
+				E1BB11C81D224DCC0030EC5C /* Discover */,
+				E1BB11C71D224DC20030EC5C /* Me */,
 				E10C64441D20D10B0023E642 /* Other */,
 			);
 			name = Classes;
+			sourceTree = "<group>";
+		};
+		E10C645A1D211A3C0023E642 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				E1BB11DF1D2275690030EC5C /* Category */,
+			);
+			name = Tool;
 			sourceTree = "<group>";
 		};
 		E11471451D0E58FA00107A3E = {
@@ -115,6 +141,152 @@
 				E11471521D0E58FA00107A3E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E1BB11C71D224DC20030EC5C /* Me */ = {
+			isa = PBXGroup;
+			children = (
+				E1BB11D51D225D780030EC5C /* Controller */,
+			);
+			name = Me;
+			sourceTree = "<group>";
+		};
+		E1BB11C81D224DCC0030EC5C /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				E1BB11D41D225D6A0030EC5C /* Model */,
+				E1BB11D31D225D620030EC5C /* View */,
+				E1BB11D21D225D430030EC5C /* Controller */,
+			);
+			name = Discover;
+			sourceTree = "<group>";
+		};
+		E1BB11C91D224DE10030EC5C /* Message */ = {
+			isa = PBXGroup;
+			children = (
+				E1BB11D11D225D380030EC5C /* Model */,
+				E1BB11D01D224E450030EC5C /* View */,
+				E1BB11CF1D224E2E0030EC5C /* Controller */,
+			);
+			name = Message;
+			sourceTree = "<group>";
+		};
+		E1BB11CA1D224DEC0030EC5C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				E1BB11CE1D224E1C0030EC5C /* Model */,
+				E1BB11CD1D224E160030EC5C /* View */,
+				E1BB11CC1D224E0C0030EC5C /* Controller */,
+			);
+			name = Home;
+			sourceTree = "<group>";
+		};
+		E1BB11CB1D224DFB0030EC5C /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E1BB11D71D225FCD0030EC5C /* Controller */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		E1BB11CC1D224E0C0030EC5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E10C64461D20D1390023E642 /* HWHomeTableViewController.h */,
+				E10C64471D20D1390023E642 /* HWHomeTableViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E1BB11CD1D224E160030EC5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E1BB11CE1D224E1C0030EC5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E1BB11CF1D224E2E0030EC5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E10C644F1D20D1680023E642 /* HWMessageTableViewController.h */,
+				E10C64501D20D1680023E642 /* HWMessageTableViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E1BB11D01D224E450030EC5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E1BB11D11D225D380030EC5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E1BB11D21D225D430030EC5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E10C64491D20D14B0023E642 /* HWDiscoverTableViewController.h */,
+				E10C644A1D20D14B0023E642 /* HWDiscoverTableViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E1BB11D31D225D620030EC5C /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E1BB11D41D225D6A0030EC5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		E1BB11D51D225D780030EC5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E10C644C1D20D1540023E642 /* HWMeTableViewController.h */,
+				E10C644D1D20D1540023E642 /* HWMeTableViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E1BB11D71D225FCD0030EC5C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E10C64521D20D7A40023E642 /* HWTabBarController.h */,
+				E10C64531D20D7A40023E642 /* HWTabBarController.m */,
+				E10C645E1D2125A10023E642 /* HWNavigationController.h */,
+				E10C645F1D2125A10023E642 /* HWNavigationController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E1BB11DF1D2275690030EC5C /* Category */ = {
+			isa = PBXGroup;
+			children = (
+				E10C645B1D211A980023E642 /* UIView+Extension.h */,
+				E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */,
+				E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */,
+				E10C645C1D211A980023E642 /* UIView+Extension.m */,
+			);
+			name = Category;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +346,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E10C64591D2118EC0023E642 /* HWTest1ViewController.xib in Resources */,
 				E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */,
 				E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */,
 			);
@@ -186,9 +359,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */,
+				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
+				E10C645D1D211A980023E642 /* UIView+Extension.m in Sources */,
 				E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */,
+				E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */,
 				E11471531D0E58FA00107A3E /* main.m in Sources */,
 				E10C64511D20D1680023E642 /* HWMessageTableViewController.m in Sources */,
+				E10C64541D20D7A40023E642 /* HWTabBarController.m in Sources */,
 				E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */,
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
 				E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */,
