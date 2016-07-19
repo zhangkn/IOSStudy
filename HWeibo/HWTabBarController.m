@@ -34,7 +34,7 @@
 
 #pragma mark -     //设置子控制器
 - (void)addChildVC:(UIViewController*)childVC Title:(NSString*)title imageName:(NSString*)imageName  selectwsImageName:(NSString*)selectwsImageName {
-    childVC.view.backgroundColor = HWRandomColor;
+//    childVC.view.backgroundColor = HWRandomColor;
 //    vc1.tabBarItem.title = title;//设置tabBar 的文字
 //    vc1.navigationItem.title = title;//设置导航栏的标题
     childVC.title = title;//同时设置tabBar 和导航栏的标题

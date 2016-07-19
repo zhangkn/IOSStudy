@@ -10,6 +10,20 @@
 
 @implementation HWNavigationController
 
+#pragma mark - 设置导航栏主题
++ (void)initialize{
+    UIBarButtonItem *barButtonItem=[UIBarButtonItem appearance];
+    NSMutableDictionary *textAttributes= [NSMutableDictionary dictionary];
+    textAttributes[NSForegroundColorAttributeName]= [UIColor orangeColor];
+    textAttributes[NSFontAttributeName] = [UIFont systemFontOfSize:14];
+    [barButtonItem setTitleTextAttributes:textAttributes forState:UIControlStateNormal];
+    //设置不可编辑状态的样式
+    NSMutableDictionary *disabledTextAttributes= [NSMutableDictionary dictionary];
+    disabledTextAttributes[NSForegroundColorAttributeName]= [UIColor grayColor];
+    disabledTextAttributes[NSFontAttributeName] = [UIFont systemFontOfSize:14];
+    [barButtonItem setTitleTextAttributes:disabledTextAttributes forState:UIControlStateDisabled];
+}
+
 #pragma mark - 拦截push;--//90%的拦截，都是通过自定义类，重写自带的方法实现
 - (void)pushViewController:(UIViewController *)viewController animated:(BOOL)animated{
     if (self.viewControllers.count>0) {
