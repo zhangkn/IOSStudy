@@ -12,7 +12,9 @@
 #import "HWMeTableViewController.h"
 #import "HWHomeTableViewController.h"
 #import "HWNavigationController.h"
-@interface HWTabBarController ()
+#import "HWTabBar.h"
+@interface HWTabBarController () <HWTabBarDelegate>
+
 
 @end
 
@@ -20,6 +22,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // 初始化子控制器
     //设置子控制器
     UIViewController *home =[[HWHomeTableViewController alloc]init];
@@ -30,13 +33,23 @@
     [self addChildVC:discover Title:@"Discover" imageName:@"tabbar_discover" selectwsImageName:@"tabbar_discover_selected"];
     UIViewController *me = [[HWMeTableViewController alloc]init];
     [self addChildVC:me Title:@"Me" imageName:@"tabbar_profile" selectwsImageName:@"tabbar_profile_selected"];
-    //
-    UIButton *tabbarComposeButton = [[UIButton alloc]init];
-    [tabbarComposeButton setBackgroundImage:@"tabbar_compose_button" forState:UIControlStateNormal];
-    [tabbarComposeButton setBackgroundImage:@"tabbar_compose_button_highlighted" forState:UIControlStateHighlighted];
-
-    [self.tabBar addSubview:tabbarComposeButton];
+    
+    //使用自定义的tabBar
+    HWTabBar *tabBar =[[HWTabBar alloc]init];
+    [self setValue:tabBar forKey:@"tabBar"];
+    
 }
+
+#pragma mark -    HWTabBarDelegate 点击发布按钮
+- (void)tabBarDidClickPlusButton:(HWTabBar *)tabBar{
+    NSLog(@"%s",__func__);
+    UIViewController *vc = [[UIViewController alloc]init];
+    vc.view.backgroundColor = HWRandomColor;
+    [self presentViewController:vc animated:YES completion:nil];
+}
+
+
+
 
 #pragma mark -     //设置子控制器
 - (void)addChildVC:(UIViewController*)childVC Title:(NSString*)title imageName:(NSString*)imageName  selectwsImageName:(NSString*)selectwsImageName {

@@ -23,6 +23,7 @@
 		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
 		E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C81D3F79840050D822 /* HWDropDown.m */; };
 		E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */; };
+		E1E2205F1D40B9E200BC090B /* HWTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E2205E1D40B9E200BC090B /* HWTabBar.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,8 @@
 		E19D87C81D3F79840050D822 /* HWDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWDropDown.m; sourceTree = "<group>"; };
 		E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
 		E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
+		E1E2205D1D40B9E200BC090B /* HWTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTabBar.h; sourceTree = "<group>"; };
+		E1E2205E1D40B9E200BC090B /* HWTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTabBar.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -155,6 +158,8 @@
 				E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */,
 				E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */,
 				E19D87C71D3F79840050D822 /* HWDropDown.h */,
+				E1E2205D1D40B9E200BC090B /* HWTabBar.h */,
+				E1E2205E1D40B9E200BC090B /* HWTabBar.m */,
 				E19D87C81D3F79840050D822 /* HWDropDown.m */,
 			);
 			name = View;
@@ -382,6 +387,7 @@
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
 				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,
 				E10C645D1D211A980023E642 /* UIView+Extension.m in Sources */,
+				E1E2205F1D40B9E200BC090B /* HWTabBar.m in Sources */,
 				E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */,
 				E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */,
 				E11471531D0E58FA00107A3E /* main.m in Sources */,
