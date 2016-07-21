@@ -20,6 +20,8 @@
 		E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E11471551D0E58FA00107A3E /* AppDelegate.m */; };
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
+		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
+		E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C81D3F79840050D822 /* HWDropDown.m */; };
 		E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,10 @@
 		E11471601D0E58FA00107A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11471621D0E58FA00107A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
+		E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWSearchBar.h; sourceTree = "<group>"; };
+		E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWSearchBar.m; sourceTree = "<group>"; };
+		E19D87C71D3F79840050D822 /* HWDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWDropDown.h; sourceTree = "<group>"; };
+		E19D87C81D3F79840050D822 /* HWDropDown.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWDropDown.m; sourceTree = "<group>"; };
 		E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
 		E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -143,6 +149,17 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E19D87C21D3F2DFD0050D822 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */,
+				E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */,
+				E19D87C71D3F79840050D822 /* HWDropDown.h */,
+				E19D87C81D3F79840050D822 /* HWDropDown.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
 		E1BB11C71D224DC20030EC5C /* Me */ = {
 			isa = PBXGroup;
 			children = (
@@ -184,6 +201,7 @@
 		E1BB11CB1D224DFB0030EC5C /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				E19D87C21D3F2DFD0050D822 /* View */,
 				E1BB11D71D225FCD0030EC5C /* Controller */,
 			);
 			name = Main;
@@ -315,6 +333,7 @@
 		E11471461D0E58FA00107A3E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = HW;
 				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = hisun;
 				TargetAttributes = {
@@ -361,6 +380,7 @@
 			files = (
 				E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */,
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
+				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,
 				E10C645D1D211A980023E642 /* UIView+Extension.m in Sources */,
 				E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */,
 				E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */,
@@ -370,6 +390,7 @@
 				E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */,
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
 				E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */,
+				E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

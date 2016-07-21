@@ -30,6 +30,12 @@
     [self addChildVC:discover Title:@"Discover" imageName:@"tabbar_discover" selectwsImageName:@"tabbar_discover_selected"];
     UIViewController *me = [[HWMeTableViewController alloc]init];
     [self addChildVC:me Title:@"Me" imageName:@"tabbar_profile" selectwsImageName:@"tabbar_profile_selected"];
+    //
+    UIButton *tabbarComposeButton = [[UIButton alloc]init];
+    [tabbarComposeButton setBackgroundImage:@"tabbar_compose_button" forState:UIControlStateNormal];
+    [tabbarComposeButton setBackgroundImage:@"tabbar_compose_button_highlighted" forState:UIControlStateHighlighted];
+
+    [self.tabBar addSubview:tabbarComposeButton];
 }
 
 #pragma mark -     //设置子控制器
@@ -44,7 +50,7 @@
     NSMutableDictionary *textAttr = [NSMutableDictionary dictionary];
     textAttr[NSForegroundColorAttributeName] = HWColor(123, 123, 123);
     [childVC.tabBarItem setTitleTextAttributes:textAttr forState:UIControlStateNormal];
-    //选择状态的文字颜色
+    //选择状态的文字颜色样式
     NSMutableDictionary *selectedTextAttr = [NSMutableDictionary dictionary];
     [selectedTextAttr setValue:[UIColor orangeColor] forKey:NSForegroundColorAttributeName];
     [childVC.tabBarItem setTitleTextAttributes:selectedTextAttr forState:UIControlStateSelected];
