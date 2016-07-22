@@ -8,11 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class HWDropDown;
+@protocol HWDropDownDelagate <NSObject>
+@optional
+- (void)dropDownDismiss:(HWDropDown*)dropdown;
+- (void)dropDownShow:(HWDropDown*)dropdown;
+@end
+
+
 @interface HWDropDown : UIView
 /** 下拉菜单控件*/
 @property (nonatomic,weak) UIView *contentView;
 /** 内容控制器*/
 @property (nonatomic,weak) UIViewController *contentViewController;
+@property (nonatomic,weak) id<HWDropDownDelagate> delegate;
+
 
 
 

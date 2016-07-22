@@ -56,6 +56,11 @@
     CGRect fromViewRect = [view convertRect:view.bounds toView:lastWindow];
     self.containerView.y= CGRectGetMaxY(fromViewRect);
     self.containerView.centerX = CGRectGetMidX(fromViewRect);
+    
+    if ([self.delegate respondsToSelector:@selector(dropDownShow:)]) {
+        [self.delegate dropDownShow:self];
+    }
+
 
 }
 +(instancetype)nemu{
@@ -63,6 +68,9 @@
 }
 -(void)dismiss{
     [self removeFromSuperview];
+    if ([self.delegate respondsToSelector:@selector(dropDownDismiss:)]) {
+        [self.delegate dropDownDismiss:self];
+    }
 }
 
 - (instancetype)initWithFrame:(CGRect)frame{
