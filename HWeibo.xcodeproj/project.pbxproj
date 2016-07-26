@@ -20,6 +20,8 @@
 		E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E11471551D0E58FA00107A3E /* AppDelegate.m */; };
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
+		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
+		E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D5D031D475EF20042B13A /* HWOAuthViewController.m */; };
 		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
 		E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C81D3F79840050D822 /* HWDropDown.m */; };
 		E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */; };
@@ -52,6 +54,10 @@
 		E11471601D0E58FA00107A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11471621D0E58FA00107A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
+		E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewFeatureViewController.h; sourceTree = "<group>"; };
+		E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNewFeatureViewController.m; sourceTree = "<group>"; };
+		E19D5D021D475EF20042B13A /* HWOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOAuthViewController.h; sourceTree = "<group>"; };
+		E19D5D031D475EF20042B13A /* HWOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWOAuthViewController.m; sourceTree = "<group>"; };
 		E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWSearchBar.h; sourceTree = "<group>"; };
 		E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWSearchBar.m; sourceTree = "<group>"; };
 		E19D87C71D3F79840050D822 /* HWDropDown.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWDropDown.h; sourceTree = "<group>"; };
@@ -97,6 +103,8 @@
 		E10C64451D20D1140023E642 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E19D5D001D475EB40042B13A /* Oauth2 */,
+				E17066B61D41C40900E6625B /* NewFeature(新特性) */,
 				E1BB11CB1D224DFB0030EC5C /* Main */,
 				E1BB11CA1D224DEC0030EC5C /* Home */,
 				E1BB11C91D224DE10030EC5C /* Message */,
@@ -150,6 +158,48 @@
 				E11471521D0E58FA00107A3E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E17066B61D41C40900E6625B /* NewFeature(新特性) */ = {
+			isa = PBXGroup;
+			children = (
+				E17066B81D41C43200E6625B /* Controller */,
+				E17066B71D41C42D00E6625B /* View */,
+			);
+			name = "NewFeature(新特性)";
+			sourceTree = "<group>";
+		};
+		E17066B71D41C42D00E6625B /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		E17066B81D41C43200E6625B /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */,
+				E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		E19D5D001D475EB40042B13A /* Oauth2 */ = {
+			isa = PBXGroup;
+			children = (
+				E19D5D011D475EB90042B13A /* Controller */,
+			);
+			name = Oauth2;
+			sourceTree = "<group>";
+		};
+		E19D5D011D475EB90042B13A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E19D5D021D475EF20042B13A /* HWOAuthViewController.h */,
+				E19D5D031D475EF20042B13A /* HWOAuthViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		E19D87C21D3F2DFD0050D822 /* View */ = {
@@ -384,6 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */,
+				E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */,
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
 				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,
 				E10C645D1D211A980023E642 /* UIView+Extension.m in Sources */,
@@ -392,6 +443,7 @@
 				E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */,
 				E11471531D0E58FA00107A3E /* main.m in Sources */,
 				E10C64511D20D1680023E642 /* HWMessageTableViewController.m in Sources */,
+				E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */,
 				E10C64541D20D7A40023E642 /* HWTabBarController.m in Sources */,
 				E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */,
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
@@ -503,7 +555,7 @@
 				INFOPLIST_FILE = HWeibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hisunpay.www.HWeibo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hisuntech.HWeibo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -517,7 +569,7 @@
 				INFOPLIST_FILE = HWeibo/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.hisunpay.www.HWeibo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hisuntech.HWeibo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
