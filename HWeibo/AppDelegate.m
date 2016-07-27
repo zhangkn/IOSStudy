@@ -9,6 +9,8 @@
 #import "AppDelegate.h"
 #import "HWTabBarController.h"
 #import "HWNewFeatureViewController.h"
+#import "HWOAuthViewController.h"
+#import "HWAccountModel.h"
 
 
 @interface AppDelegate ()
@@ -24,6 +26,23 @@
     self.window = [[UIWindow alloc]init];
     self.window.frame = [[UIScreen mainScreen]bounds];
     //设置根控制器
+    
+    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"account.archive"];
+//    NSDictionary *accountDict = [NSDictionary dictionaryWithContentsOfFile:path];
+    HWAccountModel *acount = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
+    NSLog(@"%@",path);
+    if (acount) {//已经存在用户信息
+        [self isShowNewFeatureViewController];
+    }else{
+        self.window.rootViewController = [[HWOAuthViewController alloc]init];
+    }
+    //显示窗口
+    [self.window makeKeyAndVisible];
+    return YES;
+}
+
+#pragma mark - 判断是否显示新特性
+- (void)isShowNewFeatureViewController{
     //获取当前版本号
     NSString *versionKey = @"CFBundleVersion";
     NSDictionary *infoDictionary=[NSBundle mainBundle].infoDictionary;
@@ -35,15 +54,11 @@
     if (!userDefaultsCFBundleVersion || ![userDefaultsCFBundleVersion isEqualToString:infoPlistCFBundleVersion]) {
         [[NSUserDefaults standardUserDefaults] setObject:infoPlistCFBundleVersion forKey:versionKey];
         [[NSUserDefaults standardUserDefaults] synchronize];
-         vc = [[HWNewFeatureViewController alloc]init];
+        vc = [[HWNewFeatureViewController alloc]init];
     }else{
-         vc = [[HWTabBarController alloc]init];
+        vc = [[HWTabBarController alloc]init];
     }
-    
     self.window.rootViewController = vc;
-    //显示窗口
-    [self.window makeKeyAndVisible];
-    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {
