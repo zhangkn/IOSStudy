@@ -20,6 +20,8 @@
 		E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E11471551D0E58FA00107A3E /* AppDelegate.m */; };
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
+		E139D9161D49AA060052815A /* HWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D9151D49AA060052815A /* HWAccountTool.m */; };
+		E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91B1D49D7D40052815A /* UIWindow+Extension.m */; };
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
 		E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D5D031D475EF20042B13A /* HWOAuthViewController.m */; };
 		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
@@ -67,6 +69,10 @@
 		E11471601D0E58FA00107A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11471621D0E58FA00107A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
+		E139D9141D49AA060052815A /* HWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWAccountTool.h; sourceTree = "<group>"; };
+		E139D9151D49AA060052815A /* HWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWAccountTool.m; sourceTree = "<group>"; };
+		E139D91A1D49D7D40052815A /* UIWindow+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
+		E139D91B1D49D7D40052815A /* UIWindow+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Extension.m"; sourceTree = "<group>"; };
 		E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewFeatureViewController.h; sourceTree = "<group>"; };
 		E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNewFeatureViewController.m; sourceTree = "<group>"; };
 		E19D5D021D475EF20042B13A /* HWOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOAuthViewController.h; sourceTree = "<group>"; };
@@ -199,6 +205,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E139D9131D49A9F40052815A /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				E139D9141D49AA060052815A /* HWAccountTool.h */,
+				E139D9151D49AA060052815A /* HWAccountTool.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
 		E17066B61D41C40900E6625B /* NewFeature(新特性) */ = {
 			isa = PBXGroup;
 			children = (
@@ -227,6 +242,7 @@
 		E19D5D001D475EB40042B13A /* Oauth2 */ = {
 			isa = PBXGroup;
 			children = (
+				E139D9131D49A9F40052815A /* Tool */,
 				E1E901141D48961F001F78C3 /* Model */,
 				E19D5D011D475EB90042B13A /* Controller */,
 			);
@@ -396,6 +412,8 @@
 			isa = PBXGroup;
 			children = (
 				E10C645B1D211A980023E642 /* UIView+Extension.h */,
+				E139D91A1D49D7D40052815A /* UIWindow+Extension.h */,
+				E139D91B1D49D7D40052815A /* UIWindow+Extension.m */,
 				E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */,
 				E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */,
 				E10C645C1D211A980023E642 /* UIView+Extension.m */,
@@ -532,10 +550,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				E1E901131D484BDE001F78C3 /* AFURLSessionManager.m in Sources */,
+				E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */,
 				E1E901101D484BDE001F78C3 /* AFURLConnectionOperation.m in Sources */,
 				E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */,
 				E1E9010D1D484BDE001F78C3 /* AFHTTPSessionManager.m in Sources */,
 				E1E9010E1D484BDE001F78C3 /* AFNetworkReachabilityManager.m in Sources */,
+				E139D9161D49AA060052815A /* HWAccountTool.m in Sources */,
 				E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */,
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
 				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,

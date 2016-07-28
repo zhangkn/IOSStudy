@@ -8,10 +8,10 @@
 
 #import "HWOAuthViewController.h"
 #import "AFNetworking.h"
-#import "HWTabBarController.h"
-#import "HWNewFeatureViewController.h"
 #import "HWAccountModel.h"
 #import "MBProgressHUD+MJ.h"
+#import "HWAccountTool.h"
+
 #define HWClientId @"647592779"
 #define HWRedirectUri @"https://www.baidu.com"
 #define HWClientSecret @"713f7438c3dc731b87d8a9624e7e8ab9"
@@ -77,48 +77,16 @@
     //发送请求
     [mgr POST:@"https://api.weibo.com/oauth2/access_token" parameters:paramters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         [MBProgressHUD hideHUD];
-        /**
-         {
-         "access_token" = "2.00AnExMD0p9Oph67943a5a72L4R5WE";
-         "expires_in" = 143397;
-         "remind_in" = 143397;
-         uid = 2939794294;
-         }
-         */
-        NSLog(@"%@,%@",responseObject[@"access_token"],responseObject);//2.00tiObTG0p9Oph988048ce86X7FMbC,    uid = 5934185471;    "expires_in" = 157679999;
-        NSString *documentDirectory=[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject];///Users/devzkn/Library/Developer/CoreSimulator/Devices/5A6E02FF-A156-455B-AE43-C207F4E7FBC4/data/Containers/Data/Application/62D2DAEF-5064-47A3-B04B-A7933DE6CA31/Documents
-//        NSString *doc = [documentDirectory stringByAppendingPathComponent:@"account.plist"];
-//        [responseObject writeToFile:doc atomically:YES];
-        //自定义对象的存储
-        NSString *doc = [documentDirectory stringByAppendingPathComponent:@"account.archive"];
         HWAccountModel *account = [HWAccountModel accountWithDictionary:responseObject];
-        [NSKeyedArchiver archiveRootObject:account toFile:doc];
+        //存储帐号信息
+        [HWAccountTool saveAccount:account];
         //切换窗口的根控制器
-        [self isShowNewFeatureViewController];
-        
+        [[UIApplication sharedApplication].keyWindow switchRootViewController];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         [MBProgressHUD hideHUD];
     }];
 }
 
-- (void)isShowNewFeatureViewController{
-    //获取当前版本号
-    NSString *versionKey = @"CFBundleVersion";
-    NSDictionary *infoDictionary=[NSBundle mainBundle].infoDictionary;
-    NSString *infoPlistCFBundleVersion =infoDictionary[versionKey];
-    //获取上次打开的版本号
-    NSString *userDefaultsCFBundleVersion =[[NSUserDefaults standardUserDefaults] valueForKey:versionKey];
-    NSLog(@"%@,%@",infoPlistCFBundleVersion,userDefaultsCFBundleVersion);
-    UIViewController *vc;
-    if (!userDefaultsCFBundleVersion || ![userDefaultsCFBundleVersion isEqualToString:infoPlistCFBundleVersion]) {
-        [[NSUserDefaults standardUserDefaults] setObject:infoPlistCFBundleVersion forKey:versionKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        vc = [[HWNewFeatureViewController alloc]init];
-    }else{
-        vc = [[HWTabBarController alloc]init];
-    }
-    [UIApplication sharedApplication].keyWindow.rootViewController = vc;
-}
 
 
 @end

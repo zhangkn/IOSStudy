@@ -388,12 +388,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/AppDelegate.m"
-            timestampString = "491301610.018211"
+            timestampString = "491379090.028198"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "HWeibo/UIWindow+Extension.m"
+            timestampString = "491379122.924559"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "+switchRootViewControllerWithWindow:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

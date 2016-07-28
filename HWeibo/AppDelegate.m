@@ -7,10 +7,9 @@
 //
 
 #import "AppDelegate.h"
-#import "HWTabBarController.h"
-#import "HWNewFeatureViewController.h"
 #import "HWOAuthViewController.h"
 #import "HWAccountModel.h"
+#import "HWAccountTool.h"
 
 
 @interface AppDelegate ()
@@ -26,13 +25,9 @@
     self.window = [[UIWindow alloc]init];
     self.window.frame = [[UIScreen mainScreen]bounds];
     //设置根控制器
-    
-    NSString *path = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"account.archive"];
-//    NSDictionary *accountDict = [NSDictionary dictionaryWithContentsOfFile:path];
-    HWAccountModel *acount = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
-    NSLog(@"%@",path);
-    if (acount) {//已经存在用户信息
-        [self isShowNewFeatureViewController];
+    HWAccountModel *account = [HWAccountTool account];
+    if (account) {//已经存在用户信息
+        [self.window switchRootViewController];
     }else{
         self.window.rootViewController = [[HWOAuthViewController alloc]init];
     }
@@ -41,25 +36,6 @@
     return YES;
 }
 
-#pragma mark - 判断是否显示新特性
-- (void)isShowNewFeatureViewController{
-    //获取当前版本号
-    NSString *versionKey = @"CFBundleVersion";
-    NSDictionary *infoDictionary=[NSBundle mainBundle].infoDictionary;
-    NSString *infoPlistCFBundleVersion =infoDictionary[versionKey];
-    //获取上次打开的版本号
-    NSString *userDefaultsCFBundleVersion =[[NSUserDefaults standardUserDefaults] valueForKey:versionKey];
-    NSLog(@"%@,%@",infoPlistCFBundleVersion,userDefaultsCFBundleVersion);
-    UIViewController *vc;
-    if (!userDefaultsCFBundleVersion || ![userDefaultsCFBundleVersion isEqualToString:infoPlistCFBundleVersion]) {
-        [[NSUserDefaults standardUserDefaults] setObject:infoPlistCFBundleVersion forKey:versionKey];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        vc = [[HWNewFeatureViewController alloc]init];
-    }else{
-        vc = [[HWTabBarController alloc]init];
-    }
-    self.window.rootViewController = vc;
-}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

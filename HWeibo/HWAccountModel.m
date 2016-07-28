@@ -31,7 +31,9 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.access_token forKey:@"access_token"];
     [aCoder encodeObject:self.uid forKey:@"uid"];
-    [aCoder encodeObject:self.expires_in forKey:@"expires_in"];    
+    [aCoder encodeObject:self.expires_in forKey:@"expires_in"];
+    [aCoder encodeObject:self.createDate forKey:@"createDate"];
+
 }
 #if 1
 - (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
@@ -40,6 +42,8 @@
         self.access_token=[aDecoder decodeObjectForKey:@"access_token"];
         self.uid=[aDecoder decodeObjectForKey:@"uid"];
         self.expires_in=[aDecoder decodeObjectForKey:@"expires_in"];
+        self.createDate=[aDecoder decodeObjectForKey:@"createDate"];
+
     }
     return self;
 }// NS_DESIGNATED_INITIALIZER
