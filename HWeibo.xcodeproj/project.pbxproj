@@ -22,6 +22,8 @@
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
 		E139D9161D49AA060052815A /* HWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D9151D49AA060052815A /* HWAccountTool.m */; };
 		E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91B1D49D7D40052815A /* UIWindow+Extension.m */; };
+		E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91D1D49F7570052815A /* Foundation+Log.m */; };
+		E13C3A071D4AF2160026221C /* HWTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A061D4AF2160026221C /* HWTitleButton.m */; };
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
 		E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D5D031D475EF20042B13A /* HWOAuthViewController.m */; };
 		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
@@ -73,6 +75,9 @@
 		E139D9151D49AA060052815A /* HWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWAccountTool.m; sourceTree = "<group>"; };
 		E139D91A1D49D7D40052815A /* UIWindow+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
 		E139D91B1D49D7D40052815A /* UIWindow+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Extension.m"; sourceTree = "<group>"; };
+		E139D91D1D49F7570052815A /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		E13C3A051D4AF2160026221C /* HWTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTitleButton.h; sourceTree = "<group>"; };
+		E13C3A061D4AF2160026221C /* HWTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTitleButton.m; sourceTree = "<group>"; };
 		E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewFeatureViewController.h; sourceTree = "<group>"; };
 		E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNewFeatureViewController.m; sourceTree = "<group>"; };
 		E19D5D021D475EF20042B13A /* HWOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOAuthViewController.h; sourceTree = "<group>"; };
@@ -331,6 +336,8 @@
 		E1BB11CD1D224E160030EC5C /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E13C3A051D4AF2160026221C /* HWTitleButton.h */,
+				E13C3A061D4AF2160026221C /* HWTitleButton.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -411,6 +418,7 @@
 		E1BB11DF1D2275690030EC5C /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E139D91D1D49F7570052815A /* Foundation+Log.m */,
 				E10C645B1D211A980023E642 /* UIView+Extension.h */,
 				E139D91A1D49D7D40052815A /* UIWindow+Extension.h */,
 				E139D91B1D49D7D40052815A /* UIWindow+Extension.m */,
@@ -556,6 +564,7 @@
 				E1E9010D1D484BDE001F78C3 /* AFHTTPSessionManager.m in Sources */,
 				E1E9010E1D484BDE001F78C3 /* AFNetworkReachabilityManager.m in Sources */,
 				E139D9161D49AA060052815A /* HWAccountTool.m in Sources */,
+				E13C3A071D4AF2160026221C /* HWTitleButton.m in Sources */,
 				E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */,
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
 				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,
@@ -573,6 +582,7 @@
 				E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */,
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
 				E1E901171D489633001F78C3 /* HWAccountModel.m in Sources */,
+				E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */,
 				E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */,
 				E1E901111D484BDE001F78C3 /* AFURLRequestSerialization.m in Sources */,
 				E1E9010B1D484BDE001F78C3 /* AFHTTPRequestOperation.m in Sources */,

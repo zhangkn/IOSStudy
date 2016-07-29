@@ -8,6 +8,9 @@
 
 #import "HWHomeTableViewController.h"
 #import "HWDropDown.h"
+#import "AFNetworking.h"
+#import "HWAccountTool.h"
+#import "HWTitleButton.h"
 
 @interface HWHomeTableViewController ()<HWDropDownDelagate>
 
@@ -17,32 +20,51 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //设置导航栏内容
+    [self setNavigationContent];
+    //获取用户信息
+    [self getUserInfo];
+}
+#pragma mark -  获取用户信息
+/** 
+
+ */
+- (void) getUserInfo{
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    HWAccountModel *account = [HWAccountTool account];
+    parameters[@"access_token"]= account.access_token;
+    parameters[@"uid"]= account.uid;
+    [mgr GET:@"https://api.weibo.com/2/users/show.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        //设置首页标题文字
+        NSLog(@"%@",responseObject);
+        UIButton *titleButton = (UIButton*)self.navigationItem.titleView;
+        account.name = responseObject[@"name"];
+        [titleButton setTitle:account.name forState:UIControlStateNormal];
+        //存储昵称
+        [HWAccountTool  saveAccount:account];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        //
+        NSLog(@"%@",error);
+    }];
+}
+
+#pragma mark - 设置导航栏器内容
+- (void) setNavigationContent{
     //设置左边按钮
     self.navigationItem.leftBarButtonItem =[UIBarButtonItem barButtonItemWithTarget:self  Image:@"navigationbar_friendsearch" highlightedImage:@"navigationbar_friendsearch_highlighted" actionMethod:@selector(friendsearch)];
     //设置右边按钮
     self.navigationItem.rightBarButtonItem =[UIBarButtonItem barButtonItemWithTarget:self  Image:@"navigationbar_pop" highlightedImage:@"navigationbar_pop_highlighted" actionMethod:@selector(pop)];
     //设置中间标题控件
-    UIButton *titleButton = [UIButton buttonWithType:UIButtonTypeCustom];
-    titleButton.height=30;
-    titleButton.width=150;//文字长度＋图片长度
-    //设置图片
-    UIImage *navigationbarArrowDown =[UIImage imageNamed:@"navigationbar_arrow_down"];
-    UIImage *navigationbarArrowUp =[UIImage imageNamed:@"navigationbar_arrow_up"];
-    [titleButton setImage:navigationbarArrowDown forState:UIControlStateNormal];
-    [titleButton setImage:navigationbarArrowUp forState:UIControlStateSelected];
-
-    [titleButton setTitle:@"HomePage" forState:UIControlStateNormal];
-    [titleButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    //设置边距
-    [titleButton setImageEdgeInsets:UIEdgeInsetsMake(0, titleButton.width-navigationbarArrowDown.size.width, 0, 0)];
-    titleButton.titleEdgeInsets = UIEdgeInsetsMake(0, 0, 0,navigationbarArrowDown.size.width);
+    HWTitleButton *titleButton = [HWTitleButton buttonWithType:UIButtonTypeCustom];
+    //设置标题
+    HWAccountModel *account = [HWAccountTool account];
+    [titleButton setTitle:account.name? account.name:@"homePage" forState:UIControlStateNormal];
     //监听标题的点击
     [titleButton addTarget:self action:@selector(clickTitle:) forControlEvents:UIControlEventTouchUpInside];
-
     self.navigationItem.titleView =titleButton;
-
-
 }
+
 #pragma mark - 点击标题
 /**
  图片中不规则的方向是  ：不可拉伸的方向

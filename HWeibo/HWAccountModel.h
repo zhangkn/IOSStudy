@@ -19,8 +19,10 @@
 /**		授权用户的UID，本字段只是为了方便开发者，减少一次user/show接口调用而返回的，第三方应用不能用此字段作为用户登录状态的识别，只有access_token才是用户授权的唯一票据。*/
 @property (nonatomic,copy) NSString *uid;
 
-/** 帐号的创建时间*/
+/** 帐号的创建时间     //获取帐号存储时间（产生access_token的时间）*/
 @property (nonatomic,strong) NSDate *createDate;
+/** 用户昵称*/
+@property (nonatomic,copy) NSString *name;
 
 //定义初始化方法 KVC的使用
 - (instancetype) initWithDictionary:(NSDictionary *) dict;

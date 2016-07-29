@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-@class HWAccountModel;
+#import "HWAccountModel.h"
 @interface HWAccountTool : NSObject
 + (void)saveAccount:(HWAccountModel*)account;
 /** 

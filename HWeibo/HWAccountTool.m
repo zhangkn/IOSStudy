@@ -7,7 +7,6 @@
 //
 
 #import "HWAccountTool.h"
-#import "HWAccountModel.h"
 
 #define HWAccountArchivePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"account.archive"]
 
@@ -17,8 +16,6 @@
     //        NSString *doc = [documentDirectory stringByAppendingPathComponent:@"account.plist"];
     //        [responseObject writeToFile:doc atomically:YES];
     //自定义对象的存储
-    //获取帐号存储时间（产生access_token的时间）
-    account.createDate = [NSDate date];
     [NSKeyedArchiver archiveRootObject:account toFile:HWAccountArchivePath];
 }
 

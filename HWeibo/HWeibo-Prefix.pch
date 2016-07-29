@@ -33,7 +33,7 @@
 #define HWColor(r,g,b) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:1.0]
 
 #define HWRandomColor HWColor(arc4random_uniform(265) ,arc4random_uniform(265),arc4random_uniform(265) )
-
+#define HWScale [UIScreen mainScreen].scale
 
 #endif
 #endif /* HWeibo_Prefix_pch */

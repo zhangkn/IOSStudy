@@ -21,6 +21,8 @@
     self.access_token = dict[@"access_token"];
     self.uid = dict[@"uid"];
     self.expires_in = dict[@"expires_in"];
+    //获取帐号存储时间（产生access_token的时间）
+    self.createDate = [NSDate date];
     return self;
 }
 
