@@ -12,14 +12,24 @@
 #import "HWAccountTool.h"
 #import "HWTitleButton.h"
 #import "UIImageView+WebCache.h"
+#import "HWUser.h"
+#import "HWStatuses.h"
+#import "MJExtension.h"
 
 @interface HWHomeTableViewController ()<HWDropDownDelagate>
 /** 微博数组：每一个元素（字典）代表一条微博信息*/
-@property (nonatomic,strong) NSArray *statuses;
+@property (nonatomic,strong) NSMutableArray *statuses;
 
 @end
 
 @implementation HWHomeTableViewController
+
+- (NSMutableArray *)statuses{
+    if (_statuses == nil) {
+        _statuses = [NSMutableArray array];
+    }
+    return _statuses;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,10 +38,25 @@
     //获取用户信息
     [self getUserInfo];
     //获取当前登录用户及其所关注（授权）用户的最新微博
-    [self homeTimeline];
+    //集成刷新控件
+    [self setupRefresh];
   
 
 }
+
+- (void)setupRefresh{
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
+    [refreshControl addTarget:self action:@selector(refreshControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
+    
+    
+}
+- (void)refreshControlEventValueChanged:(UIRefreshControl*)refreshControl{
+//    [refreshControl beginRefreshing];
+    [self refreshHomeTimeline:refreshControl];
+}
+
+
 #pragma mark - 获取获取当前登录用户及其所关注（授权）用户的最新微博
 /** 请求参数
  必选	类型及范围	说明
@@ -43,25 +68,36 @@
  base_app	false	int	是否只获取当前应用的数据。0为否（所有数据），1为是（仅当前应用），默认为0。
  feature	false	int	过滤类型ID，0：全部、1：原创、2：图片、3：视频、4：音乐，默认为0。
  trim_user	false	int	返回值中user字段开关，0：返回完整user字段、1：user字段仅返回user_id，默认为0。**/
-- (void)homeTimeline{
+
+- (void)refreshHomeTimeline:(UIRefreshControl*)refreshControl{
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
-//    parameters[@"count"]= @20;
+    HWStatuses *firstStatuse =[self.statuses firstObject];
+    if (firstStatuse) {
+        parameters[@"since_id"]= firstStatuse.idstr;
+    }
+    //    parameters[@"count"]= @20;
     NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
-//    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
+    //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
     [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         //设置首页标题文字
-        NSLog(@"%@",responseObject);
-        self.statuses = responseObject[@"statuses"];
-        //刷新数据
-        [self.tableView reloadData];
+        NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        if (tmpArray.count !=0) {
+            NSRange range = NSMakeRange(0, tmpArray.count);
+            NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
+            [self.statuses insertObjects:tmpArray atIndexes:set];
+            //刷新数据
+            [self.tableView reloadData];
+        }
+        NSLog(@"%d",[responseObject[@"statuses"] count]);
+        NSLog(@"%@",[(HWStatuses*)self.statuses[0] text]);
+        [refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        //
         NSLog(@"%@",error);
+        [refreshControl endRefreshing];
     }];
-    
 }
 
 #pragma mark - UITableViewDataSource
@@ -78,12 +114,12 @@
         //设置共性属性
     }
     //设置个性属性
-    NSDictionary *status = self.statuses[indexPath.row];
+    HWStatuses *status = self.statuses[indexPath.row];
 //    user	object	微博作者的用户信息字段 详细
-    NSDictionary *user = status[@"user"];
-    cell.textLabel.text =user[@"name"];
-    cell.detailTextLabel.text =status[@"text"];
-    NSString *avatarLargeUrl =user[@"avatar_large"];//用户头像地址（大图），180×180像素
+    HWUser *user = status.user;
+    cell.textLabel.text =user.name;
+    cell.detailTextLabel.text =status.text;
+    NSString *avatarLargeUrl =user.profile_image_url;
     UIImage *placeholderImage = [UIImage imageNamed:@"avatar_default_small"];
     NSURL *url =[NSURL URLWithString:avatarLargeUrl];    
     [cell.imageView sd_setImageWithURL:url placeholderImage:placeholderImage];
