@@ -42,12 +42,71 @@
     [self setupRefresh];
     //集成下拉获取更多数据控件
     [self setupLoadMoreDateFooterViewWithTableView];
-    
-  
+    //获取未读书
+    NSTimer *timer = [NSTimer timerWithTimeInterval:300 target:self selector:@selector(setupUnreadCount) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];//主线程会并发的处理timer事件
 
 }
 
-#pragma mark - 添加下拉刷新控件
+#pragma mark - 获取未读消息数
+/** 
+ http://open.weibo.com/wiki/2/remind/unread_count
+ URL
+ 
+ 请求参数
+ 必选	类型及范围	说明
+ source	false	string	采用OAuth授权方式不需要此参数，其他授权方式为必填参数，数值为应用的AppKey。
+ access_token	false	string	采用OAuth授权方式为必填参数，其他授权方式不需要此参数，OAuth授权后获得。
+ uid	true	int64	需要获取消息未读数的用户UID，必须是当前登录用户。
+ callback	false	string	JSONP回调函数，用于前端调用返回JS格式的信息。
+ unread_message	false	boolean	未读数版本。0：原版未读数，1：新版未读数。默认为0。
+ 
+ 字段说明
+ 返回值字段	字段类型	字段说明
+ status	int	新微博未读数
+ follower	int	新粉丝数
+ cmt	int	新评论数
+ dm	int	新私信数
+ mention_status	int	新提及我的微博数
+ mention_cmt	int	新提及我的评论数
+ group	int	微群消息未读数
+ private_group	int	私有微群消息未读数
+ notice	int	新通知未读数
+ invite	int	新邀请未读数
+ badge	int	新勋章数
+ photo	int	相册消息未读数
+ msgbox	int	{{{3}}}
+ */
+- (void)setupUnreadCount{
+    NSLog(@"%s",__func__);
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    //设置请求参数
+    NSString *url =@"https://rm.api.weibo.com/2/remind/unread_count.json";
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    HWAccountModel *account = [HWAccountTool account];
+    parameters[@"access_token"] = account.access_token;
+    parameters[@"uid"] = account.uid;
+    parameters[@"unread_message"] = @"1";
+    [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        //处理json数据
+        //使用模型进程存储
+        //将NSnumber 对象转化为字符串description
+        NSString *status = [responseObject[@"status"] description];// status	int	新微博未读数
+        if ([status isEqualToString:@"0"]) {
+            //清空未读消息数量
+            self.tabBarItem.badgeValue = nil;
+            [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        }else{
+            self.tabBarItem.badgeValue = status;
+            [UIApplication sharedApplication].applicationIconBadgeNumber = status.intValue;
+        }
+        NSLog(@"status:%@",status);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+}
+
+#pragma mark - 添加上拉获取更多数据的控件
 - (void)setupLoadMoreDateFooterViewWithTableView{
     [HWLoadMoreDateFooterView loadMoreDateFooterViewWithTableView:self.tableView];
     self.tableView.tableFooterView.hidden = YES;
@@ -65,10 +124,10 @@
     if (self.statuses.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
     //当前的scrollView滚动的位置
     CGFloat curruentContentOffSetY = scrollView.contentOffset.y;
-    NSLog(@"%f",self.tableView.tableFooterView.height);
+
     //完全显示最后一个cell的时候的ContentOffSetY
     CGFloat judgeOffsetY=scrollView.contentSize.height+scrollView.contentInset.bottom-scrollView.height-self.tableView.tableFooterView.height;
-    NSLog(@"%f",judgeOffsetY);
+
     if (curruentContentOffSetY>judgeOffsetY) {//意味着要显示tableFooterView
         self.tableView.tableFooterView.hidden = NO;
         //加载更多数据
@@ -106,8 +165,6 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
     }];
-    
-    
 }
 
 #pragma mark - 添加下拉刷新按钮
@@ -173,6 +230,9 @@
     if (count==0) {
         return;
     }
+    // 刷新成功(清空图标数字)
+    self.tabBarItem.badgeValue = nil;
+    [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
     UILabel *numLabel = [[UILabel alloc]init];
     numLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"timeline_new_status_background"]];
     numLabel.width =KMainScreenWidth;
