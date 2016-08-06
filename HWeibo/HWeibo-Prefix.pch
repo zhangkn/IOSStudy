@@ -35,5 +35,8 @@
 #define HWRandomColor HWColor(arc4random_uniform(265) ,arc4random_uniform(265),arc4random_uniform(265) )
 #define HWScale [UIScreen mainScreen].scale
 
+#define KMainScreenWidth [UIScreen mainScreen].bounds.size.width
+
+
 #endif
 #endif /* HWeibo_Prefix_pch */

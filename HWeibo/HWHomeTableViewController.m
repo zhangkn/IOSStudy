@@ -15,7 +15,7 @@
 #import "HWUser.h"
 #import "HWStatuses.h"
 #import "MJExtension.h"
-
+#import "HWLoadMoreDateFooterView.h"
 @interface HWHomeTableViewController ()<HWDropDownDelagate>
 /** 微博数组：每一个元素（字典）代表一条微博信息*/
 @property (nonatomic,strong) NSMutableArray *statuses;
@@ -38,12 +38,79 @@
     //获取用户信息
     [self getUserInfo];
     //获取当前登录用户及其所关注（授权）用户的最新微博
-    //集成刷新控件
+    //集成上拉刷新控件
     [self setupRefresh];
+    //集成下拉获取更多数据控件
+    [self setupLoadMoreDateFooterViewWithTableView];
+    
   
 
 }
 
+#pragma mark - 添加下拉刷新控件
+- (void)setupLoadMoreDateFooterViewWithTableView{
+    [HWLoadMoreDateFooterView loadMoreDateFooterViewWithTableView:self.tableView];
+    self.tableView.tableFooterView.hidden = YES;
+}
+/**
+ contentInset：除具体内容以外的边框尺寸
+ contentSize: 里面的具体内容（header、cell、footer），除掉contentInset以外的尺寸
+ contentOffset:
+ 1.它可以用来判断scrollView滚动到什么位置
+ 2.指scrollView的内容超出了scrollView顶部的距离（除掉contentInset以外的尺寸）
+ */
+#pragma mark - 显示tableFooterView，并加在数据
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    // 如果tableView还没有数据，就直接返回
+    if (self.statuses.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
+    //当前的scrollView滚动的位置
+    CGFloat curruentContentOffSetY = scrollView.contentOffset.y;
+    NSLog(@"%f",self.tableView.tableFooterView.height);
+    //完全显示最后一个cell的时候的ContentOffSetY
+    CGFloat judgeOffsetY=scrollView.contentSize.height+scrollView.contentInset.bottom-scrollView.height-self.tableView.tableFooterView.height;
+    NSLog(@"%f",judgeOffsetY);
+    if (curruentContentOffSetY>judgeOffsetY) {//意味着要显示tableFooterView
+        self.tableView.tableFooterView.hidden = NO;
+        //加载更多数据
+        [self loadMoreStatus];
+    }
+}
+#pragma mark - 加载数据，加载完毕隐藏tableFooterView
+- (void)loadMoreStatus{
+    //创建管理器
+    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
+    NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
+    HWAccountModel *account = [HWAccountTool account];
+    parameters[@"access_token"]= account.access_token;
+    
+    HWStatuses *lastStatuse =[self.statuses lastObject];
+    if (lastStatuse) {
+//        max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
+        // id这种数据一般都是比较大的，一般转成整数的话，最好是long long类型
+        long long maxId = lastStatuse.idstr.longLongValue - 1;
+        parameters[@"max_id"] = @(maxId);
+    }
+    //    parameters[@"count"]= @20;
+    NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
+    //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
+    [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+        NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+        if (tmpArray.count !=0) {
+            [self.statuses addObjectsFromArray:tmpArray];
+            //刷新数据
+            [self.tableView reloadData];
+        }
+        //隐藏tableFooterView
+        self.tableView.tableFooterView.hidden= YES;
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"%@",error);
+    }];
+    
+    
+}
+
+#pragma mark - 添加下拉刷新按钮
 - (void)setupRefresh{
     //添加控件
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
@@ -59,8 +126,6 @@
     //进入刷新状态
     [self refreshHomeTimeline:refreshControl];
 }
-
-
 #pragma mark - 获取获取当前登录用户及其所关注（授权）用户的最新微博
 /** 请求参数
  必选	类型及范围	说明
@@ -110,7 +175,6 @@
     }
     UILabel *numLabel = [[UILabel alloc]init];
     numLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"timeline_new_status_background"]];
-#define KMainScreenWidth [UIScreen mainScreen].bounds.size.width
     numLabel.width =KMainScreenWidth;
     numLabel.height = 20;
     numLabel.y = 64 - numLabel.height;
@@ -118,7 +182,6 @@
     numLabel.textColor = [UIColor whiteColor];
     numLabel.textAlignment = NSTextAlignmentCenter;
     [self.navigationController.view insertSubview:numLabel belowSubview:self.navigationController.navigationBar];
-    
     //动画显示numLabel
     [UIView animateWithDuration:1.0 animations:^{
         //下拉numlabel

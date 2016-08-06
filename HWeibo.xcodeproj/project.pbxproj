@@ -41,6 +41,8 @@
 		E13C3A391D4B49200026221C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A281D4B49200026221C /* UIImageView+WebCache.m */; };
 		E13C3A3A1D4B49200026221C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */; };
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
+		E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */; };
+		E18353481D55A7E8009B694A /* HWLoadMoreDateFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E18353471D55A7E8009B694A /* HWLoadMoreDateFooterView.xib */; };
 		E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D5D031D475EF20042B13A /* HWOAuthViewController.m */; };
 		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
 		E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C81D3F79840050D822 /* HWDropDown.m */; };
@@ -142,6 +144,9 @@
 		E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewFeatureViewController.h; sourceTree = "<group>"; };
 		E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWNewFeatureViewController.m; sourceTree = "<group>"; };
+		E18353441D55A7D6009B694A /* HWLoadMoreDateFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWLoadMoreDateFooterView.h; sourceTree = "<group>"; };
+		E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWLoadMoreDateFooterView.m; sourceTree = "<group>"; };
+		E18353471D55A7E8009B694A /* HWLoadMoreDateFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HWLoadMoreDateFooterView.xib; sourceTree = "<group>"; };
 		E19D5D021D475EF20042B13A /* HWOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOAuthViewController.h; sourceTree = "<group>"; };
 		E19D5D031D475EF20042B13A /* HWOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWOAuthViewController.m; sourceTree = "<group>"; };
 		E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWSearchBar.h; sourceTree = "<group>"; };
@@ -494,6 +499,9 @@
 			isa = PBXGroup;
 			children = (
 				E13C3A051D4AF2160026221C /* HWTitleButton.h */,
+				E18353441D55A7D6009B694A /* HWLoadMoreDateFooterView.h */,
+				E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */,
+				E18353471D55A7E8009B694A /* HWLoadMoreDateFooterView.xib */,
 				E13C3A061D4AF2160026221C /* HWTitleButton.m */,
 			);
 			name = View;
@@ -707,6 +715,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10C64591D2118EC0023E642 /* HWTest1ViewController.xib in Resources */,
+				E18353481D55A7E8009B694A /* HWLoadMoreDateFooterView.xib in Resources */,
 				E1E9011F1D48A49D001F78C3 /* MBProgressHUD.bundle in Resources */,
 				E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */,
 				E1B58EEC1D4C702C00E74E9C /* Info.plist in Resources */,
@@ -736,6 +745,7 @@
 				E1E9010E1D484BDE001F78C3 /* AFNetworkReachabilityManager.m in Sources */,
 				E139D9161D49AA060052815A /* HWAccountTool.m in Sources */,
 				E13C3A341D4B49200026221C /* UIButton+WebCache.m in Sources */,
+				E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */,
 				E13C3A071D4AF2160026221C /* HWTitleButton.m in Sources */,
 				E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */,
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
