@@ -52,7 +52,7 @@
     //设置scrollview的其他属性
     scrollView.bounces = NO;//去除弹簧效果
     scrollView.pagingEnabled = YES;//paging 分页
-//    scrollView.showsHorizontalScrollIndicator = NO;//去掉水平方向的滚动条
+    scrollView.showsHorizontalScrollIndicator = NO;//去掉水平方向的滚动条
     //设置分页控件
     UIPageControl *pageControl = [[UIPageControl alloc]init];
 //    pageControl.userInteractionEnabled = NO;//去掉交互功能//也可去掉高度、宽度达到失去交互功能

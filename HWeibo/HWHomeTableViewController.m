@@ -45,14 +45,18 @@
 }
 
 - (void)setupRefresh{
+    //添加控件
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc]init];
     [refreshControl addTarget:self action:@selector(refreshControlEventValueChanged:) forControlEvents:UIControlEventValueChanged];
     [self.tableView addSubview:refreshControl];
-    
+    // //刷新数据
+    [refreshControl beginRefreshing];//不会触发UIControlEventValueChanged
+    [self refreshControlEventValueChanged:refreshControl];
     
 }
+#pragma mark - 刷新控件的监听方法
 - (void)refreshControlEventValueChanged:(UIRefreshControl*)refreshControl{
-//    [refreshControl beginRefreshing];
+    //进入刷新状态
     [self refreshHomeTimeline:refreshControl];
 }
 
@@ -82,7 +86,6 @@
     NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
     //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
     [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        //设置首页标题文字
         NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         if (tmpArray.count !=0) {
             NSRange range = NSMakeRange(0, tmpArray.count);
@@ -90,13 +93,47 @@
             [self.statuses insertObjects:tmpArray atIndexes:set];
             //刷新数据
             [self.tableView reloadData];
+            //显示最新微博数量
+            [self showNewStatusesCount:tmpArray.count];
         }
-        NSLog(@"%d",[responseObject[@"statuses"] count]);
         NSLog(@"%@",[(HWStatuses*)self.statuses[0] text]);
         [refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
         [refreshControl endRefreshing];
+    }];
+}
+#pragma mark -  显示刷新的微博数量
+- (void)showNewStatusesCount:(long)count{
+    if (count==0) {
+        return;
+    }
+    UILabel *numLabel = [[UILabel alloc]init];
+    numLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"timeline_new_status_background"]];
+#define KMainScreenWidth [UIScreen mainScreen].bounds.size.width
+    numLabel.width =KMainScreenWidth;
+    numLabel.height = 20;
+    numLabel.y = 64 - numLabel.height;
+    numLabel.text =[NSString stringWithFormat:@"%ld new weibo",count];
+    numLabel.textColor = [UIColor whiteColor];
+    numLabel.textAlignment = NSTextAlignmentCenter;
+    [self.navigationController.view insertSubview:numLabel belowSubview:self.navigationController.navigationBar];
+    
+    //动画显示numLabel
+    [UIView animateWithDuration:1.0 animations:^{
+        //下拉numlabel
+//        numLabel.y = numLabel.y+numLabel.height;
+        numLabel.transform = CGAffineTransformMakeTranslation(0, numLabel.height);
+    } completion:^(BOOL finished) {
+        //恢复y值
+        [UIView animateWithDuration:1.0 delay:1.0 options:UIViewAnimationOptionCurveEaseOut animations:^{
+//            numLabel.y = numLabel.y - numLabel.height;
+            numLabel.transform = CGAffineTransformIdentity;
+        } completion:^(BOOL finished) {
+            //删除\隐藏numlabel
+//            numLabel.bounds = CGRectZero;
+            [numLabel removeFromSuperview];
+        }];
     }];
 }
 
@@ -162,6 +199,8 @@
     //设置标题
     HWAccountModel *account = [HWAccountTool account];
     [titleButton setTitle:account.name? account.name:@"homePage" forState:UIControlStateNormal];
+    //再次布局下子控件
+    [titleButton layoutSubviews];
     //监听标题的点击
     [titleButton addTarget:self action:@selector(clickTitle:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.titleView =titleButton;
