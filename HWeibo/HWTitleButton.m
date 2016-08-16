@@ -7,7 +7,7 @@
 //
 
 #import "HWTitleButton.h"
-
+#define IPTitleSpace 10 //标题和图片的间距
 @implementation HWTitleButton
 
 - (instancetype)initWithFrame:(CGRect)frame{
@@ -36,9 +36,14 @@
 //    CGFloat titleW = [self.currentTitle sizeWithAttributes:attributesDict].width;
 //    //    [titleButton setImageEdgeInsets:UIEdgeInsetsMake(0,imageW, 0, 0)];
     self.titleLabel.x= self.imageView.x;
-    self.imageView.x= CGRectGetMaxX(self.titleLabel.frame);
+    self.imageView.x= CGRectGetMaxX(self.titleLabel.frame)+IPTitleSpace;
 }
 
+//    //目的：在系统计算和设置完尺寸之后，增加宽度
+- (void)setFrame:(CGRect)frame{
+    frame.size.width+= IPTitleSpace;
+    [super setFrame:frame];
+}
 - (void)setTitle:(NSString *)title forState:(UIControlState)state{
     [super setTitle:title forState:state];
     [self sizeToFit];

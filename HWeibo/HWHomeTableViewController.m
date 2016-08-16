@@ -33,6 +33,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     //设置导航栏内容
     [self setNavigationContent];
     //获取用户信息
