@@ -26,7 +26,7 @@
             startingLineNumber = "351"
             endingLineNumber = "351"
             landmarkName = "-friendsearch"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -42,7 +42,7 @@
             startingLineNumber = "44"
             endingLineNumber = "44"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,7 +58,7 @@
             startingLineNumber = "352"
             endingLineNumber = "352"
             landmarkName = "-friendsearch"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -282,7 +282,7 @@
             startingLineNumber = "360"
             endingLineNumber = "360"
             landmarkName = "-dropDownDismiss:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -378,7 +378,7 @@
             startingLineNumber = "217"
             endingLineNumber = "217"
             landmarkName = "-refreshHomeTimeline:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -394,7 +394,7 @@
             startingLineNumber = "219"
             endingLineNumber = "219"
             landmarkName = "-refreshHomeTimeline:"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -410,7 +410,7 @@
             startingLineNumber = "37"
             endingLineNumber = "37"
             landmarkName = "-viewDidLoad"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -426,7 +426,7 @@
             startingLineNumber = "32"
             endingLineNumber = "32"
             landmarkName = "-layoutSubviews"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -458,7 +458,7 @@
             startingLineNumber = "31"
             endingLineNumber = "31"
             landmarkName = "-layoutSubviews"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -474,7 +474,7 @@
             startingLineNumber = "106"
             endingLineNumber = "106"
             landmarkName = "-setupUnreadCount"
-            landmarkType = "5">
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

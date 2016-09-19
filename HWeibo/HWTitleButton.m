@@ -7,7 +7,7 @@
 //
 
 #import "HWTitleButton.h"
-#define IPTitleSpace 10 //标题和图片的间距
+#define IPTitleSpace 8 //标题和图片的间距
 @implementation HWTitleButton
 
 - (instancetype)initWithFrame:(CGRect)frame{

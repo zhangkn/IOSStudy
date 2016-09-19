@@ -16,6 +16,7 @@
 #import "HWStatuses.h"
 #import "MJExtension.h"
 #import "HWLoadMoreDateFooterView.h"
+#import "HWStatusesTableViewCell.h"
 @interface HWHomeTableViewController ()<HWDropDownDelagate>
 /** 微博数组：每一个元素（字典）代表一条微博信息*/
 @property (nonatomic,strong) NSMutableArray *statuses;
@@ -33,7 +34,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     //设置导航栏内容
     [self setNavigationContent];
     //获取用户信息
@@ -268,22 +268,19 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-   static NSString  *identifier =@"UITableViewCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:identifier ];
-    if (cell==nil) {
-        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:identifier];
-        //设置共性属性
-    }
+   
     //设置个性属性
-    HWStatuses *status = self.statuses[indexPath.row];
-//    user	object	微博作者的用户信息字段 详细
-    HWUser *user = status.user;
-    cell.textLabel.text =user.name;
-    cell.detailTextLabel.text =status.text;
-    NSString *avatarLargeUrl =user.profile_image_url;
-    UIImage *placeholderImage = [UIImage imageNamed:@"avatar_default_small"];
-    NSURL *url =[NSURL URLWithString:avatarLargeUrl];    
-    [cell.imageView sd_setImageWithURL:url placeholderImage:placeholderImage];
+#warning HWStatusesTableViewCellFrame
+    HWStatusesTableViewCellFrame *statusF = self.statuses[indexPath.row];
+    HWStatusesTableViewCell *cell = [HWStatusesTableViewCell tableVieCellWithFrameModel:statusF tableView:tableView];    
+////    user	object	微博作者的用户信息字段 详细
+//    HWUser *user = status.user;
+//    cell.textLabel.text =user.name;
+//    cell.detailTextLabel.text =status.text;
+//    NSString *avatarLargeUrl =user.profile_image_url;
+//    UIImage *placeholderImage = [UIImage imageNamed:@"avatar_default_small"];
+//    NSURL *url =[NSURL URLWithString:avatarLargeUrl];    
+//    [cell.imageView sd_setImageWithURL:url placeholderImage:placeholderImage];
     return cell;
 }
 

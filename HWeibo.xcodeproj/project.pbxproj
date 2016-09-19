@@ -23,6 +23,7 @@
 		E139D9161D49AA060052815A /* HWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D9151D49AA060052815A /* HWAccountTool.m */; };
 		E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91B1D49D7D40052815A /* UIWindow+Extension.m */; };
 		E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91D1D49F7570052815A /* Foundation+Log.m */; };
+		E13C37FE1D8F96970032D49D /* HWStatusesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C37FD1D8F96970032D49D /* HWStatusesTableViewCell.m */; };
 		E13C3A071D4AF2160026221C /* HWTitleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A061D4AF2160026221C /* HWTitleButton.m */; };
 		E13C3A2B1D4B49200026221C /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A0B1D4B49200026221C /* MKAnnotationView+WebCache.m */; };
 		E13C3A2C1D4B49200026221C /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A0D1D4B49200026221C /* NSData+ImageContentType.m */; };
@@ -43,6 +44,7 @@
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
 		E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */; };
 		E18353481D55A7E8009B694A /* HWLoadMoreDateFooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E18353471D55A7E8009B694A /* HWLoadMoreDateFooterView.xib */; };
+		E1920B0B1D8FD447003AD139 /* HWStatusesTableViewCellFrame.m in Sources */ = {isa = PBXBuildFile; fileRef = E1920B0A1D8FD447003AD139 /* HWStatusesTableViewCellFrame.m */; };
 		E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D5D031D475EF20042B13A /* HWOAuthViewController.m */; };
 		E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */; };
 		E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */ = {isa = PBXBuildFile; fileRef = E19D87C81D3F79840050D822 /* HWDropDown.m */; };
@@ -107,6 +109,8 @@
 		E139D91A1D49D7D40052815A /* UIWindow+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
 		E139D91B1D49D7D40052815A /* UIWindow+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+Extension.m"; sourceTree = "<group>"; };
 		E139D91D1D49F7570052815A /* Foundation+Log.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Foundation+Log.m"; sourceTree = "<group>"; };
+		E13C37FC1D8F96970032D49D /* HWStatusesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusesTableViewCell.h; sourceTree = "<group>"; };
+		E13C37FD1D8F96970032D49D /* HWStatusesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusesTableViewCell.m; sourceTree = "<group>"; };
 		E13C3A051D4AF2160026221C /* HWTitleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTitleButton.h; sourceTree = "<group>"; };
 		E13C3A061D4AF2160026221C /* HWTitleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTitleButton.m; sourceTree = "<group>"; };
 		E13C3A0A1D4B49200026221C /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
@@ -147,6 +151,8 @@
 		E18353441D55A7D6009B694A /* HWLoadMoreDateFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWLoadMoreDateFooterView.h; sourceTree = "<group>"; };
 		E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWLoadMoreDateFooterView.m; sourceTree = "<group>"; };
 		E18353471D55A7E8009B694A /* HWLoadMoreDateFooterView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HWLoadMoreDateFooterView.xib; sourceTree = "<group>"; };
+		E1920B091D8FD447003AD139 /* HWStatusesTableViewCellFrame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusesTableViewCellFrame.h; sourceTree = "<group>"; };
+		E1920B0A1D8FD447003AD139 /* HWStatusesTableViewCellFrame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusesTableViewCellFrame.m; sourceTree = "<group>"; };
 		E19D5D021D475EF20042B13A /* HWOAuthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWOAuthViewController.h; sourceTree = "<group>"; };
 		E19D5D031D475EF20042B13A /* HWOAuthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWOAuthViewController.m; sourceTree = "<group>"; };
 		E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWSearchBar.h; sourceTree = "<group>"; };
@@ -501,6 +507,8 @@
 				E13C3A051D4AF2160026221C /* HWTitleButton.h */,
 				E18353441D55A7D6009B694A /* HWLoadMoreDateFooterView.h */,
 				E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */,
+				E13C37FC1D8F96970032D49D /* HWStatusesTableViewCell.h */,
+				E13C37FD1D8F96970032D49D /* HWStatusesTableViewCell.m */,
 				E18353471D55A7E8009B694A /* HWLoadMoreDateFooterView.xib */,
 				E13C3A061D4AF2160026221C /* HWTitleButton.m */,
 			);
@@ -513,6 +521,8 @@
 				E1B58EAC1D4C460D00E74E9C /* HWUser.h */,
 				E1B58EAF1D4C496D00E74E9C /* HWStatuses.h */,
 				E1B58EB01D4C496D00E74E9C /* HWStatuses.m */,
+				E1920B091D8FD447003AD139 /* HWStatusesTableViewCellFrame.h */,
+				E1920B0A1D8FD447003AD139 /* HWStatusesTableViewCellFrame.m */,
 				E1B58EAD1D4C460D00E74E9C /* HWUser.m */,
 			);
 			name = Model;
@@ -688,6 +698,7 @@
 				TargetAttributes = {
 					E114714D1D0E58FA00107A3E = {
 						CreatedOnToolsVersion = 7.2.1;
+						DevelopmentTeam = FUV5KWMMAV;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -783,6 +794,7 @@
 				E1B58EB11D4C496D00E74E9C /* HWStatuses.m in Sources */,
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
 				E1E901171D489633001F78C3 /* HWAccountModel.m in Sources */,
+				E13C37FE1D8F96970032D49D /* HWStatusesTableViewCell.m in Sources */,
 				E13C3A2C1D4B49200026221C /* NSData+ImageContentType.m in Sources */,
 				E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */,
 				E13C3A371D4B49200026221C /* UIImage+WebP.m in Sources */,
@@ -792,6 +804,7 @@
 				E1E901121D484BDE001F78C3 /* AFURLResponseSerialization.m in Sources */,
 				E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */,
 				E1B58EF31D4C702C00E74E9C /* NSObject+MJCoding.m in Sources */,
+				E1920B0B1D8FD447003AD139 /* HWStatusesTableViewCellFrame.m in Sources */,
 				E1B58EF41D4C702C00E74E9C /* NSObject+MJKeyValue.m in Sources */,
 				E1B58EAE1D4C460D00E74E9C /* HWUser.m in Sources */,
 				E1E901201D48A49D001F78C3 /* MBProgressHUD.m in Sources */,
@@ -898,6 +911,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HWeibo/HWeibo-Prefix.pch";
 				INFOPLIST_FILE = HWeibo/Info.plist;
@@ -913,6 +927,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "HWeibo/HWeibo-Prefix.pch";
 				INFOPLIST_FILE = HWeibo/Info.plist;
