@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "HWStatuses.h"
+
+#define HWStatusCellBorderW 10
+#define HWNameLabelFont [UIFont systemFontOfSize:12]
+
 /**
  1.存放一个微博cell 内部控件的frame
  2.存放cell的高度
@@ -33,5 +37,13 @@
 @property (nonatomic,assign ) CGRect sourceLabelFrame;
 /** 正文*/
 @property (nonatomic,assign ) CGRect contentLabelFrame;
+
+/**
+ 提供类方法，返回数据模型数组--工厂模式
+ */
++ (NSArray *) listWithHWStatusesArray:(NSArray *)statusesArray;
+//定义初始化方法 KVC的使用
+- (instancetype) initWithStatuses:(HWStatuses *) statues;
++ (instancetype) statuesFrameWithStatues:(HWStatuses *) statues;
 
 @end

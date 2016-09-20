@@ -112,6 +112,8 @@
     if (self) {
         //设置共性属性、初始化内部控件
         self.photoView.backgroundColor = [UIColor redColor];
+        self.nameLabel.font = HWNameLabelFont;
+        [self vipView];
     }
     return self;
 }
@@ -137,6 +139,7 @@
 
 
 - (void)setFrameModel:(HWStatusesTableViewCellFrame *)frameModel{
+    NSLog(@"%@",frameModel.statues.user);
     _frameModel = frameModel;
     //设置控件frame
     self.originalView.frame = frameModel.originalViewFrame;
@@ -145,8 +148,15 @@
     UIImage *placeholderImage = [UIImage imageNamed:@"avatar_default_small"];
     [self.iconView sd_setImageWithURL:iconImageURL placeholderImage:placeholderImage];
     //设置会员图标
-    self.vipView.frame = frameModel.vipViewFrame;
-    [self.vipView setImage:[UIImage imageNamed:@"common_icon_membership_level1"]];
+    if (frameModel.statues.user.VIP) {
+        self.vipView.frame = frameModel.vipViewFrame;
+        NSString *imageName = [NSString stringWithFormat:@"common_icon_membership_level%@",frameModel.statues.user.mbrank];
+        [self.vipView setImage:[UIImage imageNamed:imageName]];
+        NSLog(@"%@,%@",frameModel.statues.user,self.vipView);
+
+    }else{
+        self.vipView.frame = CGRectZero;
+    }
     //配图
     self.photoView.frame = frameModel.photoViewFrame;
     //昵称

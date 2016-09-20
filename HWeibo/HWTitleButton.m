@@ -41,8 +41,8 @@
 
 //    //目的：在系统计算和设置完尺寸之后，增加宽度
 - (void)setFrame:(CGRect)frame{
-    frame.size.width+= IPTitleSpace;
     [super setFrame:frame];
+//    frame.size.width+= IPTitleSpace;
 }
 - (void)setTitle:(NSString *)title forState:(UIControlState)state{
     [super setTitle:title forState:state];
@@ -52,5 +52,6 @@
     [super setImage:image forState:state];
     [self sizeToFit];
 }
+
 
 @end

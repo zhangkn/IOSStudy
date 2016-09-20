@@ -19,17 +19,18 @@
 #import "HWStatusesTableViewCell.h"
 @interface HWHomeTableViewController ()<HWDropDownDelagate>
 /** 微博数组：每一个元素（字典）代表一条微博信息*/
-@property (nonatomic,strong) NSMutableArray *statuses;
+@property (nonatomic,strong) NSMutableArray *statusesFrame;
 
 @end
 
 @implementation HWHomeTableViewController
 
-- (NSMutableArray *)statuses{
-    if (_statuses == nil) {
-        _statuses = [NSMutableArray array];
+/** 懒加载 微博数据*/
+- (NSMutableArray *)statusesFrame{
+    if (_statusesFrame == nil) {
+        _statusesFrame = [NSMutableArray array];
     }
-    return _statuses;
+    return _statusesFrame;
 }
 
 - (void)viewDidLoad {
@@ -122,7 +123,7 @@
 #pragma mark - 显示tableFooterView，并加在数据
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     // 如果tableView还没有数据，就直接返回
-    if (self.statuses.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
+    if (self.statusesFrame.count == 0 || self.tableView.tableFooterView.isHidden == NO) return;
     //当前的scrollView滚动的位置
     CGFloat curruentContentOffSetY = scrollView.contentOffset.y;
 
@@ -143,7 +144,7 @@
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
     
-    HWStatuses *lastStatuse =[self.statuses lastObject];
+    HWStatuses *lastStatuse =[[self.statusesFrame lastObject] statues];
     if (lastStatuse) {
 //        max_id	false	int64	若指定此参数，则返回ID小于或等于max_id的微博，默认为0。
         // id这种数据一般都是比较大的，一般转成整数的话，最好是long long类型
@@ -156,7 +157,8 @@
     [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         if (tmpArray.count !=0) {
-            [self.statuses addObjectsFromArray:tmpArray];
+            NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
+            [self.statusesFrame addObjectsFromArray:tmpFrameArray];
             //刷新数据
             [self.tableView reloadData];
         }
@@ -201,7 +203,7 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
-    HWStatuses *firstStatuse =[self.statuses firstObject];
+    HWStatuses *firstStatuse =[[self.statusesFrame firstObject] statues];
     if (firstStatuse) {
         parameters[@"since_id"]= firstStatuse.idstr;
     }
@@ -211,15 +213,16 @@
     [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         if (tmpArray.count !=0) {
+            NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
             NSRange range = NSMakeRange(0, tmpArray.count);
             NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
-            [self.statuses insertObjects:tmpArray atIndexes:set];
+            [self.statusesFrame insertObjects:tmpFrameArray atIndexes:set];
             //刷新数据
             [self.tableView reloadData];
             //显示最新微博数量
             [self showNewStatusesCount:tmpArray.count];
         }
-        NSLog(@"%@",[(HWStatuses*)self.statuses[0] text]);
+        NSLog(@"%@",[(HWStatuses*)[self.statusesFrame[0] statues] text]);
         [refreshControl endRefreshing];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"%@",error);
@@ -264,14 +267,13 @@
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return self.statuses.count;
+    return self.statusesFrame.count;
 }
 
 - (UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
    
     //设置个性属性
-#warning HWStatusesTableViewCellFrame
-    HWStatusesTableViewCellFrame *statusF = self.statuses[indexPath.row];
+    HWStatusesTableViewCellFrame *statusF = self.statusesFrame[indexPath.row];
     HWStatusesTableViewCell *cell = [HWStatusesTableViewCell tableVieCellWithFrameModel:statusF tableView:tableView];    
 ////    user	object	微博作者的用户信息字段 详细
 //    HWUser *user = status.user;
@@ -284,6 +286,10 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    HWStatusesTableViewCellFrame *statusF = self.statusesFrame[indexPath.row];
+    return statusF.cellHeight;
+}
 
 #pragma mark -  获取用户信息
 /** 
