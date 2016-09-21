@@ -99,6 +99,7 @@
     if (nil == _contentLabel) {
         UILabel *tmpView = [[UILabel alloc]init];
         _contentLabel = tmpView;
+        [tmpView setNumberOfLines:0];
         [self.originalView addSubview:_contentLabel];
     }
     return _contentLabel;
@@ -111,9 +112,14 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //设置共性属性、初始化内部控件
+        [self originalView];
         self.photoView.backgroundColor = [UIColor redColor];
+        [self iconView];
         self.nameLabel.font = HWNameLabelFont;
-        [self vipView];
+        [self.vipView setContentMode:UIViewContentModeCenter];
+        self.timeLabel.font = HWTimeLabelFont;
+        self.sourceLabel.font =HWTimeLabelFont;
+        self.contentLabel.font = HWNameLabelFont;
     }
     return self;
 }
@@ -149,6 +155,8 @@
     [self.iconView sd_setImageWithURL:iconImageURL placeholderImage:placeholderImage];
     //设置会员图标
     if (frameModel.statues.user.VIP) {
+        [self.vipView setHidden:NO];
+        self.nameLabel.textColor = HWColor(227, 92, 37);
         self.vipView.frame = frameModel.vipViewFrame;
         NSString *imageName = [NSString stringWithFormat:@"common_icon_membership_level%@",frameModel.statues.user.mbrank];
         [self.vipView setImage:[UIImage imageNamed:imageName]];
@@ -156,6 +164,8 @@
 
     }else{
         self.vipView.frame = CGRectZero;
+        [self.vipView setHidden:YES];
+        self.nameLabel.textColor = HWColor(0, 0, 0);
     }
     //配图
     self.photoView.frame = frameModel.photoViewFrame;
@@ -164,8 +174,10 @@
     self.nameLabel.text = frameModel.statues.user.name;
     //时间
     self.timeLabel.frame = frameModel.timeLabelFrame;
+    self.timeLabel.text = frameModel.statues.created_at;
     
     self.sourceLabel.frame = frameModel.sourceLabelFrame;
+    self.sourceLabel.text = frameModel.statues.source;
     // 正文
     self.contentLabel.frame = frameModel.contentLabelFrame;
     self.contentLabel.text = frameModel.statues.text;

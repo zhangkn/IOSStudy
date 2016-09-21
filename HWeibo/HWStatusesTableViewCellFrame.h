@@ -10,7 +10,10 @@
 #import "HWStatuses.h"
 
 #define HWStatusCellBorderW 10
+#define HWStatusCellContentViewSpaceW 5
 #define HWNameLabelFont [UIFont systemFontOfSize:12]
+#define HWTimeLabelFont [UIFont systemFontOfSize:10]
+
 
 /**
  1.存放一个微博cell 内部控件的frame

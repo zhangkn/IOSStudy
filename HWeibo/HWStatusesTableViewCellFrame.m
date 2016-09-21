@@ -13,11 +13,19 @@
 @implementation HWStatusesTableViewCellFrame
 
 -(CGSize) sizeWithText:(NSString*)text font:(UIFont *)font{
-    NSDictionary *tmpDict = @{NSFontAttributeName: font};
-   return  [text sizeWithAttributes:tmpDict];
+    /** 方式一*/
+//    NSDictionary *tmpDict = @{NSFontAttributeName: font};
+//   return  [text sizeWithAttributes:tmpDict];
+    /** 方式2*/
     //    CGFloat nameW = [statues.text sizeWithFont:HWNameLabelFont].width;
+    /** 方式3*/
+    return  [self sizeWithText:text font:font maxW:CGFLOAT_MAX];
 }
-
+-(CGSize) sizeWithText:(NSString*)text font:(UIFont *)font maxW:(CGFloat)maxW{
+    NSDictionary *tmpDict = @{NSFontAttributeName: font};
+    CGSize maxSize = CGSizeMake(maxW, CGFLOAT_MAX);
+    return  [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:tmpDict context:nil].size;
+}
 - (void)setStatues:(HWStatuses *)statues{
     _statues = statues;
     //计算控件的frame
@@ -38,25 +46,42 @@
     /** 会员图标*/
     if (self.statues.user.VIP) {
         //计算frame
-        CGFloat vipX = CGRectGetMaxX(self.nameLabelFrame)+HWStatusCellBorderW;
+        CGFloat vipX = CGRectGetMaxX(self.nameLabelFrame)+HWStatusCellContentViewSpaceW;
         CGFloat vipY = HWStatusCellBorderW;
         CGFloat vipW = 14;
         CGFloat vipH = nameH;
         self.vipViewFrame = CGRectMake(vipX, vipY, vipW, vipH);
     }
     
-
-    /** 配图*/  
-
     
-
     /** 时间*/
-
-    /** 来源*/
-
-    /** 正文*/
+    CGFloat timeX = nameX;
+    CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame)+HWStatusCellBorderW;
+    CGSize timeSize = [self sizeWithText:statues.created_at font:HWTimeLabelFont];
     
-    self.cellHeight = 70;
+    self.timeLabelFrame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height);
+    
+    /** 来源*/
+    CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame)+HWStatusCellContentViewSpaceW;
+    CGFloat sourceY = timeY;
+    //<a href="http://app.weibo.com/t/feed/PBP2P" rel="nofollow">微博 weibo.com</a>
+    CGSize sourceSize = [self sizeWithText:[NSString stringWithFormat:@"from %@",statues.source] font:HWTimeLabelFont];
+    self.sourceLabelFrame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height);
+    
+    /** 正文*/
+    CGFloat contentX = HWStatusCellBorderW;
+    CGFloat contentY = MAX(CGRectGetMaxY(self.iconViewFrame),CGRectGetMaxY(self.timeLabelFrame))+HWStatusCellBorderW;
+    CGSize contentSize = [self sizeWithText:statues.text font:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
+    self.contentLabelFrame = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
+    /** 配图*/
+
+    
+
+  
+
+    //设置高度
+    self.cellHeight = MAX(CGRectGetMaxY(self.contentLabelFrame),CGRectGetMaxY(self.photoViewFrame))+HWStatusCellBorderW;
+    self.originalViewFrame = CGRectMake(0, 0, KMainScreenWidth, self.cellHeight);
 
 }
 
