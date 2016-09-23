@@ -35,6 +35,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+//    self.tableView.contentInset = UIEdgeInsetsMake(HWStatusCellBorderW, 0, 0, 0);
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    self.tableView.backgroundColor = HWColor(237, 237, 237);
+
     //设置导航栏内容
     [self setNavigationContent];
     //获取用户信息
@@ -47,7 +51,6 @@
     //获取未读书
     NSTimer *timer = [NSTimer timerWithTimeInterval:300 target:self selector:@selector(setupUnreadCount) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];//主线程会并发的处理timer事件
-
 }
 
 #pragma mark - 获取未读消息数
@@ -289,6 +292,13 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     HWStatusesTableViewCellFrame *statusF = self.statusesFrame[indexPath.row];
     return statusF.cellHeight;
+}
+- (void)tableView: (UITableView*)tableView willDisplayCell: (UITableViewCell*)cell forRowAtIndexPath: (NSIndexPath*)indexPath
+{
+//    cell.contentView.backgroundColor = HWColor(241, 248, 255);
+//    if (indexPath.row == 0) {
+//        cell.y = cell.frame.origin.y+10;
+//    }
 }
 
 #pragma mark -  获取用户信息

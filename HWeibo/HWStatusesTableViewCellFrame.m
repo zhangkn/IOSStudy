@@ -33,9 +33,22 @@
     [self setupOriginalViewFrame:statues];    
     /*2. 计算转发微博的 frame*/
     [self setupRepostViewFrame:statues];
-    //3.计算cell 高度
-    self.cellHeight = MAX(CGRectGetMaxY(self.originalViewFrame),CGRectGetMaxY(self.repostViewFrame))+HWStatusCellBorderW;
+    /*3. 计算toolbar*/
+    [self setupToolbarViewFrame:statues];
+    //4.计算cell 高度
+//    self.cellHeight = MAX(CGRectGetMaxY(self.originalViewFrame),CGRectGetMaxY(self.repostViewFrame))+HWStatusCellBorderW;
+    self.cellHeight = CGRectGetMaxY(self.toolbarViewFrame)+HWStatusCellBorderW;
 
+
+}
+
+#pragma mark - 计算原创微博的frame
+- (void)setupToolbarViewFrame:(HWStatuses*)statues{
+    CGFloat toolbarX = 0;
+    CGFloat toolbarY = MAX(CGRectGetMaxY(self.originalViewFrame), CGRectGetMaxY(self.repostViewFrame))+1;//分割线效果
+    CGFloat toolbarW = KMainScreenWidth;
+    CGFloat toolbarH = 35;
+    self.toolbarViewFrame = CGRectMake(toolbarX, toolbarY, toolbarW, toolbarH);
 }
 #pragma mark - 计算原创微博的frame
 - (void)setupOriginalViewFrame:(HWStatuses*)statues{

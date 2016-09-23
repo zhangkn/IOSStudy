@@ -49,6 +49,11 @@
 /** 转发文本*/
 @property (nonatomic,assign) CGRect repostContentLabelFrame;
 
+//第3部分： toolbar的frame计算
+/** 工具条整体*/
+@property (nonatomic,assign) CGRect toolbarViewFrame;
+
+
 /**
  提供类方法，返回数据模型数组--工厂模式
  */

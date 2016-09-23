@@ -10,6 +10,7 @@
 #import "HWStatuses.h"
 #import "UIImageView+WebCache.h"
 #import "HWPhoto.h"
+#import "HWStatuesToolbar.h"
 @interface HWStatusesTableViewCell ()
 /**1. 原创微博控件*/
 @property (nonatomic,weak) UIView *originalView;
@@ -36,12 +37,23 @@
 /** 转发文本*/
 @property (nonatomic,weak) UILabel *repostContentLabel;
 
-
+/**3. 转发微博控件 */
+/** 工具条微博整体*/
+@property (nonatomic,weak) HWStatuesToolbar *toolbarView;
 
 
 @end
 
 @implementation HWStatusesTableViewCell
+
+- (UIView *)toolbarView{
+    if (nil == _toolbarView) {
+        HWStatuesToolbar *tmpView = [[HWStatuesToolbar alloc]init];
+        _toolbarView = tmpView;
+        [self.contentView addSubview:_toolbarView];
+    }
+    return _toolbarView;
+}
 
 - (UIView *)repostView{
     if (nil == _repostView) {
@@ -144,24 +156,36 @@
     return _contentLabel;
 }
 
-
-
+/** 目的 ： 让第一个cell与导航栏有固定的间距*/
+- (void)setFrame:(CGRect)frame{
+    frame.origin.y += HWStatusCellBorderW;
+    [super setFrame:frame];
+}
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        self.backgroundColor = [UIColor clearColor];
+        self.selectionStyle = UITableViewCellSelectionStyleNone;//去掉选中效果
         //设置共性属性、初始化内部控件
         [self setupOriginalView];
         //初始化转发控件
         [self setupRepostView];
+        //初始化工具条
+        [self setuptoolbarView];
+        
     }
     return self;
 }
 
+- (void) setuptoolbarView{
+    [self.toolbarView setBackgroundColor:[UIColor whiteColor]];
+}
+
 - (void) setupOriginalView{
     // 初始化原创控件
-    [self originalView];
-    //        self.photoView.backgroundColor = [UIColor redColor];
+//    [self originalView];
+    self.originalView.backgroundColor = [UIColor whiteColor];
     [self iconView];
     self.nameLabel.font = HWNameLabelFont;
     [self.vipView setContentMode:UIViewContentModeCenter];
@@ -171,8 +195,9 @@
     self.photoView.contentMode = UIViewContentModeScaleAspectFit;
 }
 
+/** 构建原创微博*/
 - (void) setupRepostView{
-    self.repostView.backgroundColor = HWColor(241, 248, 255);
+    self.repostView.backgroundColor = [UIColor clearColor];
     self.repostContentLabel.font = HWNameLabelFont;
     self.repostPhotoView.contentMode =UIViewContentModeScaleAspectFit;
 }
@@ -204,8 +229,16 @@
     [self setupOriginalViewFrameAndData:frameModel];
     //2.装配转发微博的数据、frame
     [self setupRepostViewFrameAndData:frameModel];
+    //3. 装配工具条
+    [self setupToolbarViewFrameAndData:frameModel];
+
    
     
+}
+
+#pragma mark - 装配toolbar微博控件
+- (void)setupToolbarViewFrameAndData:(HWStatusesTableViewCellFrame*) frameModel{
+    self.toolbarView.frame = frameModel.toolbarViewFrame;
 }
 #pragma mark - 装配原创微博控件
 - (void)setupOriginalViewFrameAndData:(HWStatusesTableViewCellFrame*) frameModel{
