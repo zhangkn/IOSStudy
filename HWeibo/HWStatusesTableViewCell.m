@@ -9,8 +9,9 @@
 #import "HWStatusesTableViewCell.h"
 #import "HWStatuses.h"
 #import "UIImageView+WebCache.h"
+#import "HWPhoto.h"
 @interface HWStatusesTableViewCell ()
-/** 原创微博控件*/
+/**1. 原创微博控件*/
 @property (nonatomic,weak) UIView *originalView;
 /** 头像*/
 @property (nonatomic,weak) UIImageView *iconView;
@@ -27,11 +28,49 @@
 /** 正文*/
 @property (nonatomic,weak) UILabel *contentLabel;
 
+/**2. 转发微博控件 */
+/** 转发微博整体*/
+@property (nonatomic,weak) UIView *repostView;
+/** 转发配图*/
+@property (nonatomic,weak) UIImageView *repostPhotoView;
+/** 转发文本*/
+@property (nonatomic,weak) UILabel *repostContentLabel;
+
+
+
 
 @end
 
 @implementation HWStatusesTableViewCell
 
+- (UIView *)repostView{
+    if (nil == _repostView) {
+        UIView *tmpView = [[UIView alloc]init];
+        _repostView = tmpView;
+        [self.contentView addSubview:_repostView];
+    }
+    return _repostView;
+}
+
+- (UILabel *)repostContentLabel{
+    if (nil == _repostContentLabel) {
+        UILabel *tmpView = [[UILabel alloc]init];
+        _repostContentLabel = tmpView;
+        _repostContentLabel.numberOfLines = 0;
+        [self.repostView addSubview:_repostContentLabel];
+    }
+    return _repostContentLabel;
+}
+
+- (UIImageView *)repostPhotoView{
+    if (nil == _repostPhotoView) {
+        UIImageView *tmpView = [[UIImageView alloc]init];
+        _repostPhotoView = tmpView;
+        [self.repostView addSubview:_repostPhotoView];
+    }
+    return _repostPhotoView;
+}
+/**懒加载原创微博控件 */
 - (UIView *)originalView{
     if (nil == _originalView) {
         UIView *tmpView = [[UIView alloc]init];
@@ -112,16 +151,30 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         //设置共性属性、初始化内部控件
-        [self originalView];
-        self.photoView.backgroundColor = [UIColor redColor];
-        [self iconView];
-        self.nameLabel.font = HWNameLabelFont;
-        [self.vipView setContentMode:UIViewContentModeCenter];
-        self.timeLabel.font = HWTimeLabelFont;
-        self.sourceLabel.font =HWTimeLabelFont;
-        self.contentLabel.font = HWNameLabelFont;
+        [self setupOriginalView];
+        //初始化转发控件
+        [self setupRepostView];
     }
     return self;
+}
+
+- (void) setupOriginalView{
+    // 初始化原创控件
+    [self originalView];
+    //        self.photoView.backgroundColor = [UIColor redColor];
+    [self iconView];
+    self.nameLabel.font = HWNameLabelFont;
+    [self.vipView setContentMode:UIViewContentModeCenter];
+    self.timeLabel.font = HWTimeLabelFont;
+    self.sourceLabel.font =HWTimeLabelFont;
+    self.contentLabel.font = HWNameLabelFont;
+    self.photoView.contentMode = UIViewContentModeScaleAspectFit;
+}
+
+- (void) setupRepostView{
+    self.repostView.backgroundColor = HWColor(241, 248, 255);
+    self.repostContentLabel.font = HWNameLabelFont;
+    self.repostPhotoView.contentMode =UIViewContentModeScaleAspectFit;
 }
 
 + (instancetype)tableViewCellWithTableView:(UITableView *)tableView{
@@ -145,8 +198,17 @@
 
 
 - (void)setFrameModel:(HWStatusesTableViewCellFrame *)frameModel{
-    NSLog(@"%@",frameModel.statues.user);
+//    NSLog(@"%@",frameModel.statues.user);
     _frameModel = frameModel;
+    //1.装配原创微博的数据、frame
+    [self setupOriginalViewFrameAndData:frameModel];
+    //2.装配转发微博的数据、frame
+    [self setupRepostViewFrameAndData:frameModel];
+   
+    
+}
+#pragma mark - 装配原创微博控件
+- (void)setupOriginalViewFrameAndData:(HWStatusesTableViewCellFrame*) frameModel{
     //设置控件frame
     self.originalView.frame = frameModel.originalViewFrame;
     self.iconView.frame = frameModel.iconViewFrame;
@@ -161,14 +223,22 @@
         NSString *imageName = [NSString stringWithFormat:@"common_icon_membership_level%@",frameModel.statues.user.mbrank];
         [self.vipView setImage:[UIImage imageNamed:imageName]];
         NSLog(@"%@,%@",frameModel.statues.user,self.vipView);
-
+        
     }else{
         self.vipView.frame = CGRectZero;
         [self.vipView setHidden:YES];
         self.nameLabel.textColor = HWColor(0, 0, 0);
     }
     //配图
-    self.photoView.frame = frameModel.photoViewFrame;
+    if (frameModel.statues.pic_urls.count>0) {
+        self.photoView.hidden = NO;
+        self.photoView.frame = frameModel.photoViewFrame;
+        UIImage *placeholderImage = [UIImage imageNamed:@"timeline_image_placeholder"];
+        [self.photoView sd_setImageWithURL:[NSURL URLWithString:[frameModel.statues.pic_urls[0] thumbnail_pic]] placeholderImage:placeholderImage];
+    }else{
+        self.photoView.hidden = YES;
+        self.photoView.frame = CGRectZero;
+    }
     //昵称
     self.nameLabel.frame = frameModel.nameLabelFrame;
     self.nameLabel.text = frameModel.statues.user.name;
@@ -181,7 +251,33 @@
     // 正文
     self.contentLabel.frame = frameModel.contentLabelFrame;
     self.contentLabel.text = frameModel.statues.text;
-    //装配数据
+}
+
+#pragma mark - 装配转发微博控件
+- (void)setupRepostViewFrameAndData:(HWStatusesTableViewCellFrame*) frameModel{
+    if (frameModel.statues.retweeted_status) {
+        self.repostView.hidden = NO;
+        self.repostContentLabel.hidden = NO;
+        self.repostPhotoView.hidden = NO;
+        self.repostView.frame = frameModel.repostViewFrame;
+        self.repostContentLabel.frame = frameModel.repostContentLabelFrame;
+        NSString *tmp = [NSString stringWithFormat:@"@%@:%@",frameModel.statues.retweeted_status.user.name,frameModel.statues.retweeted_status.text];
+        self.repostContentLabel.text = tmp;
+        //转发微币的配图
+        if (frameModel.statues.retweeted_status.pic_urls.count>0) {
+            self.repostPhotoView.hidden = NO;
+            self.repostPhotoView.frame = frameModel.repostPhotoViewFrame;
+            UIImage *placeholderImage = [UIImage imageNamed:@"timeline_image_placeholder"];
+            [self.repostPhotoView sd_setImageWithURL:[NSURL URLWithString:[frameModel.statues.retweeted_status.pic_urls[0] thumbnail_pic]] placeholderImage:placeholderImage];
+        }else{
+            self.repostPhotoView.hidden = YES;
+            self.repostPhotoView.frame = CGRectZero;
+        }
+    }else{
+        self.repostView.hidden = YES;
+        self.repostContentLabel.hidden = YES;
+        self.repostPhotoView.hidden = YES;
+    }
 }
 
 @end

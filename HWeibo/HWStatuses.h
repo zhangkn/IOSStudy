@@ -25,5 +25,39 @@
 /**user	object	微博作者的用户信息字段 详细*/
 @property (nonatomic,strong) HWUser *user;
 
+/**		微博配图 字典数组[
+ {
+	thumbnail_pic = http://ww2.sinaimg.cn/thumbnail/005SWs8tjw1f817kxjo9pj311t1eeag5.jpg
+ },
+ {
+	thumbnail_pic = http://ww1.sinaimg.cn/thumbnail/005SWs8tjw1f817kym4exj311t1eejxa.jpg
+ },
+ {
+	thumbnail_pic = http://ww3.sinaimg.cn/thumbnail/005SWs8tjw1f817kz6f2dj30dc0hsgml.jpg
+ },
+ {
+	thumbnail_pic = http://ww4.sinaimg.cn/thumbnail/005SWs8tjw1f817kzskwoj30dc0hsdh6.jpg
+ },
+ {
+	thumbnail_pic = http://ww1.sinaimg.cn/thumbnail/005SWs8tjw1f817l0g18jj30dc0hsdhe.jpg
+ },
+ {
+	thumbnail_pic = http://ww2.sinaimg.cn/thumbnail/005SWs8tjw1f817l136e1j30dc0hsq4p.jpg
+ },
+ {
+	thumbnail_pic = http://ww1.sinaimg.cn/thumbnail/005SWs8tjw1f817l1qojlj30dc0hs400.jpg
+ },
+ {
+	thumbnail_pic = http://ww3.sinaimg.cn/thumbnail/005SWs8tjw1f817l2e4yej30dc0hs3zw.jpg
+ },
+ {
+	thumbnail_pic = http://ww2.sinaimg.cn/thumbnail/005SWs8tjw1f817l30xryj30dc0hsac0.jpg
+ }
+ ]。*/
+@property (nonatomic,strong) NSArray *pic_urls;
+
+/**	object	被转发的原微博信息字段，当该微博为转发微博时返回 详细*/
+@property (nonatomic,strong) HWStatuses *retweeted_status;
+
 
 @end

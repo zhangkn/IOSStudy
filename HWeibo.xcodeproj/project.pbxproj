@@ -20,6 +20,7 @@
 		E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E11471551D0E58FA00107A3E /* AppDelegate.m */; };
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
+		E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E11749111D935DEE00B89DFE /* HWPhoto.m */; };
 		E139D9161D49AA060052815A /* HWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D9151D49AA060052815A /* HWAccountTool.m */; };
 		E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91B1D49D7D40052815A /* UIWindow+Extension.m */; };
 		E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91D1D49F7570052815A /* Foundation+Log.m */; };
@@ -104,6 +105,8 @@
 		E11471601D0E58FA00107A3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E11471621D0E58FA00107A3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
+		E11749101D935DEE00B89DFE /* HWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPhoto.h; sourceTree = "<group>"; };
+		E11749111D935DEE00B89DFE /* HWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPhoto.m; sourceTree = "<group>"; };
 		E139D9141D49AA060052815A /* HWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWAccountTool.h; sourceTree = "<group>"; };
 		E139D9151D49AA060052815A /* HWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWAccountTool.m; sourceTree = "<group>"; };
 		E139D91A1D49D7D40052815A /* UIWindow+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
@@ -519,6 +522,8 @@
 			isa = PBXGroup;
 			children = (
 				E1B58EAC1D4C460D00E74E9C /* HWUser.h */,
+				E11749101D935DEE00B89DFE /* HWPhoto.h */,
+				E11749111D935DEE00B89DFE /* HWPhoto.m */,
 				E1B58EAF1D4C496D00E74E9C /* HWStatuses.h */,
 				E1B58EB01D4C496D00E74E9C /* HWStatuses.m */,
 				E1920B091D8FD447003AD139 /* HWStatusesTableViewCellFrame.h */,
@@ -759,6 +764,7 @@
 				E13C3A391D4B49200026221C /* UIImageView+WebCache.m in Sources */,
 				E1B58EEE1D4C702C00E74E9C /* MJFoundation.m in Sources */,
 				E1E9010E1D484BDE001F78C3 /* AFNetworkReachabilityManager.m in Sources */,
+				E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */,
 				E139D9161D49AA060052815A /* HWAccountTool.m in Sources */,
 				E13C3A341D4B49200026221C /* UIButton+WebCache.m in Sources */,
 				E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */,

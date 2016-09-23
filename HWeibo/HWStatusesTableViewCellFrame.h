@@ -24,6 +24,7 @@
 
 @property (nonatomic,strong) HWStatuses *statues;
 @property (nonatomic,assign) CGFloat cellHeight;
+//第1部分： 原创微博控件的frame计算
 /** 原创微博控件*/
 @property (nonatomic,assign ) CGRect originalViewFrame;
 /** 头像*/
@@ -40,6 +41,13 @@
 @property (nonatomic,assign ) CGRect sourceLabelFrame;
 /** 正文*/
 @property (nonatomic,assign ) CGRect contentLabelFrame;
+//第二部分： 转发控件的frame计算
+/** 转发微博整体*/
+@property (nonatomic,assign) CGRect repostViewFrame;
+/** 转发配图*/
+@property (nonatomic,assign) CGRect repostPhotoViewFrame;
+/** 转发文本*/
+@property (nonatomic,assign) CGRect repostContentLabelFrame;
 
 /**
  提供类方法，返回数据模型数组--工厂模式
