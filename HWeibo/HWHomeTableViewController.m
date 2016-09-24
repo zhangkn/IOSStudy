@@ -206,16 +206,23 @@
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
+#warning  方案1：下拉刷新 ，不更新所有的数据，包括原先展示的数据，包括不更新转发数、评论数、点赞数，只展示最新的数据
+
     HWStatuses *firstStatuse =[[self.statusesFrame firstObject] statues];
     if (firstStatuse) {
         parameters[@"since_id"]= firstStatuse.idstr;
     }
-    //    parameters[@"count"]= @20;
+#warning  方案二：下拉刷新 ，就更新所有的数据，包括原先展示的数据，目的是展示转发数、评论数、点赞数
+    // test
+//    parameters[@"since_id"]=  [[[self.statusesFrame lastObject] statues] idstr];
+#warning  方案3：下拉刷新 ，只保留一条最新的数据，展示一个加载更多的按钮。（cell 判断，如果只有一条数据，就展示加载更多的数据）
+    //    parameters[@"count"]= @1;
     NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
     //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
     [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         if (tmpArray.count !=0) {
+//            [self.statusesFrame removeAllObjects];//后台成功返回的时候才进行清空
             NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
             NSRange range = NSMakeRange(0, tmpArray.count);
             NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];

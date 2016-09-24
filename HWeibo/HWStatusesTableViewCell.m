@@ -239,6 +239,7 @@
 #pragma mark - 装配toolbar微博控件
 - (void)setupToolbarViewFrameAndData:(HWStatusesTableViewCellFrame*) frameModel{
     self.toolbarView.frame = frameModel.toolbarViewFrame;
+    self.toolbarView.statuses = frameModel.statues;
 }
 #pragma mark - 装配原创微博控件
 - (void)setupOriginalViewFrameAndData:(HWStatusesTableViewCellFrame*) frameModel{

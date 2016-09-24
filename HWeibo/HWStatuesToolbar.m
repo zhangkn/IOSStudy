@@ -23,6 +23,31 @@
 
 @implementation HWStatuesToolbar
 
++ (instancetype)statuesToolbarWithStatues:(HWStatuses *)statuses{
+    HWStatuesToolbar *tmp = [[HWStatuesToolbar alloc]init];
+    tmp.statuses = statuses;
+    return tmp;
+}
+
+- (void)setStatuses:(HWStatuses *)statuses{
+    _statuses = statuses;
+    //装配数据
+    [self setupButtonData:self.repostButton count:statuses.reposts_count defaultValue:@"Repost"];
+    [self setupButtonData:self.commentButton count:statuses.comments_count defaultValue:@"Comments"];
+    [self setupButtonData:self.likesButton count:statuses.attitudes_count defaultValue:@"Likes"];
+}
+
+- (void)setupButtonData:(UIButton*)btn count:(int)count defaultValue:(NSString*)defaultValue{
+    if (count>0) {
+        defaultValue = (count <=9999) ? [NSString stringWithFormat:@"%d",count] : [NSString stringWithFormat:@"%dK",(int)(count*0.001)] ;//
+        /** Objective-C浮点数转化整数（向上取整、向下取整）*/
+//        方法一 (int)(count*0.001)]
+//        方法2 floor取得不大于浮点数的最大整数 返回值，是double
+//        方法3ceil函数，向上取整
+    }
+    [btn setTitle:defaultValue forState:UIControlStateNormal];
+}
+
 - (UIButton *)repostButton{
     if (nil == _repostButton) {
         UIButton *tmpView = [[UIButton alloc]init];
