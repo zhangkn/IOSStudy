@@ -21,6 +21,7 @@
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
 		E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E11749111D935DEE00B89DFE /* HWPhoto.m */; };
+		E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D41D97794300394ACF /* HWCreatedAtTool.m */; };
 		E139D9161D49AA060052815A /* HWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D9151D49AA060052815A /* HWAccountTool.m */; };
 		E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91B1D49D7D40052815A /* UIWindow+Extension.m */; };
 		E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91D1D49F7570052815A /* Foundation+Log.m */; };
@@ -108,6 +109,8 @@
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
 		E11749101D935DEE00B89DFE /* HWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPhoto.h; sourceTree = "<group>"; };
 		E11749111D935DEE00B89DFE /* HWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPhoto.m; sourceTree = "<group>"; };
+		E12E47D31D97794300394ACF /* HWCreatedAtTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCreatedAtTool.h; sourceTree = "<group>"; };
+		E12E47D41D97794300394ACF /* HWCreatedAtTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWCreatedAtTool.m; sourceTree = "<group>"; };
 		E139D9141D49AA060052815A /* HWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWAccountTool.h; sourceTree = "<group>"; };
 		E139D9151D49AA060052815A /* HWAccountTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWAccountTool.m; sourceTree = "<group>"; };
 		E139D91A1D49D7D40052815A /* UIWindow+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+Extension.h"; sourceTree = "<group>"; };
@@ -315,6 +318,15 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E12E47D61D97794A00394ACF /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				E12E47D31D97794300394ACF /* HWCreatedAtTool.h */,
+				E12E47D41D97794300394ACF /* HWCreatedAtTool.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
 		E139D9131D49A9F40052815A /* Tool */ = {
 			isa = PBXGroup;
 			children = (
@@ -481,6 +493,7 @@
 		E1BB11CA1D224DEC0030EC5C /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				E12E47D61D97794A00394ACF /* Tool */,
 				E1BB11CE1D224E1C0030EC5C /* Model */,
 				E1BB11CD1D224E160030EC5C /* View */,
 				E1BB11CC1D224E0C0030EC5C /* Controller */,
@@ -770,6 +783,7 @@
 				E1B58EEE1D4C702C00E74E9C /* MJFoundation.m in Sources */,
 				E1E9010E1D484BDE001F78C3 /* AFNetworkReachabilityManager.m in Sources */,
 				E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */,
+				E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */,
 				E139D9161D49AA060052815A /* HWAccountTool.m in Sources */,
 				E13C3A341D4B49200026221C /* UIButton+WebCache.m in Sources */,
 				E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */,
