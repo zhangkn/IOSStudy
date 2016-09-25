@@ -50,6 +50,27 @@
     CGFloat toolbarH = 35;
     self.toolbarViewFrame = CGRectMake(toolbarX, toolbarY, toolbarW, toolbarH);
 }
+/** 目的 时刻保持frame的时刻更新  timeSize.width会改变，必须重写sourceLabelFrame */
+- (CGRect)timeLabelFrame{
+    /** 时间*/
+    CGFloat timeX = self.nameLabelFrame.origin.x;
+    CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame)+HWStatusCellBorderW;
+    CGSize timeSize = [self sizeWithText:_statues.created_at font:HWTimeLabelFont];
+    _timeLabelFrame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height);
+    return _timeLabelFrame;
+}
+- (CGRect)sourceLabelFrame{
+    /** 来源*/
+    CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame)+HWStatusCellContentViewSpaceW;
+    CGFloat sourceY = self.timeLabelFrame.origin.y;
+    //<a href="http://app.weibo.com/t/feed/PBP2P" rel="nofollow">微博 weibo.com</a>
+    CGSize sourceSize = [self sizeWithText:[NSString stringWithFormat:@"from %@",_statues.source] font:HWTimeLabelFont];
+    _sourceLabelFrame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height);
+    return _sourceLabelFrame;
+}
+
+
+
 #pragma mark - 计算原创微博的frame
 - (void)setupOriginalViewFrame:(HWStatuses*)statues{
     

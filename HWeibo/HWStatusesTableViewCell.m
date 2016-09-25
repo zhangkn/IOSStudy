@@ -277,8 +277,9 @@
     self.nameLabel.frame = frameModel.nameLabelFrame;
     self.nameLabel.text = frameModel.statues.user.name;
     //时间
-    self.timeLabel.frame = frameModel.timeLabelFrame;
-    self.timeLabel.text = frameModel.statues.created_at;
+    /** 由于时间的格式处理，重写了created_at 方法进行格式化处理，因此timeLabelFrame 的getter也需对应重写getter*/
+    self.timeLabel.text = frameModel.statues.created_at;//调用getter，getter的值随时间的不一样，而变化.此时对应的timeLabelFrame 需要重新计算。
+    self.timeLabel.frame = frameModel.timeLabelFrame;//
     
     self.sourceLabel.frame = frameModel.sourceLabelFrame;
     self.sourceLabel.text = frameModel.statues.source;
