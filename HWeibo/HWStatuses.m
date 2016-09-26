@@ -7,7 +7,6 @@
 //
 
 #import "HWStatuses.h"
-#import "HWPhoto.h"
 #import "MJExtension.h"
 #import "HWCreatedAtTool.h"
 
@@ -28,6 +27,20 @@
     //星期  月份 日期 HH:mm:ss 北京时间正8时区 年份    HH 大写24小时制
 //    Sat Sep 24 15:27:52 +0800 2016
     return [HWCreatedAtTool processStatutesCreatedAt:_created_at];
+}
+
+- (void)setSource:(NSString *)source{
+    //方法一     NSRegularExpression
+//方法二 截取  substringWithRange
+    if (!source || [source isEqualToString:@""]) {
+        _source = @"";
+        return;
+    }
+    NSRange tmpRange;
+    tmpRange.location=[source rangeOfString:@">"].location+1;
+    tmpRange.length = [source rangeOfString:@"<" options:NSBackwardsSearch].location-tmpRange.location;
+    NSString *tmp = [source substringWithRange:tmpRange];
+    _source = [@"from " stringByAppendingString:tmp];
 }
 
 @end

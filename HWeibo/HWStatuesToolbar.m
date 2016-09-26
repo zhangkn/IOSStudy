@@ -8,7 +8,6 @@
 
 #import "HWStatuesToolbar.h"
 #define HWHWStatuesToolbarFont [UIFont systemFontOfSize:12]
-#define HWHWStatuesToolbarTextColor HWColor(147, 147, 147)
 #define HWHWStatuesToolbarTitleEdgeInsets UIEdgeInsetsMake(0, 5, 0, 0)
 
 
@@ -18,10 +17,34 @@
 @property (nonatomic,weak) UIButton *commentButton;
 @property (nonatomic,weak) UIButton *likesButton;
 
+@property (nonatomic,weak) UIImageView *cutOffView;
+@property (nonatomic,weak) UIImageView *cutOffView1;
+
+
 
 @end
 
 @implementation HWStatuesToolbar
+
+- (UIImageView *)cutOffView1{
+    if (nil == _cutOffView1) {
+        UIImageView *tmpView = [[UIImageView alloc]init];
+        _cutOffView1 = tmpView;
+        [tmpView setImage:[UIImage imageNamed:@"timeline_card_bottom_line"]];
+        [self addSubview:_cutOffView1];
+    }
+    return _cutOffView1;
+}
+
+- (UIImageView *)cutOffView{
+    if (nil == _cutOffView) {
+        UIImageView *tmpView = [[UIImageView alloc]init];
+        _cutOffView = tmpView;
+        [tmpView setImage:[UIImage imageNamed:@"timeline_card_bottom_line"]];
+        [self addSubview:_cutOffView];
+    }
+    return _cutOffView;
+}
 
 + (instancetype)statuesToolbarWithStatues:(HWStatuses *)statuses{
     HWStatuesToolbar *tmp = [[HWStatuesToolbar alloc]init];
@@ -116,7 +139,9 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     self.repostButton.frame = CGRectMake(0, 0, self.width/3, self.height);
+    self.cutOffView.frame = CGRectMake(CGRectGetMaxX(self.repostButton.frame), self.repostButton.y, 1, self.repostButton.height);
     self.commentButton.frame = CGRectMake(CGRectGetMaxX(self.repostButton.frame), 0, self.width/3, self.height);
+    self.cutOffView1.frame = CGRectMake(CGRectGetMaxX(self.commentButton.frame), self.commentButton.y, 1, self.commentButton.height);
     self.likesButton.frame = CGRectMake(CGRectGetMaxX(self.commentButton.frame), 0, self.width/3, self.height);
     
 }

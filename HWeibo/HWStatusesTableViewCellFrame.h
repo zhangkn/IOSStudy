@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "HWStatuses.h"
 
-#define HWStatusCellBorderW 10
 #define HWStatusCellContentViewSpaceW 5
 #define HWNameLabelFont [UIFont systemFontOfSize:12]
 #define HWTimeLabelFont [UIFont systemFontOfSize:10]
@@ -32,7 +31,7 @@
 /** 会员图标*/
 @property (nonatomic,assign ) CGRect vipViewFrame;
 /** 配图*/
-@property (nonatomic,assign ) CGRect photoViewFrame;
+@property (nonatomic,assign ) CGRect photoViewsFrame;
 /** 昵称*/
 @property (nonatomic,assign ) CGRect nameLabelFrame;
 /** 时间*/
@@ -45,7 +44,7 @@
 /** 转发微博整体*/
 @property (nonatomic,assign) CGRect repostViewFrame;
 /** 转发配图*/
-@property (nonatomic,assign) CGRect repostPhotoViewFrame;
+@property (nonatomic,assign) CGRect repostPhotosViewFrame;
 /** 转发文本*/
 @property (nonatomic,assign) CGRect repostContentLabelFrame;
 

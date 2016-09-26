@@ -11,15 +11,17 @@
 #import "UIImageView+WebCache.h"
 #import "HWPhoto.h"
 #import "HWStatuesToolbar.h"
+#import "HWStatuePhotosView.h"
+#import "HWIconView.h"
 @interface HWStatusesTableViewCell ()
 /**1. 原创微博控件*/
 @property (nonatomic,weak) UIView *originalView;
 /** 头像*/
-@property (nonatomic,weak) UIImageView *iconView;
+@property (nonatomic,weak) HWIconView *iconView;
 /** 会员图标*/
 @property (nonatomic,weak) UIImageView *vipView;
 /** 配图*/
-@property (nonatomic,weak) UIImageView *photoView;
+@property (nonatomic,weak) HWStatuePhotosView *photosView;
 /** 昵称*/
 @property (nonatomic,weak) UILabel *nameLabel;
 /** 时间*/
@@ -33,7 +35,7 @@
 /** 转发微博整体*/
 @property (nonatomic,weak) UIView *repostView;
 /** 转发配图*/
-@property (nonatomic,weak) UIImageView *repostPhotoView;
+@property (nonatomic,weak) HWStatuePhotosView *repostPhotosView;
 /** 转发文本*/
 @property (nonatomic,weak) UILabel *repostContentLabel;
 
@@ -74,13 +76,13 @@
     return _repostContentLabel;
 }
 
-- (UIImageView *)repostPhotoView{
-    if (nil == _repostPhotoView) {
-        UIImageView *tmpView = [[UIImageView alloc]init];
-        _repostPhotoView = tmpView;
-        [self.repostView addSubview:_repostPhotoView];
+- (HWStatuePhotosView *)repostPhotosView{
+    if (nil == _repostPhotosView) {
+        HWStatuePhotosView *tmpView = [[HWStatuePhotosView alloc]init];
+        _repostPhotosView = tmpView;
+        [self.repostView addSubview:_repostPhotosView];
     }
-    return _repostPhotoView;
+    return _repostPhotosView;
 }
 /**懒加载原创微博控件 */
 - (UIView *)originalView{
@@ -92,9 +94,9 @@
     return _originalView;
 }
 
-- (UIImageView *)iconView{
+- (HWIconView *)iconView{
     if (nil == _iconView) {
-        UIImageView *tmpView = [[UIImageView alloc]init];
+        HWIconView *tmpView = [[HWIconView alloc]init];
         _iconView = tmpView;
         [self.originalView addSubview:_iconView];
     }
@@ -110,13 +112,13 @@
     return _vipView;
 }
 
-- (UIImageView *)photoView{
-    if (nil == _photoView) {
-        UIImageView *tmpView = [[UIImageView alloc]init];
-        _photoView = tmpView;
-        [self.originalView addSubview:_photoView];
+- (HWStatuePhotosView *)photosView{
+    if (nil == _photosView) {
+        HWStatuePhotosView *tmpView = [[HWStatuePhotosView alloc]init];
+        _photosView = tmpView;
+        [self.originalView addSubview:_photosView];
     }
-    return _photoView;
+    return _photosView;
 }
 
 - (UILabel *)nameLabel{
@@ -132,6 +134,7 @@
     if (nil == _timeLabel) {
         UILabel *tmpView = [[UILabel alloc]init];
         _timeLabel = tmpView;
+        [tmpView setTextColor:HWHWStatuesToolbarTextColor];
         [self.originalView addSubview:_timeLabel];
     }
     return _timeLabel;
@@ -141,6 +144,7 @@
     if (nil == _sourceLabel) {
         UILabel *tmpView = [[UILabel alloc]init];
         _sourceLabel = tmpView;
+        [tmpView setTextColor:HWHWStatuesToolbarTextColor];
         [self.originalView addSubview:_sourceLabel];
     }
     return _sourceLabel;
@@ -192,14 +196,16 @@
     self.timeLabel.font = HWTimeLabelFont;
     self.sourceLabel.font =HWTimeLabelFont;
     self.contentLabel.font = HWNameLabelFont;
-    self.photoView.contentMode = UIViewContentModeScaleAspectFit;
+//    self.photosView.contentMode = UIViewContentModeScaleAspectFit;
+    self.photosView.backgroundColor = [UIColor whiteColor];
 }
 
 /** 构建原创微博*/
 - (void) setupRepostView{
     self.repostView.backgroundColor = [UIColor clearColor];
     self.repostContentLabel.font = HWNameLabelFont;
-    self.repostPhotoView.contentMode =UIViewContentModeScaleAspectFit;
+//    self.repostPhotoView.contentMode =UIViewContentModeScaleAspectFit;
+    self.repostPhotosView.backgroundColor = [UIColor whiteColor];
 }
 
 + (instancetype)tableViewCellWithTableView:(UITableView *)tableView{
@@ -246,9 +252,7 @@
     //设置控件frame
     self.originalView.frame = frameModel.originalViewFrame;
     self.iconView.frame = frameModel.iconViewFrame;
-    NSURL *iconImageURL = [ NSURL URLWithString:_frameModel.statues.user.profile_image_url];
-    UIImage *placeholderImage = [UIImage imageNamed:@"avatar_default_small"];
-    [self.iconView sd_setImageWithURL:iconImageURL placeholderImage:placeholderImage];
+    self.iconView.user = frameModel.statues.user;
     //设置会员图标
     if (frameModel.statues.user.VIP) {
         [self.vipView setHidden:NO];
@@ -265,13 +269,12 @@
     }
     //配图
     if (frameModel.statues.pic_urls.count>0) {
-        self.photoView.hidden = NO;
-        self.photoView.frame = frameModel.photoViewFrame;
-        UIImage *placeholderImage = [UIImage imageNamed:@"timeline_image_placeholder"];
-        [self.photoView sd_setImageWithURL:[NSURL URLWithString:[frameModel.statues.pic_urls[0] thumbnail_pic]] placeholderImage:placeholderImage];
+        self.photosView.hidden = NO;
+        self.photosView.frame = frameModel.photoViewsFrame;
+        self.photosView.pic_urls = frameModel.statues.pic_urls;
     }else{
-        self.photoView.hidden = YES;
-        self.photoView.frame = CGRectZero;
+        self.photosView.hidden = YES;
+        self.photosView.frame = CGRectZero;
     }
     //昵称
     self.nameLabel.frame = frameModel.nameLabelFrame;
@@ -293,25 +296,24 @@
     if (frameModel.statues.retweeted_status) {
         self.repostView.hidden = NO;
         self.repostContentLabel.hidden = NO;
-        self.repostPhotoView.hidden = NO;
+        self.repostPhotosView.hidden = NO;
         self.repostView.frame = frameModel.repostViewFrame;
         self.repostContentLabel.frame = frameModel.repostContentLabelFrame;
         NSString *tmp = [NSString stringWithFormat:@"@%@:%@",frameModel.statues.retweeted_status.user.name,frameModel.statues.retweeted_status.text];
         self.repostContentLabel.text = tmp;
         //转发微币的配图
         if (frameModel.statues.retweeted_status.pic_urls.count>0) {
-            self.repostPhotoView.hidden = NO;
-            self.repostPhotoView.frame = frameModel.repostPhotoViewFrame;
-            UIImage *placeholderImage = [UIImage imageNamed:@"timeline_image_placeholder"];
-            [self.repostPhotoView sd_setImageWithURL:[NSURL URLWithString:[frameModel.statues.retweeted_status.pic_urls[0] thumbnail_pic]] placeholderImage:placeholderImage];
+            self.repostPhotosView.hidden = NO;
+            self.repostPhotosView.frame = frameModel.repostPhotosViewFrame;
+            self.repostPhotosView.pic_urls = frameModel.statues.retweeted_status.pic_urls;
         }else{
-            self.repostPhotoView.hidden = YES;
-            self.repostPhotoView.frame = CGRectZero;
+            self.repostPhotosView.hidden = YES;
+            self.repostPhotosView.frame = CGRectZero;
         }
     }else{
         self.repostView.hidden = YES;
         self.repostContentLabel.hidden = YES;
-        self.repostPhotoView.hidden = YES;
+        self.repostPhotosView.hidden = YES;
     }
 }
 

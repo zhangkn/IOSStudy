@@ -37,6 +37,7 @@
 
 #define KMainScreenWidth [UIScreen mainScreen].bounds.size.width
 
+#define HWStatusCellBorderW 10
 
 #endif
 #endif /* HWeibo_Prefix_pch */

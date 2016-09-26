@@ -10,4 +10,8 @@
 
 @implementation HWPhoto
 
+
+- (NSString *)description{
+    return self.thumbnail_pic;
+}
 @end

@@ -8,6 +8,15 @@
 //
 
 #import <Foundation/Foundation.h>
+typedef enum {
+    HWUserVerifiedTypeNone = -1 ,//未认证
+    HWUserVerifiedTypeAvatarVip = 0 ,//个人认证
+    HWUserVerifiedTypeAvatarEnterpriseVip2 = 2, //企业官方认证
+    HWUserVerifiedTypeAvatarEnterpriseVip3 = 3, //媒体官方认证
+    HWUserVerifiedTypeAvatarEnterpriseVip5 = 5, //网站官方认证
+    HWUserVerifiedTypeAvatarVgirl = 10 ,//微女郎
+    HWUserVerifiedTypeAvatarGrassroot = 220,//微博达人
+} HWUserVerifiedType;
 
 @interface HWUser : NSObject
 /**idstr	string	字符串型的用户UID*/
@@ -35,6 +44,14 @@ url	string	用户博客地址*/
 /** 会员类型 》2 会员*/
 @property (nonatomic,assign) int mbtype;
 @property (nonatomic,assign,getter=isVIP) BOOL VIP;
+
+/**	boolean	是否是微博认证用户，即加V用户，true：是，false：否*/
+@property (nonatomic,assign,) BOOL verified;
+/** 认证类型	int	暂未支持   -1  未认证   个人认证  _verified_type:0   企业认证（官方）  _verified_type:2  企业认证   _verified_type:3   企业认证   _verified_type:5   微女郎  _verified_type:10  微博达人  _verified_type:220
+*/
+@property (nonatomic,assign) HWUserVerifiedType verified_type;
+
+@property (nonatomic,strong) UIImage *verified_typeImage;
 
 
 

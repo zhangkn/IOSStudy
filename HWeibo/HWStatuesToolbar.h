@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HWStatuses.h"
+#define HWHWStatuesToolbarTextColor HWColor(147, 147, 147)
 @interface HWStatuesToolbar : UIView
 
 //自定义视图的现实的数据来源于模型，即使用模型装配自定义视图的显示内容

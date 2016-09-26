@@ -7,6 +7,7 @@
 //
 
 #import "HWStatusesTableViewCellFrame.h"
+#import "HWStatuePhotosView.h"
 
 
 
@@ -118,25 +119,22 @@
     CGSize contentSize = [self sizeWithText:statues.text font:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
     self.contentLabelFrame = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
     /** 配图*/
-    
-    
-    
     if (statues.pic_urls.count>0) {
-        //        NSLog(@"%@",statues.pic_urls);
         //        计算配图frame
         CGFloat photoY = CGRectGetMaxY(self.contentLabelFrame)+HWStatusCellBorderW;
-        //        CGFloat photoW = KMainScreenWidth - 2*HWStatusCellBorderW;
-        CGFloat photoW = 100;
-        CGFloat photoX = (KMainScreenWidth-photoW)*0.5;
-        CGFloat photoH = 100;
-        self.photoViewFrame = CGRectMake(photoX, photoY, photoW, photoH);
+        CGSize photoSize = [HWStatuePhotosView sizeWithPicUrlsCount:statues.pic_urls.count];
+        CGFloat photoW = photoSize.width;
+        CGFloat photoX = HWStatusCellBorderW;
+        CGFloat photoH = photoSize.height;
+        self.photoViewsFrame = CGRectMake(photoX, photoY, photoW, photoH);
     }
     
     //原创微博的frame
-    CGFloat tmpcellHeight = MAX(CGRectGetMaxY(self.contentLabelFrame),CGRectGetMaxY(self.photoViewFrame))+HWStatusCellBorderW;
+    CGFloat tmpcellHeight = MAX(CGRectGetMaxY(self.contentLabelFrame),CGRectGetMaxY(self.photoViewsFrame))+HWStatusCellBorderW;
     self.originalViewFrame = CGRectMake(0, 0, KMainScreenWidth, tmpcellHeight);
     
 }
+
 #pragma mark - 计算转发微博的frame
 - (void)setupRepostViewFrame:(HWStatuses*)statues{
     if (statues.retweeted_status) {
@@ -148,19 +146,17 @@
         CGSize retweetedContentSize = [self sizeWithText:tmp font:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
         self.repostContentLabelFrame = CGRectMake(retweetedContentX, retweetedContentY, retweetedContentSize.width, retweetedContentSize.height);
         //转发微博的配图信息
-        
         if (statues.retweeted_status.pic_urls.count>0) {
-            //        NSLog(@"%@",statues.pic_urls);
             //        计算配图frame
             CGFloat repostphotoY = CGRectGetMaxY(self.repostContentLabelFrame)+HWStatusCellBorderW;
-            //        CGFloat photoW = KMainScreenWidth - 2*HWStatusCellBorderW;
-            CGFloat repostphotoW = 100;
-            CGFloat repostphotoX = (KMainScreenWidth-repostphotoW)*0.5;
-            CGFloat repostphotoH = 100;
-            self.repostPhotoViewFrame = CGRectMake(repostphotoX, repostphotoY, repostphotoW, repostphotoH);
+            CGSize repostphotoSize = [HWStatuePhotosView sizeWithPicUrlsCount:statues.retweeted_status.pic_urls.count];
+            CGFloat repostphotoW = repostphotoSize.width;
+            CGFloat repostphotoX = HWStatusCellBorderW;
+            CGFloat repostphotoH = repostphotoSize.height;
+            self.repostPhotosViewFrame = CGRectMake(repostphotoX, repostphotoY, repostphotoW, repostphotoH);
         }
-        //原创微博的frame
-        CGFloat repostTmpcellHeight = MAX(CGRectGetMaxY(self.repostContentLabelFrame),CGRectGetMaxY(self.repostPhotoViewFrame))+HWStatusCellBorderW;
+        //转发微博的frame
+        CGFloat repostTmpcellHeight = MAX(CGRectGetMaxY(self.repostContentLabelFrame),CGRectGetMaxY(self.repostPhotosViewFrame))+HWStatusCellBorderW;
         CGFloat repostViewX = 0;
         CGFloat repostViewY = CGRectGetMaxY(self.originalViewFrame);
         self.repostViewFrame = CGRectMake(repostViewX, repostViewY, KMainScreenWidth, repostTmpcellHeight);
