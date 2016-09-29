@@ -54,7 +54,12 @@
      *  4.后台运行状态
      */
     // 向操作系统申请后台运行的资格，能维持多久，是不确定的
-    UIBackgroundTaskIdentifier task = [application beginBackgroundTaskWithExpirationHandler:^{
+    /** 知识点：
+     1>block会在定义那一刻，直接拿到外部的局部变量task的值。以后block中局部变量task的值就固定不变
+    2>block中 对被————block修饰的变量的一直引用
+     3》block中 对被————static修饰的变量的一直引用；对全局变量、成员变量也是能一致引用*/
+
+    __block UIBackgroundTaskIdentifier task = [application beginBackgroundTaskWithExpirationHandler:^{
         // 当申请的后台运行时间已经结束（过期），就会调用这个block
         // 赶紧结束任务
         [application endBackgroundTask:task];

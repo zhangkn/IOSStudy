@@ -21,8 +21,10 @@
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
 		E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E11749111D935DEE00B89DFE /* HWPhoto.m */; };
+		E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */; };
 		E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D41D97794300394ACF /* HWCreatedAtTool.m */; };
 		E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D81D97B82300394ACF /* HWStatuePhotosView.m */; };
+		E13155511D9CFACB00CAD5D9 /* NSString+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E13155501D9CFACB00CAD5D9 /* NSString+Extension.m */; };
 		E1394F1C1D991F0900B77847 /* HWIconView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1394F1B1D991F0900B77847 /* HWIconView.m */; };
 		E139D9161D49AA060052815A /* HWAccountTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D9151D49AA060052815A /* HWAccountTool.m */; };
 		E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E139D91B1D49D7D40052815A /* UIWindow+Extension.m */; };
@@ -112,10 +114,14 @@
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
 		E11749101D935DEE00B89DFE /* HWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPhoto.h; sourceTree = "<group>"; };
 		E11749111D935DEE00B89DFE /* HWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPhoto.m; sourceTree = "<group>"; };
+		E12300181D9B5CC80061E8A3 /* HWComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeViewController.h; sourceTree = "<group>"; };
+		E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeViewController.m; sourceTree = "<group>"; };
 		E12E47D31D97794300394ACF /* HWCreatedAtTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCreatedAtTool.h; sourceTree = "<group>"; };
 		E12E47D41D97794300394ACF /* HWCreatedAtTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWCreatedAtTool.m; sourceTree = "<group>"; };
 		E12E47D71D97B82300394ACF /* HWStatuePhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatuePhotosView.h; sourceTree = "<group>"; };
 		E12E47D81D97B82300394ACF /* HWStatuePhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatuePhotosView.m; sourceTree = "<group>"; };
+		E131554F1D9CFACB00CAD5D9 /* NSString+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Extension.h"; sourceTree = "<group>"; };
+		E13155501D9CFACB00CAD5D9 /* NSString+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Extension.m"; sourceTree = "<group>"; };
 		E1394F1A1D991F0900B77847 /* HWIconView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWIconView.h; sourceTree = "<group>"; };
 		E1394F1B1D991F0900B77847 /* HWIconView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWIconView.m; sourceTree = "<group>"; };
 		E139D9141D49AA060052815A /* HWAccountTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWAccountTool.h; sourceTree = "<group>"; };
@@ -270,6 +276,7 @@
 		E10C64451D20D1140023E642 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				E12300171D9B5C980061E8A3 /* Compose(发布微博) */,
 				E19D5D001D475EB40042B13A /* Oauth2 */,
 				E17066B61D41C40900E6625B /* NewFeature(新特性) */,
 				E1BB11CB1D224DFB0030EC5C /* Main */,
@@ -325,6 +332,31 @@
 				E11471521D0E58FA00107A3E /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E12300171D9B5C980061E8A3 /* Compose(发布微博) */ = {
+			isa = PBXGroup;
+			children = (
+				E123001C1D9B5CE10061E8A3 /* Controller */,
+				E123001B1D9B5CD20061E8A3 /* View  */,
+			);
+			name = "Compose(发布微博)";
+			sourceTree = "<group>";
+		};
+		E123001B1D9B5CD20061E8A3 /* View  */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "View ";
+			sourceTree = "<group>";
+		};
+		E123001C1D9B5CE10061E8A3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E12300181D9B5CC80061E8A3 /* HWComposeViewController.h */,
+				E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		E12E47D61D97794A00394ACF /* Tool */ = {
@@ -432,6 +464,8 @@
 		E19D87C21D3F2DFD0050D822 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E1394F1A1D991F0900B77847 /* HWIconView.h */,
+				E1394F1B1D991F0900B77847 /* HWIconView.m */,
 				E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */,
 				E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */,
 				E19D87C71D3F79840050D822 /* HWDropDown.h */,
@@ -533,8 +567,6 @@
 			isa = PBXGroup;
 			children = (
 				E13C3A051D4AF2160026221C /* HWTitleButton.h */,
-				E1394F1A1D991F0900B77847 /* HWIconView.h */,
-				E1394F1B1D991F0900B77847 /* HWIconView.m */,
 				E19F34F01D9800310009F550 /* HWStatuePhotoView.h */,
 				E19F34F11D9800310009F550 /* HWStatuePhotoView.m */,
 				E15D7E451D94FEFB005B45DA /* HWStatuesToolbar.h */,
@@ -638,6 +670,8 @@
 				E139D91D1D49F7570052815A /* Foundation+Log.m */,
 				E10C645B1D211A980023E642 /* UIView+Extension.h */,
 				E139D91A1D49D7D40052815A /* UIWindow+Extension.h */,
+				E131554F1D9CFACB00CAD5D9 /* NSString+Extension.h */,
+				E13155501D9CFACB00CAD5D9 /* NSString+Extension.m */,
 				E139D91B1D49D7D40052815A /* UIWindow+Extension.m */,
 				E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */,
 				E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */,
@@ -788,6 +822,8 @@
 				E13C3A381D4B49200026221C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1E901131D484BDE001F78C3 /* AFURLSessionManager.m in Sources */,
 				E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */,
+				E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */,
+				E13155511D9CFACB00CAD5D9 /* NSString+Extension.m in Sources */,
 				E1E901101D484BDE001F78C3 /* AFURLConnectionOperation.m in Sources */,
 				E1B58EF21D4C702C00E74E9C /* NSObject+MJClass.m in Sources */,
 				E1B58EF11D4C702C00E74E9C /* MJPropertyType.m in Sources */,

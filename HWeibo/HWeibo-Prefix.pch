@@ -19,6 +19,7 @@
 #import "UIView+Extension.h"
 #import "UIBarButtonItem+Extension.h"
 #import "UIWindow+Extension.h"
+#import "NSString+Extension.h"
 
 
 

@@ -11,6 +11,8 @@
 @implementation HWNavigationController
 
 #pragma mark - 设置导航栏主题
+
+
 + (void)initialize{
     UIBarButtonItem *barButtonItem=[UIBarButtonItem appearance];
     NSMutableDictionary *textAttributes= [NSMutableDictionary dictionary];
@@ -20,7 +22,7 @@
     //设置不可编辑状态的样式
     NSMutableDictionary *disabledTextAttributes= [NSMutableDictionary dictionary];
     disabledTextAttributes[NSForegroundColorAttributeName]= [UIColor grayColor];
-    disabledTextAttributes[NSFontAttributeName] = [UIFont systemFontOfSize:14];
+    disabledTextAttributes[NSFontAttributeName] =  textAttributes[NSFontAttributeName];
     [barButtonItem setTitleTextAttributes:disabledTextAttributes forState:UIControlStateDisabled];
 }
 

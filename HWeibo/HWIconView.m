@@ -31,7 +31,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.contentMode = UIViewContentModeScaleAspectFill;
-        self.clipsToBounds = YES;
+//        self.clipsToBounds = YES;
         //创建V类型ImageView
         self.vImageView.hidden = YES;
     }
@@ -62,8 +62,8 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     if (self.user.verified_type != HWUserVerifiedTypeNone) {
-        self.vImageView.x = self.width - self.vImageView.width;
-        self.vImageView.y = self.height - self.vImageView.height;
+        self.vImageView.x = self.width - self.vImageView.width*0.6;
+        self.vImageView.y = self.height - self.vImageView.height*0.6;
     }
     
 }

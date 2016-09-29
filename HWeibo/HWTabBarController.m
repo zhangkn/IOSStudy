@@ -13,6 +13,7 @@
 #import "HWHomeTableViewController.h"
 #import "HWNavigationController.h"
 #import "HWTabBar.h"
+#import "HWComposeViewController.h"
 @interface HWTabBarController () <HWTabBarDelegate>
 
 
@@ -34,7 +35,7 @@
     UIViewController *me = [[HWMeTableViewController alloc]init];
     [self addChildVC:me Title:@"Me" imageName:@"tabbar_profile" selectwsImageName:@"tabbar_profile_selected"];
     
-    //使用自定义的tabBar
+    //使用自定义的tabBar 计算UITabBarButton的frame 以及tabbarComposeButton ＋ 按钮 的frame
     HWTabBar *tabBar =[[HWTabBar alloc]init];
     [self setValue:tabBar forKey:@"tabBar"];
     
@@ -42,10 +43,9 @@
 
 #pragma mark -    HWTabBarDelegate 点击发布按钮
 - (void)tabBarDidClickPlusButton:(HWTabBar *)tabBar{
-    NSLog(@"%s",__func__);
-    UIViewController *vc = [[UIViewController alloc]init];
-    vc.view.backgroundColor = HWRandomColor;
-    [self presentViewController:vc animated:YES completion:nil];
+    HWComposeViewController *vc = [[HWComposeViewController alloc]init];
+    HWNavigationController *navigationVC = [[HWNavigationController alloc]initWithRootViewController:vc];
+       [self presentViewController:navigationVC animated:YES completion:nil];
 }
 
 

@@ -20,6 +20,7 @@
 - (instancetype)initWithDictionary:(NSDictionary *)dict{
     self.access_token = dict[@"access_token"];
     self.uid = dict[@"uid"];
+//    self.name = dict[@"name"];
     self.expires_in = dict[@"expires_in"];
     //获取帐号存储时间（产生access_token的时间）
     self.createDate = [NSDate date];
@@ -33,6 +34,7 @@
 - (void)encodeWithCoder:(NSCoder *)aCoder{
     [aCoder encodeObject:self.access_token forKey:@"access_token"];
     [aCoder encodeObject:self.uid forKey:@"uid"];
+    [aCoder encodeObject:self.name forKey:@"name"];
     [aCoder encodeObject:self.expires_in forKey:@"expires_in"];
     [aCoder encodeObject:self.createDate forKey:@"createDate"];
 
@@ -43,6 +45,7 @@
     if (self) {
         self.access_token=[aDecoder decodeObjectForKey:@"access_token"];
         self.uid=[aDecoder decodeObjectForKey:@"uid"];
+        self.name=[aDecoder decodeObjectForKey:@"name"];
         self.expires_in=[aDecoder decodeObjectForKey:@"expires_in"];
         self.createDate=[aDecoder decodeObjectForKey:@"createDate"];
 

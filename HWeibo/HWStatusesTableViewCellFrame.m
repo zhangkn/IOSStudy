@@ -13,20 +13,7 @@
 
 @implementation HWStatusesTableViewCellFrame
 
--(CGSize) sizeWithText:(NSString*)text font:(UIFont *)font{
-    /** 方式一*/
-//    NSDictionary *tmpDict = @{NSFontAttributeName: font};
-//   return  [text sizeWithAttributes:tmpDict];
-    /** 方式2*/
-    //    CGFloat nameW = [statues.text sizeWithFont:HWNameLabelFont].width;
-    /** 方式3*/
-    return  [self sizeWithText:text font:font maxW:CGFLOAT_MAX];
-}
--(CGSize) sizeWithText:(NSString*)text font:(UIFont *)font maxW:(CGFloat)maxW{
-    NSDictionary *tmpDict = @{NSFontAttributeName: font};
-    CGSize maxSize = CGSizeMake(maxW, CGFLOAT_MAX);
-    return  [text boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:tmpDict context:nil].size;
-}
+
 - (void)setStatues:(HWStatuses *)statues{
     _statues = statues;
     //计算控件的frame
@@ -56,7 +43,7 @@
     /** 时间*/
     CGFloat timeX = self.nameLabelFrame.origin.x;
     CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame)+HWStatusCellBorderW;
-    CGSize timeSize = [self sizeWithText:_statues.created_at font:HWTimeLabelFont];
+    CGSize timeSize = [_statues.created_at sizeWithFont:HWTimeLabelFont];
     _timeLabelFrame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height);
     return _timeLabelFrame;
 }
@@ -65,7 +52,7 @@
     CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame)+HWStatusCellContentViewSpaceW;
     CGFloat sourceY = self.timeLabelFrame.origin.y;
     //<a href="http://app.weibo.com/t/feed/PBP2P" rel="nofollow">微博 weibo.com</a>
-    CGSize sourceSize = [self sizeWithText:[NSString stringWithFormat:@"from %@",_statues.source] font:HWTimeLabelFont];
+    CGSize sourceSize = [[NSString stringWithFormat:@"from %@",_statues.source] sizeWithFont:HWTimeLabelFont];
     _sourceLabelFrame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height);
     return _sourceLabelFrame;
 }
@@ -84,7 +71,7 @@
     /** 昵称*/
     CGFloat nameX = CGRectGetMaxX(self.iconViewFrame)+HWStatusCellBorderW;
     CGFloat nameY = HWStatusCellBorderW;
-    CGSize nameSize = [self sizeWithText:statues.user.name font:HWNameLabelFont];
+    CGSize nameSize = [statues.user.name sizeWithFont:HWNameLabelFont];
     CGFloat nameH = nameSize.height;
     CGFloat nameW= nameSize.width;
     self.nameLabelFrame = CGRectMake(nameX, nameY, nameW, nameH);
@@ -102,7 +89,7 @@
     /** 时间*/
     CGFloat timeX = nameX;
     CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame)+HWStatusCellBorderW;
-    CGSize timeSize = [self sizeWithText:statues.created_at font:HWTimeLabelFont];
+    CGSize timeSize = [statues.created_at sizeWithFont:HWTimeLabelFont];
     
     self.timeLabelFrame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height);
     
@@ -110,13 +97,13 @@
     CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame)+HWStatusCellContentViewSpaceW;
     CGFloat sourceY = timeY;
     //<a href="http://app.weibo.com/t/feed/PBP2P" rel="nofollow">微博 weibo.com</a>
-    CGSize sourceSize = [self sizeWithText:[NSString stringWithFormat:@"from %@",statues.source] font:HWTimeLabelFont];
+    CGSize sourceSize = [[NSString stringWithFormat:@"from %@",statues.source] sizeWithFont:HWTimeLabelFont];
     self.sourceLabelFrame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height);
     
     /** 正文*/
     CGFloat contentX = HWStatusCellBorderW;
     CGFloat contentY = MAX(CGRectGetMaxY(self.iconViewFrame),CGRectGetMaxY(self.timeLabelFrame))+HWStatusCellBorderW;
-    CGSize contentSize = [self sizeWithText:statues.text font:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
+    CGSize contentSize = [statues.text sizeWithFont:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
     self.contentLabelFrame = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
     /** 配图*/
     if (statues.pic_urls.count>0) {
@@ -143,7 +130,7 @@
         CGFloat retweetedContentX = HWStatusCellBorderW;
         CGFloat retweetedContentY =HWStatusCellBorderW;
         NSString *tmp = [NSString stringWithFormat:@"@%@:%@",statues.retweeted_status.user.name,statues.retweeted_status.text];
-        CGSize retweetedContentSize = [self sizeWithText:tmp font:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
+        CGSize retweetedContentSize = [tmp sizeWithFont:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
         self.repostContentLabelFrame = CGRectMake(retweetedContentX, retweetedContentY, retweetedContentSize.width, retweetedContentSize.height);
         //转发微博的配图信息
         if (statues.retweeted_status.pic_urls.count>0) {
