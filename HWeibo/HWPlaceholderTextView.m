@@ -28,6 +28,12 @@
     self.textViewPalceHolderLabel.font = font;
 }
 
+- (void)setText:(NSString *)text{
+    [super setText:text];
+    //处理占位符是否隐藏
+    [self textViewTextDidChangeNotification];
+}
+
 
 - (void)setTextViewPalceHolderColor:(UIColor *)textViewPalceHolderColor{
     _textViewPalceHolderColor = textViewPalceHolderColor;
@@ -40,7 +46,7 @@
 }
 
 - (void)setTextViewPalceHolder:(NSString *)textViewPalceHolder{
-    _textViewPalceHolder = textViewPalceHolder;
+    _textViewPalceHolder = [textViewPalceHolder copy];
     self.textViewPalceHolderLabel.text = textViewPalceHolder;
 }
 
@@ -48,6 +54,7 @@
     if (nil == _textViewPalceHolderLabel) {
         UILabel *tmpView = [[UILabel alloc]init];
         _textViewPalceHolderLabel = tmpView;
+        tmpView.textColor = [UIColor grayColor];//默认的占位符颜色
         [self addSubview:_textViewPalceHolderLabel];
     }
     return _textViewPalceHolderLabel;
@@ -72,6 +79,10 @@
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewTextDidChangeNotification) name:UITextViewTextDidChangeNotification object:self];
     }
     return self;    
+}
+- (void)dealloc{
+    //清除监听者
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - 控制占位符是否隐藏
