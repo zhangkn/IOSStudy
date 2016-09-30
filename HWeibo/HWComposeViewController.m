@@ -8,13 +8,12 @@
 
 #import "HWComposeViewController.h"
 #import "HWAccountTool.h"
-#define HWTextViewFont  [UIFont systemFontOfSize:13]
+#import "HWPlaceholderTextView.h"
 
 @interface HWComposeViewController ()<UITextViewDelegate>
 /** 输入控件*/
-@property (nonatomic,weak) UITextView *textView;
-/** textView输入控件的占位label*/
-@property (nonatomic,weak) UILabel *textViewPalceHolderLabel;
+@property (nonatomic,weak) HWPlaceholderTextView *textView;
+
 
 
 @end
@@ -28,27 +27,9 @@
     //设置输入控件
     [self.textView setDelegate:self];
     [self.textView becomeFirstResponder];
-    self.textViewPalceHolderLabel.font =HWTextViewFont;
 
 }
 #pragma mark - UITextViewDelegate
-
-//- (void)textViewDidChangeSelection:(UITextView *)textView
-//{
-//    
-//}
-//
-///** 动态计算textView 的高度*/
-//- (void)textViewDidChange:(UITextView *)textView{
-//    NSLog(@"打印字数＝＝%lu",(unsigned long)textView.text.length );
-//    int numLines = textView.contentSize.height/textView.font.lineHeight;
-//    NSLog(@"numlines = %i", numLines);
-////    // 计算出长宽
-////    CGSize size = [self.textView.text sizeWithFont:self.textView.font maxW:self.textView.frame.size.width];
-////    CGRect rect = self.textView.frame;
-////    rect.size.height = size.height + 15;
-////    self.textView.frame = rect;
-//}
 
 
 - (void)textViewDidEndEditing:(UITextView *)textView{
@@ -57,21 +38,21 @@
 
 /** 控制字数、以及自动增加textView 的height*/
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
-    
     NSString *strText = textView.text;//替换前的文字
-    NSLog(@"------- text: %@    strText:%@   range.length: %lu   location: %lu ",text,strText,(unsigned long)range.length,range.location);
-    
-    if (strText.length == 0 &&
-        [text isEqualToString:@""])
-        self.textViewPalceHolderLabel.hidden = NO;
-    else if (strText.length == 1 &&             [text isEqualToString:@""]){//处理删除键的情况
-        self.textViewPalceHolderLabel.hidden = NO;
-    }else
-        self.textViewPalceHolderLabel.hidden = YES;
-    
-    if ([text isEqualToString:@""]) {
-        return YES;
-    }
+    /** 隐藏占位字符串的逻辑移到自定义textview内部实现*/
+//    NSLog(@"------- text: %@    strText:%@   range.length: %lu   location: %lu ",text,strText,(unsigned long)range.length,range.location);
+//    
+//    if (strText.length == 0 &&
+//        [text isEqualToString:@""])
+//        self.textView.hiddentextViewPalceHolder = NO;
+//    else if (strText.length == 1 &&             [text isEqualToString:@""]){//处理删除键的情况
+//        self.textView.hiddentextViewPalceHolder = NO;
+//    }else
+//        self.textView.hiddentextViewPalceHolder = YES;
+//    
+//    if ([text isEqualToString:@""]) {
+//        return YES;
+//    }
     
     // 控制字数
     int nTotalHasText = [self convertToInt:strText];// 原来字符串的字符个数
@@ -115,31 +96,20 @@
 
 #pragma mark - 设置输入控件
 
-- (UILabel *)textViewPalceHolderLabel{
-    if (nil == _textViewPalceHolderLabel) {
-        UILabel *tmpView = [[UILabel alloc]init];
-        _textViewPalceHolderLabel = tmpView;
-        tmpView.textColor = [UIColor grayColor];
-        tmpView.text = @"What's on your mind?";
-        CGSize size = [tmpView.text sizeWithFont:tmpView.font];
-        tmpView.size = size;
-        tmpView.x = 5;
-        tmpView.y =5;
-        [self.textView addSubview:_textViewPalceHolderLabel];
-    }
-    return _textViewPalceHolderLabel;
-}
 
-- (UITextView *)textView{
+
+- (HWPlaceholderTextView *)textView{
     if (nil == _textView) {
-        UITextView *tmpView = [[UITextView alloc]init];
+        NSString *textViewPalceHolder =  @"What's on your mind?";
+        HWPlaceholderTextView *tmpView = [HWPlaceholderTextView placeholderTextViewWithTextViewPalceHolder:textViewPalceHolder];
         _textView = tmpView;
         tmpView.frame = self.view.bounds;
+        tmpView.font = HWTextViewFont;
+        tmpView.textViewPalceHolderColor = [UIColor grayColor];
         [self.view addSubview:_textView];
     }
     return _textView;
 }
-
 
 
 

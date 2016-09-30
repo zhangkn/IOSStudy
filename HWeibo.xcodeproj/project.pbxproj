@@ -47,6 +47,7 @@
 		E13C3A381D4B49200026221C /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A261D4B49200026221C /* UIImageView+HighlightedWebCache.m */; };
 		E13C3A391D4B49200026221C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A281D4B49200026221C /* UIImageView+WebCache.m */; };
 		E13C3A3A1D4B49200026221C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */; };
+		E140CA971D9DF6660015741D /* HWPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E140CA961D9DF6660015741D /* HWPlaceholderTextView.m */; };
 		E15D7E471D94FEFB005B45DA /* HWStatuesToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E15D7E461D94FEFB005B45DA /* HWStatuesToolbar.m */; };
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
 		E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */; };
@@ -166,6 +167,8 @@
 		E13C3A281D4B49200026221C /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
 		E13C3A291D4B49200026221C /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
 		E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
+		E140CA951D9DF6660015741D /* HWPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPlaceholderTextView.h; sourceTree = "<group>"; };
+		E140CA961D9DF6660015741D /* HWPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPlaceholderTextView.m; sourceTree = "<group>"; };
 		E15D7E451D94FEFB005B45DA /* HWStatuesToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatuesToolbar.h; sourceTree = "<group>"; };
 		E15D7E461D94FEFB005B45DA /* HWStatuesToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatuesToolbar.m; sourceTree = "<group>"; };
 		E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewFeatureViewController.h; sourceTree = "<group>"; };
@@ -466,6 +469,8 @@
 			children = (
 				E1394F1A1D991F0900B77847 /* HWIconView.h */,
 				E1394F1B1D991F0900B77847 /* HWIconView.m */,
+				E140CA951D9DF6660015741D /* HWPlaceholderTextView.h */,
+				E140CA961D9DF6660015741D /* HWPlaceholderTextView.m */,
 				E19D87C31D3F2E3E0050D822 /* HWSearchBar.h */,
 				E19D87C41D3F2E3E0050D822 /* HWSearchBar.m */,
 				E19D87C71D3F79840050D822 /* HWDropDown.h */,
@@ -878,6 +883,7 @@
 				E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */,
 				E13C3A371D4B49200026221C /* UIImage+WebP.m in Sources */,
 				E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */,
+				E140CA971D9DF6660015741D /* HWPlaceholderTextView.m in Sources */,
 				E1E901111D484BDE001F78C3 /* AFURLRequestSerialization.m in Sources */,
 				E1E9010B1D484BDE001F78C3 /* AFHTTPRequestOperation.m in Sources */,
 				E1E901121D484BDE001F78C3 /* AFURLResponseSerialization.m in Sources */,
