@@ -11,6 +11,9 @@
 #import "HWPlaceholderTextView.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD+MJ.h"
+#import "HWComposeToolBar.h"
+
+
 
 @interface HWComposeViewController ()<UITextViewDelegate>
 /** 输入控件*/
@@ -21,9 +24,26 @@
 /** textView 是否有内容*/
 @property (nonatomic,assign) BOOL isTextViewHasChar;
 
+/** HWComposeToolBar 工具条*/
+@property (nonatomic,strong) HWComposeToolBar *composeToolBar;
+
 @end
 
 @implementation HWComposeViewController
+
+- (HWComposeToolBar *)composeToolBar{
+    if (nil == _composeToolBar) {
+        HWComposeToolBar *tmpView = [[HWComposeToolBar alloc]init];
+        _composeToolBar = tmpView;
+        tmpView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"compose_toolbar_background"]];
+        tmpView.width = self.textView.width;
+        tmpView.height = 44;
+//        self.textView setInputView:<#(UIView * _Nullable)#>设置键盘
+        //设置键盘上面的顶部的内容
+        self.textView.inputAccessoryView =_composeToolBar;
+    }
+    return _composeToolBar;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,6 +51,13 @@
     [self setupNavigationItem];
     //设置输入控件
     [self setupTextView];
+    //设置键盘顶部的内容：工具条
+    [self  setupComposeToolBar];
+}
+
+- (void)setupComposeToolBar{
+    
+    [self composeToolBar];
 }
 
 - (void)setupTextView{
@@ -223,7 +250,7 @@
  必选	类型及范围	说明
  access_token	true	string	采用OAuth授权方式为必填参数，OAuth授权后获得。
  status	true	string	要发布的微博文本内容，必须做URLencode，内容不超过140个汉字。
- pic 	false	binary	微博的配图。  nsdata 
+ pic 	false	binary	微博的配图。  nsdata
  visible	false	int	微博的可见性，0：所有人能看，1：仅自己可见，2：密友可见，3：指定分组可见，默认为0。
  list_id	false	string	微博的保护投递指定分组ID，只有当visible参数为3时生效且必选。
  lat	false	float	纬度，有效范围：-90.0到+90.0，+表示北纬，默认为0.0。
@@ -235,13 +262,13 @@
  */
 - (void)sendCompose{
     [self.textView resignFirstResponder];
-    //请求管理器
+    //1.请求管理器
     AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     //    [mgr setResponseSerializer:[AFJSONResponseSerializer serializer]];//afn 默认的解析器
     /** 可以修改源代码，来支持更多的ContentTypes
      self.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"application/json", @"text/json", @"text/javascript", nil];
      */
-    //拼接请求参数
+    //2.拼接请求参数
     NSString *strUrl = @"https://api.weibo.com/2/statuses/update.json";
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"access_token"]=[HWAccountTool account].access_token;
@@ -249,19 +276,21 @@
 //    paramters[@"grant_type"]= @"authorization_code";//请求的类型，填写authorization_code
 //    paramters[@"code"]= code;//调用authorize获得的code值。
 //    paramters[@"redirect_uri"]= HWRedirectUri;//	回调地址，需需与注册应用里的回调地址一致。
-    //发送请求
+    //3.发送请求
     [mgr POST:strUrl parameters:paramters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-//        [MBProgressHUD hideHUD];
+        [MBProgressHUD showSuccess:@"send"];
 //        HWAccountModel *account = [HWAccountModel accountWithDictionary:responseObject];
 //        //存储帐号信息
 //        [HWAccountTool saveAccount:account];
         NSLog(@"succ sendCompose");
         //切换窗口的根控制器
-        [[UIApplication sharedApplication].keyWindow switchRootViewController];
+//        [[UIApplication sharedApplication].keyWindow switchRootViewController];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideHUD];
+        [MBProgressHUD showError:@"failed"];
     }];
-    
+    //4. dismissViewControllerAnimated
+    [self dismissViewControllerAnimated:YES completion:nil];
+
 }
 
 
