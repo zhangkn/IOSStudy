@@ -15,7 +15,7 @@
 
 
 
-@interface HWComposeViewController ()<UITextViewDelegate>
+@interface HWComposeViewController ()<UITextViewDelegate,HWComposeToolBarDelegete,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 /** 输入控件*/
 @property (nonatomic,weak) HWPlaceholderTextView *textView;
 /** 发送按钮是否enabled*/
@@ -38,11 +38,40 @@
         tmpView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"compose_toolbar_background"]];
         tmpView.width = self.textView.width;
         tmpView.height = 44;
+        //方法一： 工具条放于textView上面，工具条会随着键盘的弹出、隐藏
 //        self.textView setInputView:<#(UIView * _Nullable)#>设置键盘
-        //设置键盘上面的顶部的内容
-        self.textView.inputAccessoryView =_composeToolBar;
+        //设置键盘上面的顶部的内容，会跟随键盘的弹出、隐藏。
+//        self.textView.inputAccessoryView =_composeToolBar;
+         //方法二： 工具条永远都在,并且在监听键盘的通知
+        tmpView.x = 0;
+        tmpView.y = self.view.height - tmpView.height;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrameNotification:) name:UIKeyboardWillChangeFrameNotification object:nil];
+        [self.view addSubview:_composeToolBar];
     }
     return _composeToolBar;
+}
+
+#pragma mark - 根据键盘的frame设置工具条的frame
+- (void)keyboardWillChangeFrameNotification:(NSNotification*)notification{
+    /** 
+     
+     NSConcreteNotification 0x60800025da90 {name = UIKeyboardWillChangeFrameNotification; userInfo = {
+     UIKeyboardBoundsUserInfoKey = NSRect: {{0, 0}, {320, 253}},//键盘最终的位置
+     UIKeyboardAnimationDurationUserInfoKey = 0.4, //AnimationTime 动画的时间
+     UIKeyboardAnimationCurveUserInfoKey = 7, //动画的执行节奏
+     }}
+
+//     */
+    weakSelf(weakSelf);
+    NSTimeInterval  keyboardAnimationDuration = [(NSNumber*)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+    NSTimeInterval  keyboardAnimationCurveUserInfoKey = [(NSNumber*)notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] doubleValue];
+     CGRect keyboardFrame = [(NSValue*)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    [UIView animateWithDuration:(keyboardAnimationDuration) delay:0.0 options:keyboardAnimationCurveUserInfoKey animations:^{
+        weakSelf.composeToolBar.y = keyboardFrame.origin.y- self.composeToolBar.height;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
 }
 
 - (void)viewDidLoad {
@@ -57,7 +86,7 @@
 
 - (void)setupComposeToolBar{
     
-    [self composeToolBar];
+    self.composeToolBar.delegete = self;
 }
 
 - (void)setupTextView{
@@ -67,7 +96,95 @@
     [self processSendComposeButtonState];
 }
 
+#pragma mark - HWComposeToolBarDelegete
+/**处理工具条的按钮 */
+- (void)composeToolBarDelegeteDidClickToolButton:(HWComposeToolBar *)composeToolBar clickToolButtonType:(HWComposeToolBarButtonType)clickToolButtonType{
+    switch (clickToolButtonType) {
+        case HWComposeToolBarButtonTypeComposeCamerabutton:
+            [self processHWComposeToolBarButtonTypeComposeCamerabutton];
+            break;
+        case HWComposeToolBarButtonTypeComposeToolbarPictureButton:
+            [self processHWComposeToolBarButtonTypeComposeToolbarPictureButton];
+            break;
+        case HWComposeToolBarButtonTypeComposeTrendbutton:
+            [self processHWComposeToolBarButtonTypeComposeTrendbutton];
+            break;
+        case HWComposeToolBarButtonTypeComposeMentionbutton:
+            [self processHWComposeToolBarButtonTypeComposeMentionbutton];
+            break;
+        case HWComposeToolBarButtonTypeComposeKeyboardbutton:
+            [self processHWComposeToolBarButtonTypeComposeKeyboardbutton];
+            break;
+        case HWComposeToolBarButtonTypeComposeEmoticonbutton:
+            [self processHWComposeToolBarButtonTypeComposeEmoticonbutton];
+            break;
+    }
+    
+}
+#pragma mark - 处理工具条细节的辅助方法
+/** 打开拍照控制器*/
+- (void)processHWComposeToolBarButtonTypeComposeCamerabutton{
+   
+}
+
+ #pragma mark - UIImagePickerControllerDelegate
+// The picker does not dismiss itself; the client dismisses it in these callbacks.
+// The delegate will receive one or the other, but not both, depending whether the user
+// confirms or cancels.
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info{
+    /** 
+     
+     po info
+     {
+     UIImagePickerControllerMediaType = "public.image";
+     UIImagePickerControllerOriginalImage = "<UIImage: 0x600000283070> size {4288, 2848} orientation 0 scale 1.000000";
+     UIImagePickerControllerReferenceURL = "assets-library://asset/asset.JPG?id=106E99A1-4F6A-45A2-B320-B0AD4A8E8473&ext=JPG";
+     }
+
+     */
+    NSLog(@"%@",info);
+    //的到图片 显示到self.textView 上面
+    [picker dismissViewControllerAnimated:YES completion:nil];
+
+    
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+/** 选择相册*/
+- (void)processHWComposeToolBarButtonTypeComposeToolbarPictureButton{
+    
+    UIImagePickerController *vc = [[UIImagePickerController alloc]init];
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
+    
+}
+- (void)processHWComposeToolBarButtonTypeComposeTrendbutton{
+    
+}
+- (void)processHWComposeToolBarButtonTypeComposeMentionbutton{
+    
+}
+- (void)processHWComposeToolBarButtonTypeComposeKeyboardbutton{
+    
+}
+- (void)processHWComposeToolBarButtonTypeComposeEmoticonbutton{
+    
+}
+
+#pragma mark - UIScrollViewDelegate
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    //Dragging 的时候关闭键盘
+    [self.view endEditing:YES];
+}
+
+
 #pragma mark - UITextViewDelegate
+
+
 
 /** 此方法只有用户点击return才可以触发*/
 - (void)textViewDidEndEditing:(UITextView *)textView{

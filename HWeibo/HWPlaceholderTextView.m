@@ -65,6 +65,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         [self.textViewPalceHolderLabel setNumberOfLines:0];
+        self.alwaysBounceVertical =YES ;//设置弹簧效果－－垂直方向
         /*
          Notifications
          

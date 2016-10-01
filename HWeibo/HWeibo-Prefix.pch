@@ -40,5 +40,8 @@
 
 #define HWStatusCellBorderW 10
 
+#define weakSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
+
+
 #endif
 #endif /* HWeibo_Prefix_pch */

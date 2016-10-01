@@ -11,12 +11,7 @@
 @interface HWComposeToolBar ()
 
 /** 
- compose_camerabutton_background_highlighted@2x   compose_camerabutton_background@2x
- compose_emoticonbutton_background_highlighted@2x
- compose_keyboardbutton_background_highlighted@2x
- compose_mentionbutton_background_highlighted@2x
- compose_toolbar_picture_highlighted@2x
- compose_trendbutton_background_highlighted@2x
+ 
  */
 /** 拍照按钮*/
 @property (nonatomic ,weak) UIButton* composeCamerabutton;
@@ -42,6 +37,7 @@
     if (nil == _composeEmoticonbutton) {
         UIButton *tmp = [self setupBUttonWithImage: @"compose_emoticonbutton_background" highlightedImageName:@"compose_emoticonbutton_background_highlighted"];
         _composeEmoticonbutton = tmp;
+        tmp.tag = HWComposeToolBarButtonTypeComposeEmoticonbutton;
         [self addSubview:_composeEmoticonbutton];
     }
     return _composeEmoticonbutton;
@@ -50,6 +46,7 @@
     if (nil == _composeKeyboardbutton) {
         UIButton* tmp = [self setupBUttonWithImage: @"compose_keyboardbutton_background" highlightedImageName:@"compose_keyboardbutton_background_highlighted"];
         _composeKeyboardbutton = tmp;
+        tmp.tag = HWComposeToolBarButtonTypeComposeKeyboardbutton;
         [self addSubview:_composeKeyboardbutton];
     }
     return _composeKeyboardbutton;
@@ -58,6 +55,7 @@
     if (nil == _composeMentionbutton) {
         UIButton *tmp = [self setupBUttonWithImage: @"compose_mentionbutton_background" highlightedImageName:@"compose_mentionbutton_background_highlighted"];
         _composeMentionbutton = tmp;
+        tmp.tag = HWComposeToolBarButtonTypeComposeMentionbutton;
         [self addSubview:_composeMentionbutton];
     }
     return _composeMentionbutton;
@@ -66,6 +64,7 @@
     if (nil == _composeCamerabutton) {
         UIButton *tmp = [self setupBUttonWithImage: @"compose_camerabutton_background" highlightedImageName:@"compose_camerabutton_background_highlighted"];
         _composeCamerabutton = tmp;
+        tmp.tag = HWComposeToolBarButtonTypeComposeCamerabutton;
         [self addSubview:_composeCamerabutton];
     }
     return _composeCamerabutton;
@@ -74,6 +73,7 @@
     if (nil == _composeToolbarPictureButton) {
         UIButton *tmp = [self setupBUttonWithImage: @"compose_toolbar_picture" highlightedImageName:@"compose_toolbar_picture_highlighted"];
         _composeToolbarPictureButton = tmp;
+        tmp.tag = HWComposeToolBarButtonTypeComposeToolbarPictureButton;
         [self addSubview:_composeToolbarPictureButton];
     }
     return _composeToolbarPictureButton;
@@ -83,6 +83,7 @@
     if (nil == _composeTrendbutton) {
         UIButton *tmp = [self setupBUttonWithImage: @"compose_trendbutton_background" highlightedImageName:@"compose_trendbutton_background_highlighted"];
         _composeTrendbutton = tmp;
+        tmp.tag = HWComposeToolBarButtonTypeComposeTrendbutton;
         [self addSubview:_composeTrendbutton];
     }
     return _composeTrendbutton;
@@ -98,11 +99,17 @@
 }
 /** 以及界面切换*/
 - (UIButton*)didclickButton:(UIButton*)btn{
-    //界面切换
-    if (btn == self.composeEmoticonbutton || btn == self.composeKeyboardbutton) {
+    //表情视图和键盘视图的切换
+    if (btn.tag == HWComposeToolBarButtonTypeComposeEmoticonbutton || btn.tag == HWComposeToolBarButtonTypeComposeKeyboardbutton) {
         self.composeEmoticonbutton.hidden = self.composeKeyboardbutton.hidden;
         self.composeKeyboardbutton.hidden = !self.composeEmoticonbutton.hidden;
     }
+    
+    // 通知控制器 界面切换
+    if ([self.delegete respondsToSelector:@selector(composeToolBarDelegeteDidClickToolButton:clickToolButtonType:)]) {
+        [self.delegete composeToolBarDelegeteDidClickToolButton:self clickToolButtonType:btn.tag];
+    }
+    
     return btn;
 }
 - (instancetype)initWithFrame:(CGRect)frame{
