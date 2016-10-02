@@ -12,10 +12,10 @@
 #import "AFNetworking.h"
 #import "MBProgressHUD+MJ.h"
 #import "HWComposeToolBar.h"
+#import "HWComposePhotosView.h"
+#import "HWEmojiKeyboard.h"
 
-
-
-@interface HWComposeViewController ()<UITextViewDelegate,HWComposeToolBarDelegete,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface HWComposeViewController ()<UITextViewDelegate,HWComposeToolBarDelegete,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HWComposePhotosViewDelegate>
 /** 输入控件*/
 @property (nonatomic,weak) HWPlaceholderTextView *textView;
 /** 发送按钮是否enabled*/
@@ -23,13 +23,49 @@
 
 /** textView 是否有内容*/
 @property (nonatomic,assign) BOOL isTextViewHasChar;
+/** 用户是否选择了上传图片*/
+@property (nonatomic,assign) BOOL hasComposePhotos;
+
 
 /** HWComposeToolBar 工具条*/
 @property (nonatomic,strong) HWComposeToolBar *composeToolBar;
 
+
+/** 显示从相册选择的image或者拍照的照片 的视图*/
+@property (nonatomic,strong) HWComposePhotosView *composePhotosView;
+
+
+/** emojiKeyboard 表情键盘*/
+@property (nonatomic,strong) HWEmojiKeyboard *emojiKeyboard;
 @end
 
 @implementation HWComposeViewController
+
+- (HWEmojiKeyboard *)emojiKeyboard{
+    if (nil == _emojiKeyboard) {
+        HWEmojiKeyboard *tmpView = [[HWEmojiKeyboard alloc]init];
+        _emojiKeyboard = tmpView;
+        tmpView.width= self.textView.width;
+        tmpView.height = 44+44+ ((tmpView.width-2*HWEmojiListViewScrollViewMargin)/HWEmojiListViewScrollViewMaxClos)*HWEmojiListViewScrollViewMaxRows;
+//        tmpView.x = 0;
+//        tmpView.y = self.view.height - tmpView.height;
+    }
+    return _emojiKeyboard;
+}
+
+- (HWComposePhotosView *)composePhotosView{
+    if (nil == _composePhotosView) {
+        HWComposePhotosView *tmp = [[HWComposePhotosView alloc]init];
+        tmp.x = 10;
+        tmp.y = 100;
+        tmp.width = self.view.width - tmp.x*2;
+        tmp.height = self.textView.height;
+        _composePhotosView = tmp;
+//        tmp.backgroundColor = HWRandomColor;
+        [self.textView addSubview:_composePhotosView];
+    }
+    return _composePhotosView;
+}
 
 - (HWComposeToolBar *)composeToolBar{
     if (nil == _composeToolBar) {
@@ -67,7 +103,13 @@
     NSTimeInterval  keyboardAnimationCurveUserInfoKey = [(NSNumber*)notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] doubleValue];
      CGRect keyboardFrame = [(NSValue*)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     [UIView animateWithDuration:(keyboardAnimationDuration) delay:0.0 options:keyboardAnimationCurveUserInfoKey animations:^{
-        weakSelf.composeToolBar.y = keyboardFrame.origin.y- self.composeToolBar.height;
+        CGFloat tmp = 0;
+        if (keyboardFrame.origin.y<= KMainScreenHeight) {
+            tmp =keyboardFrame.origin.y ;
+        }else{
+            tmp = KMainScreenHeight;
+        }
+        weakSelf.composeToolBar.y = tmp- self.composeToolBar.height;
     } completion:^(BOOL finished) {
         
     }];
@@ -82,6 +124,23 @@
     [self setupTextView];
     //设置键盘顶部的内容：工具条
     [self  setupComposeToolBar];
+    //构建显示相册图片的视图
+    [self setupComposePhotosView];
+    //构建表情键盘
+//    [self setupEmojiKeyboard];
+}
+
+- (void)setupEmojiKeyboard{
+//    [self.emojiKeyboard setHidden:YES];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:YES];
+    [self.view endEditing:YES];
+}
+
+- (void)setupComposePhotosView{
+    [self.composePhotosView setDelegate:self];
 }
 
 - (void)setupComposeToolBar{
@@ -95,6 +154,13 @@
     self.isTextViewHasChar = self.textView.text.length>0;
     [self processSendComposeButtonState];
 }
+
+#pragma mark -  HWComposePhotosViewDelegate
+
+- (void)composePhotosViewDidClickAddPhoto:(HWComposePhotosView *)composePhotosView{
+    [self openUIImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary];
+}
+
 
 #pragma mark - HWComposeToolBarDelegete
 /**处理工具条的按钮 */
@@ -123,8 +189,23 @@
 }
 #pragma mark - 处理工具条细节的辅助方法
 /** 打开拍照控制器*/
+#warning weibo 官法是自定义 UIImagePickerController，若想获取图片资源，采用AssetsLibbrary.framework 进行获取所有的图片
 - (void)processHWComposeToolBarButtonTypeComposeCamerabutton{
+    
+    [self openUIImagePickerController:UIImagePickerControllerSourceTypeCamera];
    
+}
+
+- (void)openUIImagePickerController:(UIImagePickerControllerSourceType)type{
+    //是否支持
+    if (![UIImagePickerController isSourceTypeAvailable:type]) {
+        return;
+    }
+    //控制器跳转
+    UIImagePickerController *vc = [[UIImagePickerController alloc]init];
+    vc.sourceType = type;
+    vc.delegate = self;
+    [self presentViewController:vc animated:YES completion:nil];
 }
 
  #pragma mark - UIImagePickerControllerDelegate
@@ -143,11 +224,105 @@
 
      */
     NSLog(@"%@",info);
-    //的到图片 显示到self.textView 上面
+    
+    
+    /** 
+     
+     (lldb) po info
+     {
+     UIImagePickerControllerMediaMetadata =     {
+     DPIHeight = 72;
+     DPIWidth = 72;
+     Orientation = 6;
+     "{Exif}" =         {
+     ApertureValue = "2.27500704749987";
+     BrightnessValue = "-2.184053190731416";
+     ColorSpace = 1;
+     DateTimeDigitized = "2016:10:01 16:51:39";
+     DateTimeOriginal = "2016:10:01 16:51:39";
+     ExposureBiasValue = 0;
+     ExposureMode = 0;
+     ExposureProgram = 2;
+     ExposureTime = "0.05882352941176471";
+     FNumber = "2.2";
+     Flash = 24;
+     FocalLenIn35mmFilm = 29;
+     FocalLength = "4.15";
+     ISOSpeedRatings =             (
+     640
+     );
+     LensMake = Apple;
+     LensModel = "iPhone 6s back camera 4.15mm f/2.2";
+     LensSpecification =             (
+     "4.15",
+     "4.15",
+     "2.2",
+     "2.2"
+     );
+     MeteringMode = 5;
+     PixelXDimension = 4032;
+     PixelYDimension = 3024;
+     SceneType = 1;
+     SensingMethod = 2;
+     ShutterSpeedValue = "4.059158207392653";
+     SubjectArea =             (
+     2015,
+     1511,
+     2217,
+     1330
+     );
+     SubsecTimeDigitized = 268;
+     SubsecTimeOriginal = 268;
+     WhiteBalance = 0;
+     };
+     "{MakerApple}" =         {
+     1 = 4;
+     14 = 0;
+     2 = <0d001000 36001200 19001f00 28003700 3300ae00 ee00fa00 e6001f01 2f012201 0d001100 39001200 19002100 2b003300 3100b600 ec00fe00 ea002001 2a011a01 0c001200 3d001300 1a002200 36004300 4400b400 da00f800 f3001e01 29010c01 0c001500 45001300 1b002200 28002200 1e002600 3f00e000 f0002201 24011001 0c001c00 48001300 1a002200 21001f00 24002400 5700d300 eb001001 1201f600 0c003c00 38001300 17001d00 37004b00 52004b00 6400ce00 08013a01 3c011e01 0c004e00 1e001200 14001500 43005900 5b002500 1d002f00 7b00d500 18010201 0d004200 17001100 13001300 4b005b00 46002d00 16001b00 1d002b00 4800a000 0e003200 13001200 13001600 4f005800 4a001c00 14001400 23002d00 34008a00 0f000e00 0d001000 13001b00 53005500 52004100 36002700 3f004000 59007d00 0e000c00 0d000f00 12002600 4b004100 3e004200 4a004900 63007900 7a007c00 0b000d00 0d000f00 12002d00 1a001200 14001b00 44007900 95009700 98007a00 0c000d00 0c000e00 0f004000 17001100 11004300 8a008f00 9b00aa00 bf00b100 0d000c00 0b000c00 0d006300 29001400 15007400 85007e00 84009300 ab00b100 0e000c00 0a000a00 0b008000 48003500 45007500 78006e00 74008800 91009a00 0e000a00 09000900 0a009300 56003e00 47006000 65005b00 62006c00 79008100>;
+     20 = 4;
+     3 =             {
+     epoch = 0;
+     flags = 1;
+     timescale = 1000000000;
+     value = 611403874140375;
+     };
+     4 = 1;
+     5 = 76;
+     6 = 71;
+     7 = 1;
+     8 =             (
+     "-0.1083837598562241",
+     "-0.2783985435962677",
+     "-0.9513330459594727"
+     );
+     9 = 4371;
+     };
+     "{TIFF}" =         {
+     DateTime = "2016:10:01 16:51:39";
+     Make = Apple;
+     Model = "iPhone 6s";
+     ResolutionUnit = 2;
+     Software = "10.0.1";
+     XResolution = 72;
+     YResolution = 72;
+     };
+     };
+     UIImagePickerControllerMediaType = "public.image";
+     UIImagePickerControllerOriginalImage = "<UIImage: 0x17009db50> size {3024, 4032} orientation 3 scale 1.000000";
+     }
+     */
+    //1. 显示图片到self.textView 上面
+    UIImage *image = info[UIImagePickerControllerOriginalImage];
+    [self.composePhotosView addPhoto:image];
+    //2.处理发送按钮状态
+    self.hasComposePhotos = [self.composePhotosView hasComposePhotos];
+    [self processSendComposeButtonState];
+    //3.dismissViewControllerAnimated
     [picker dismissViewControllerAnimated:YES completion:nil];
 
     
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
     
     [picker dismissViewControllerAnimated:YES completion:nil];
@@ -155,11 +330,7 @@
 
 /** 选择相册*/
 - (void)processHWComposeToolBarButtonTypeComposeToolbarPictureButton{
-    
-    UIImagePickerController *vc = [[UIImagePickerController alloc]init];
-    vc.delegate = self;
-    [self presentViewController:vc animated:YES completion:nil];
-    
+    [self openUIImagePickerController:UIImagePickerControllerSourceTypePhotoLibrary];
 }
 - (void)processHWComposeToolBarButtonTypeComposeTrendbutton{
     
@@ -168,9 +339,25 @@
     
 }
 - (void)processHWComposeToolBarButtonTypeComposeKeyboardbutton{
-    
+    //展示系统键盘
+    self.emojiKeyboard.hidden = YES;
+    self.textView.inputView = nil;
+    //使键盘生效代码
+    [self.textView endEditing:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.textView becomeFirstResponder];        
+    });
 }
 - (void)processHWComposeToolBarButtonTypeComposeEmoticonbutton{
+    //展示表情键盘
+    self.emojiKeyboard.hidden = NO;
+    self.textView.inputView = self.emojiKeyboard;
+    //使键盘生效代码
+    [self.textView endEditing:YES];
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        [self.textView becomeFirstResponder];
+    });
+    
     
 }
 
@@ -183,8 +370,10 @@
 
 
 #pragma mark - UITextViewDelegate
-
-
+///** 改变composePhotosView的位置 */
+//- (void)textViewDidChange:(UITextView *)textView{
+//   
+//}
 
 /** 此方法只有用户点击return才可以触发*/
 - (void)textViewDidEndEditing:(UITextView *)textView{
@@ -205,14 +394,28 @@
 //    }else
 //        self.textView.hiddentextViewPalceHolder = YES;
 //
-    //1.控制发送按钮
+    //1.控制发送按钮状态
     [self processSendComposeButtonState:strText replacementText:text];
+    
+    //2.控制composePhotosView的位置
+   
+    NSLog(@"打印字数＝＝%lu",(unsigned long)textView.text.length );
+    double numLines = textView.contentSize.height/textView.font.lineHeight;
+    NSLog(@"numlines = %f", numLines);
+    // 计算出长宽1
+    CGSize size = [[strText stringByAppendingString:text] sizeWithFont:self.textView.font maxW:textView.frame.size.width-10];
+    CGFloat margin = size.height +textView.font.lineHeight*2;
+    if (self.composePhotosView.y - margin <= 0 ) {
+        self.composePhotosView.y = margin;
+    }
+    
+    
     
     if ([text isEqualToString:@""]) {
         return YES;
     }
     
-    //2. 控制字数
+    //3. 控制字数
     int nTotalHasText = [self convertToInt:strText];// 原来字符串的字符个数
     // 计算新字符串的字符个数
     int nTotalToLoadText = [self convertToInt:text];
@@ -223,7 +426,7 @@
         [textView resignFirstResponder];
         return false;
     }
-    else if(nTotalHasText >= 10000 && nTotalToLoadText > 0)    {//控制字数为60
+    else if(nTotalHasText >= 1000 && nTotalToLoadText > 0)    {//控制字数为60
         return false;
     }
     return YES;
@@ -245,7 +448,7 @@
 }
 #pragma mark - 根据多个控件是否有内容进行控制发送按钮
 - (void) processSendComposeButtonState{
-    if (self.isTextViewHasChar) {//此条件是： 根据多个控件是否有内容进行判断。
+    if (self.isTextViewHasChar || self.hasComposePhotos) {//此条件是： 根据多个控件是否有内容进行判断。
         self.isSendComposeEnabled = YES;
     }else{
         self.isSendComposeEnabled = NO;
@@ -386,29 +589,56 @@
      self.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"application/json", @"text/json", @"text/javascript", nil];
      */
     //2.拼接请求参数
-    NSString *strUrl = @"https://api.weibo.com/2/statuses/update.json";
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"access_token"]=[HWAccountTool account].access_token;
-    paramters[@"status"]= self.textView.text;
-//    paramters[@"grant_type"]= @"authorization_code";//请求的类型，填写authorization_code
-//    paramters[@"code"]= code;//调用authorize获得的code值。
-//    paramters[@"redirect_uri"]= HWRedirectUri;//	回调地址，需需与注册应用里的回调地址一致。
-    //3.发送请求
-    [mgr POST:strUrl parameters:paramters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        [MBProgressHUD showSuccess:@"send"];
-//        HWAccountModel *account = [HWAccountModel accountWithDictionary:responseObject];
-//        //存储帐号信息
-//        [HWAccountTool saveAccount:account];
-        NSLog(@"succ sendCompose");
-        //切换窗口的根控制器
-//        [[UIApplication sharedApplication].keyWindow switchRootViewController];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD showError:@"failed"];
-    }];
+    if (self.textView.text.length ==0 || [self.textView.text isEqualToString:@""]) {
+        paramters[@"status"]= @"share pictures for test，Please disregard/ignore the  message！";
+    }else{
+        paramters[@"status"]= [self.textView.text stringByAppendingString:@"\r\n---test app，Please ignore the  message!"];
+    }
+    //    3.发送请求
+    if (self.isTextViewHasChar && !self.hasComposePhotos) {
+        NSString *strUrl = @"https://api.weibo.com/2/statuses/update.json";
+        [self updateJsonWithUrl:strUrl paramters:paramters mgr:mgr];
+    }else{
+        NSString *strUrl = @"https://upload.api.weibo.com/2/statuses/upload.json";
+        [self uploadJsonWithUrl:strUrl paramters:paramters mgr:mgr];
+    }
+   
     //4. dismissViewControllerAnimated
     [self dismissViewControllerAnimated:YES completion:nil];
 
 }
 
+- (void)updateJsonWithUrl:(NSString*)strUrl paramters:(NSDictionary*)paramters mgr:(AFHTTPRequestOperationManager*)mgr{
+        [mgr POST:strUrl parameters:paramters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+            [MBProgressHUD showSuccess:@"send"];
+            //切换窗口的根控制器
+//            [[UIApplication sharedApplication].keyWindow switchRootViewController];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [MBProgressHUD showError:@"failed"];
+        }];
+    
+}
+
+- (void)uploadJsonWithUrl:(NSString*)strUrl paramters:(NSDictionary*)paramters mgr:(AFHTTPRequestOperationManager*)mgr{
+    NSArray *datas =[self.composePhotosView getphotos];
+    [mgr POST:strUrl parameters:paramters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+        //处理文件上传
+        /**
+         pic	true	binary	要上传的图片，仅支持JPEG、GIF、PNG格式，图片大小小于5M。
+         请求必须用POST方式提交，并且注意采用multipart/form-data编码方式；
+         目前支持一张图片
+         */
+        [formData appendPartWithFileData:datas.lastObject name:@"pic" fileName:@"test.jpg" mimeType:@"multipart/form-data"];
+        NSLog(@"%lu",(unsigned long)datas.lastObject);
+        
+    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [MBProgressHUD showSuccess:@"send success"];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        [MBProgressHUD showError:@"failed"];
+        NSLog(@"%@",error);
+    }];
+}
 
 @end

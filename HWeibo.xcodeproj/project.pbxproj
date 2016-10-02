@@ -21,6 +21,15 @@
 		E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E114715D1D0E58FA00107A3E /* Assets.xcassets */; };
 		E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */; };
 		E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = E11749111D935DEE00B89DFE /* HWPhoto.m */; };
+		E120AB671D9FB72000A6FA28 /* HWComposePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB661D9FB72000A6FA28 /* HWComposePhotosView.m */; };
+		E120AB6B1DA0B3E200A6FA28 /* HWEmojiKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB6A1DA0B3E200A6FA28 /* HWEmojiKeyboard.m */; };
+		E120AB6E1DA0C9A000A6FA28 /* HWEmojiTabbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB6D1DA0C9A000A6FA28 /* HWEmojiTabbar.m */; };
+		E120AB711DA0CABD00A6FA28 /* HWEmojiListView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB701DA0CABD00A6FA28 /* HWEmojiListView.m */; };
+		E120AB741DA0F73100A6FA28 /* HWEmojiTabbarButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB731DA0F73100A6FA28 /* HWEmojiTabbarButton.m */; };
+		E120AB761DA10CFC00A6FA28 /* EmotionIcons in Resources */ = {isa = PBXBuildFile; fileRef = E120AB751DA10CFC00A6FA28 /* EmotionIcons */; };
+		E120AB7B1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB7A1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m */; };
+		E120AB7E1DA114AE00A6FA28 /* HWEmotionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB7D1DA114AE00A6FA28 /* HWEmotionModel.m */; };
+		E120AB811DA1546800A6FA28 /* HWEmojiPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB801DA1546800A6FA28 /* HWEmojiPageView.m */; };
 		E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */; };
 		E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D41D97794300394ACF /* HWCreatedAtTool.m */; };
 		E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D81D97B82300394ACF /* HWStatuePhotosView.m */; };
@@ -116,6 +125,23 @@
 		E11471681D0E635000107A3E /* HWeibo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HWeibo-Prefix.pch"; sourceTree = "<group>"; };
 		E11749101D935DEE00B89DFE /* HWPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPhoto.h; sourceTree = "<group>"; };
 		E11749111D935DEE00B89DFE /* HWPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPhoto.m; sourceTree = "<group>"; };
+		E120AB651D9FB72000A6FA28 /* HWComposePhotosView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposePhotosView.h; sourceTree = "<group>"; };
+		E120AB661D9FB72000A6FA28 /* HWComposePhotosView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposePhotosView.m; sourceTree = "<group>"; };
+		E120AB691DA0B3E200A6FA28 /* HWEmojiKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiKeyboard.h; sourceTree = "<group>"; };
+		E120AB6A1DA0B3E200A6FA28 /* HWEmojiKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiKeyboard.m; sourceTree = "<group>"; };
+		E120AB6C1DA0C9A000A6FA28 /* HWEmojiTabbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiTabbar.h; sourceTree = "<group>"; };
+		E120AB6D1DA0C9A000A6FA28 /* HWEmojiTabbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiTabbar.m; sourceTree = "<group>"; };
+		E120AB6F1DA0CABD00A6FA28 /* HWEmojiListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiListView.h; sourceTree = "<group>"; };
+		E120AB701DA0CABD00A6FA28 /* HWEmojiListView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiListView.m; sourceTree = "<group>"; };
+		E120AB721DA0F73100A6FA28 /* HWEmojiTabbarButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiTabbarButton.h; sourceTree = "<group>"; };
+		E120AB731DA0F73100A6FA28 /* HWEmojiTabbarButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiTabbarButton.m; sourceTree = "<group>"; };
+		E120AB751DA10CFC00A6FA28 /* EmotionIcons */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmotionIcons; sourceTree = "<group>"; };
+		E120AB791DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiKeyboardEmojiTool.h; sourceTree = "<group>"; };
+		E120AB7A1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiKeyboardEmojiTool.m; sourceTree = "<group>"; };
+		E120AB7C1DA114AE00A6FA28 /* HWEmotionModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmotionModel.h; sourceTree = "<group>"; };
+		E120AB7D1DA114AE00A6FA28 /* HWEmotionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmotionModel.m; sourceTree = "<group>"; };
+		E120AB7F1DA1546800A6FA28 /* HWEmojiPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiPageView.h; sourceTree = "<group>"; };
+		E120AB801DA1546800A6FA28 /* HWEmojiPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiPageView.m; sourceTree = "<group>"; };
 		E12300181D9B5CC80061E8A3 /* HWComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeViewController.h; sourceTree = "<group>"; };
 		E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeViewController.m; sourceTree = "<group>"; };
 		E12E47D31D97794300394ACF /* HWCreatedAtTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCreatedAtTool.h; sourceTree = "<group>"; };
@@ -331,6 +357,7 @@
 		E11471511D0E58FA00107A3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E120AB751DA10CFC00A6FA28 /* EmotionIcons */,
 				E114715D1D0E58FA00107A3E /* Assets.xcassets */,
 				E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */,
 				E11471621D0E58FA00107A3E /* Info.plist */,
@@ -340,9 +367,29 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		E120AB771DA10FE000A6FA28 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				E120AB791DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.h */,
+				E120AB7A1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
+		E120AB781DA10FE600A6FA28 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E120AB7C1DA114AE00A6FA28 /* HWEmotionModel.h */,
+				E120AB7D1DA114AE00A6FA28 /* HWEmotionModel.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		E12300171D9B5C980061E8A3 /* Compose(发布微博) */ = {
 			isa = PBXGroup;
 			children = (
+				E120AB781DA10FE600A6FA28 /* Model */,
+				E120AB771DA10FE000A6FA28 /* Tool */,
 				E123001C1D9B5CE10061E8A3 /* Controller */,
 				E123001B1D9B5CD20061E8A3 /* View  */,
 			);
@@ -353,6 +400,18 @@
 			isa = PBXGroup;
 			children = (
 				E14505FF1D9EA80B00A561ED /* HWComposeToolBar.h */,
+				E120AB651D9FB72000A6FA28 /* HWComposePhotosView.h */,
+				E120AB7F1DA1546800A6FA28 /* HWEmojiPageView.h */,
+				E120AB801DA1546800A6FA28 /* HWEmojiPageView.m */,
+				E120AB691DA0B3E200A6FA28 /* HWEmojiKeyboard.h */,
+				E120AB6A1DA0B3E200A6FA28 /* HWEmojiKeyboard.m */,
+				E120AB6C1DA0C9A000A6FA28 /* HWEmojiTabbar.h */,
+				E120AB6D1DA0C9A000A6FA28 /* HWEmojiTabbar.m */,
+				E120AB721DA0F73100A6FA28 /* HWEmojiTabbarButton.h */,
+				E120AB731DA0F73100A6FA28 /* HWEmojiTabbarButton.m */,
+				E120AB6F1DA0CABD00A6FA28 /* HWEmojiListView.h */,
+				E120AB701DA0CABD00A6FA28 /* HWEmojiListView.m */,
+				E120AB661D9FB72000A6FA28 /* HWComposePhotosView.m */,
 				E14506001D9EA80B00A561ED /* HWComposeToolBar.m */,
 			);
 			name = "View ";
@@ -816,6 +875,7 @@
 				E18353481D55A7E8009B694A /* HWLoadMoreDateFooterView.xib in Resources */,
 				E1E9011F1D48A49D001F78C3 /* MBProgressHUD.bundle in Resources */,
 				E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */,
+				E120AB761DA10CFC00A6FA28 /* EmotionIcons in Resources */,
 				E1B58EEC1D4C702C00E74E9C /* Info.plist in Resources */,
 				E114715E1D0E58FA00107A3E /* Assets.xcassets in Resources */,
 			);
@@ -849,9 +909,12 @@
 				E13C3A341D4B49200026221C /* UIButton+WebCache.m in Sources */,
 				E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */,
 				E13C3A071D4AF2160026221C /* HWTitleButton.m in Sources */,
+				E120AB6B1DA0B3E200A6FA28 /* HWEmojiKeyboard.m in Sources */,
 				E19D5D041D475EF20042B13A /* HWOAuthViewController.m in Sources */,
 				E10C64601D2125A10023E642 /* HWNavigationController.m in Sources */,
 				E15D7E471D94FEFB005B45DA /* HWStatuesToolbar.m in Sources */,
+				E120AB7B1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m in Sources */,
+				E120AB811DA1546800A6FA28 /* HWEmojiPageView.m in Sources */,
 				E13C3A351D4B49200026221C /* UIImage+GIF.m in Sources */,
 				E13C3A331D4B49200026221C /* SDWebImagePrefetcher.m in Sources */,
 				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,
@@ -867,6 +930,7 @@
 				E1E2205F1D40B9E200BC090B /* HWTabBar.m in Sources */,
 				E1394F1C1D991F0900B77847 /* HWIconView.m in Sources */,
 				E11471561D0E58FA00107A3E /* AppDelegate.m in Sources */,
+				E120AB671D9FB72000A6FA28 /* HWComposePhotosView.m in Sources */,
 				E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */,
 				E1E9010C1D484BDE001F78C3 /* AFHTTPRequestOperationManager.m in Sources */,
 				E11471531D0E58FA00107A3E /* main.m in Sources */,
@@ -879,14 +943,18 @@
 				E14506011D9EA80B00A561ED /* HWComposeToolBar.m in Sources */,
 				E1E9011E1D48A49D001F78C3 /* MBProgressHUD+MJ.m in Sources */,
 				E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */,
+				E120AB7E1DA114AE00A6FA28 /* HWEmotionModel.m in Sources */,
 				E13C3A2B1D4B49200026221C /* MKAnnotationView+WebCache.m in Sources */,
 				E13C3A361D4B49200026221C /* UIImage+MultiFormat.m in Sources */,
 				E1B58EB11D4C496D00E74E9C /* HWStatuses.m in Sources */,
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
+				E120AB6E1DA0C9A000A6FA28 /* HWEmojiTabbar.m in Sources */,
 				E1E901171D489633001F78C3 /* HWAccountModel.m in Sources */,
+				E120AB741DA0F73100A6FA28 /* HWEmojiTabbarButton.m in Sources */,
 				E13C37FE1D8F96970032D49D /* HWStatusesTableViewCell.m in Sources */,
 				E13C3A2C1D4B49200026221C /* NSData+ImageContentType.m in Sources */,
 				E139D91E1D49F7570052815A /* Foundation+Log.m in Sources */,
+				E120AB711DA0CABD00A6FA28 /* HWEmojiListView.m in Sources */,
 				E13C3A371D4B49200026221C /* UIImage+WebP.m in Sources */,
 				E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */,
 				E140CA971D9DF6660015741D /* HWPlaceholderTextView.m in Sources */,

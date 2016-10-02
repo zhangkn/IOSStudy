@@ -37,6 +37,8 @@
 #define HWScale [UIScreen mainScreen].scale
 
 #define KMainScreenWidth [UIScreen mainScreen].bounds.size.width
+#define KMainScreenHeight [UIScreen mainScreen].bounds.size.height
+
 
 #define HWStatusCellBorderW 10
 
