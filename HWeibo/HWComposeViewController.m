@@ -8,16 +8,17 @@
 
 #import "HWComposeViewController.h"
 #import "HWAccountTool.h"
-#import "HWPlaceholderTextView.h"
+#import "HWEmotionTextView.h"
 #import "AFNetworking.h"
 #import "MBProgressHUD+MJ.h"
 #import "HWComposeToolBar.h"
 #import "HWComposePhotosView.h"
 #import "HWEmojiKeyboard.h"
+#import "HWEmotionModel.h"
 
-@interface HWComposeViewController ()<UITextViewDelegate,HWComposeToolBarDelegete,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HWComposePhotosViewDelegate>
+@interface HWComposeViewController ()<UITextViewDelegate,HWComposeToolBarDelegete,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HWComposePhotosViewDelegate,HWEmotionTextViewDelegate>
 /** 输入控件*/
-@property (nonatomic,weak) HWPlaceholderTextView *textView;
+@property (nonatomic,weak) HWEmotionTextView *textView;
 /** 发送按钮是否enabled*/
 @property (nonatomic,assign) BOOL isSendComposeEnabled;
 
@@ -82,9 +83,18 @@
         tmpView.x = 0;
         tmpView.y = self.view.height - tmpView.height;
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrameNotification:) name:UIKeyboardWillChangeFrameNotification object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didSelectedEmojiNofificationName:) name:HWdidSelectedEmojiNofificationName object:nil];
         [self.view addSubview:_composeToolBar];
     }
     return _composeToolBar;
+}
+#pragma mark - 根据将表情添加到textview
+
+- (void)didSelectedEmojiNofificationName:(NSNotification*)notification{
+    //1.获取要添加的文字
+    HWEmotionModel *model= notification.userInfo[HWselectedEmojiModelKey];
+    [self.textView insertEmotions:model];
+    
 }
 
 #pragma mark - 根据键盘的frame设置工具条的frame
@@ -368,6 +378,14 @@
     [self.view endEditing:YES];
 }
 
+#pragma mark - HWEmotionTextViewDelegate
+
+- (BOOL)emotionTextView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
+    return  [self textView:textView shouldChangeTextInRange:range replacementText:text];
+}
+    
+
+
 
 #pragma mark - UITextViewDelegate
 ///** 改变composePhotosView的位置 */
@@ -381,6 +399,9 @@
 }
 
 /** 控制字数、以及自动增加textView 的height*/
+/** 
+ The current selection range. If the length of the range is 0, range reflects the current insertion point. If the user presses the Delete key, the length of the range is 1 and an empty string object replaces that single character.
+ */
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text{
     NSString *strText = textView.text;//替换前的文字
     /** 隐藏占位字符串的逻辑移到自定义textview内部实现*/
@@ -484,13 +505,14 @@
 
 
 
-- (HWPlaceholderTextView *)textView{
+- (HWEmotionTextView *)textView{
     if (nil == _textView) {
         NSString *textViewPalceHolder =  @"What's on your mind?";
-        HWPlaceholderTextView *tmpView = [HWPlaceholderTextView placeholderTextViewWithTextViewPalceHolder:textViewPalceHolder];
+        HWEmotionTextView *tmpView = [HWEmotionTextView placeholderTextViewWithTextViewPalceHolder:textViewPalceHolder];
         _textView = tmpView;
         tmpView.frame = self.view.bounds;
         tmpView.font = HWTextViewFont;
+        tmpView.emotionTextViewDelegate = self;
         tmpView.textViewPalceHolderColor = [UIColor grayColor];
         [self.view addSubview:_textView];
     }

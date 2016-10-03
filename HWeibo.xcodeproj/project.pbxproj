@@ -30,6 +30,11 @@
 		E120AB7B1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB7A1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m */; };
 		E120AB7E1DA114AE00A6FA28 /* HWEmotionModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB7D1DA114AE00A6FA28 /* HWEmotionModel.m */; };
 		E120AB811DA1546800A6FA28 /* HWEmojiPageView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB801DA1546800A6FA28 /* HWEmojiPageView.m */; };
+		E120AB841DA1FBD000A6FA28 /* NSString+Emoji.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB831DA1FBD000A6FA28 /* NSString+Emoji.m */; };
+		E120AB871DA20CCF00A6FA28 /* HWEmojiMagnifierView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB861DA20CCF00A6FA28 /* HWEmojiMagnifierView.m */; };
+		E120AB8D1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E120AB8C1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib */; };
+		E120AB911DA24AB400A6FA28 /* HWEmojiButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB901DA24AB400A6FA28 /* HWEmojiButton.m */; };
+		E120AB941DA2A98900A6FA28 /* HWEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB931DA2A98900A6FA28 /* HWEmotionTextView.m */; };
 		E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */; };
 		E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D41D97794300394ACF /* HWCreatedAtTool.m */; };
 		E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D81D97B82300394ACF /* HWStatuePhotosView.m */; };
@@ -142,6 +147,15 @@
 		E120AB7D1DA114AE00A6FA28 /* HWEmotionModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmotionModel.m; sourceTree = "<group>"; };
 		E120AB7F1DA1546800A6FA28 /* HWEmojiPageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiPageView.h; sourceTree = "<group>"; };
 		E120AB801DA1546800A6FA28 /* HWEmojiPageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiPageView.m; sourceTree = "<group>"; };
+		E120AB821DA1FBD000A6FA28 /* NSString+Emoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Emoji.h"; sourceTree = "<group>"; };
+		E120AB831DA1FBD000A6FA28 /* NSString+Emoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Emoji.m"; sourceTree = "<group>"; };
+		E120AB851DA20CCF00A6FA28 /* HWEmojiMagnifierView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiMagnifierView.h; sourceTree = "<group>"; };
+		E120AB861DA20CCF00A6FA28 /* HWEmojiMagnifierView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiMagnifierView.m; sourceTree = "<group>"; };
+		E120AB8C1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HWEmojiMagnifierView.xib; sourceTree = "<group>"; };
+		E120AB8F1DA24AB400A6FA28 /* HWEmojiButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmojiButton.h; sourceTree = "<group>"; };
+		E120AB901DA24AB400A6FA28 /* HWEmojiButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiButton.m; sourceTree = "<group>"; };
+		E120AB921DA2A98900A6FA28 /* HWEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmotionTextView.h; sourceTree = "<group>"; };
+		E120AB931DA2A98900A6FA28 /* HWEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmotionTextView.m; sourceTree = "<group>"; };
 		E12300181D9B5CC80061E8A3 /* HWComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeViewController.h; sourceTree = "<group>"; };
 		E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeViewController.m; sourceTree = "<group>"; };
 		E12E47D31D97794300394ACF /* HWCreatedAtTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCreatedAtTool.h; sourceTree = "<group>"; };
@@ -400,8 +414,15 @@
 			isa = PBXGroup;
 			children = (
 				E14505FF1D9EA80B00A561ED /* HWComposeToolBar.h */,
+				E120AB921DA2A98900A6FA28 /* HWEmotionTextView.h */,
+				E120AB931DA2A98900A6FA28 /* HWEmotionTextView.m */,
 				E120AB651D9FB72000A6FA28 /* HWComposePhotosView.h */,
 				E120AB7F1DA1546800A6FA28 /* HWEmojiPageView.h */,
+				E120AB8F1DA24AB400A6FA28 /* HWEmojiButton.h */,
+				E120AB901DA24AB400A6FA28 /* HWEmojiButton.m */,
+				E120AB851DA20CCF00A6FA28 /* HWEmojiMagnifierView.h */,
+				E120AB8C1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib */,
+				E120AB861DA20CCF00A6FA28 /* HWEmojiMagnifierView.m */,
 				E120AB801DA1546800A6FA28 /* HWEmojiPageView.m */,
 				E120AB691DA0B3E200A6FA28 /* HWEmojiKeyboard.h */,
 				E120AB6A1DA0B3E200A6FA28 /* HWEmojiKeyboard.m */,
@@ -736,6 +757,8 @@
 		E1BB11DF1D2275690030EC5C /* Category */ = {
 			isa = PBXGroup;
 			children = (
+				E120AB821DA1FBD000A6FA28 /* NSString+Emoji.h */,
+				E120AB831DA1FBD000A6FA28 /* NSString+Emoji.m */,
 				E139D91D1D49F7570052815A /* Foundation+Log.m */,
 				E10C645B1D211A980023E642 /* UIView+Extension.h */,
 				E139D91A1D49D7D40052815A /* UIWindow+Extension.h */,
@@ -872,6 +895,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E10C64591D2118EC0023E642 /* HWTest1ViewController.xib in Resources */,
+				E120AB8D1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib in Resources */,
 				E18353481D55A7E8009B694A /* HWLoadMoreDateFooterView.xib in Resources */,
 				E1E9011F1D48A49D001F78C3 /* MBProgressHUD.bundle in Resources */,
 				E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */,
@@ -915,6 +939,7 @@
 				E15D7E471D94FEFB005B45DA /* HWStatuesToolbar.m in Sources */,
 				E120AB7B1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m in Sources */,
 				E120AB811DA1546800A6FA28 /* HWEmojiPageView.m in Sources */,
+				E120AB941DA2A98900A6FA28 /* HWEmotionTextView.m in Sources */,
 				E13C3A351D4B49200026221C /* UIImage+GIF.m in Sources */,
 				E13C3A331D4B49200026221C /* SDWebImagePrefetcher.m in Sources */,
 				E19D87C51D3F2E3E0050D822 /* HWSearchBar.m in Sources */,
@@ -938,12 +963,14 @@
 				E19F34F21D9800310009F550 /* HWStatuePhotoView.m in Sources */,
 				E13C3A3A1D4B49200026221C /* UIView+WebCacheOperation.m in Sources */,
 				E10C64511D20D1680023E642 /* HWMessageTableViewController.m in Sources */,
+				E120AB841DA1FBD000A6FA28 /* NSString+Emoji.m in Sources */,
 				E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */,
 				E10C64541D20D7A40023E642 /* HWTabBarController.m in Sources */,
 				E14506011D9EA80B00A561ED /* HWComposeToolBar.m in Sources */,
 				E1E9011E1D48A49D001F78C3 /* MBProgressHUD+MJ.m in Sources */,
 				E10C644E1D20D1540023E642 /* HWMeTableViewController.m in Sources */,
 				E120AB7E1DA114AE00A6FA28 /* HWEmotionModel.m in Sources */,
+				E120AB911DA24AB400A6FA28 /* HWEmojiButton.m in Sources */,
 				E13C3A2B1D4B49200026221C /* MKAnnotationView+WebCache.m in Sources */,
 				E13C3A361D4B49200026221C /* UIImage+MultiFormat.m in Sources */,
 				E1B58EB11D4C496D00E74E9C /* HWStatuses.m in Sources */,
@@ -963,6 +990,7 @@
 				E1E901121D484BDE001F78C3 /* AFURLResponseSerialization.m in Sources */,
 				E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */,
 				E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */,
+				E120AB871DA20CCF00A6FA28 /* HWEmojiMagnifierView.m in Sources */,
 				E1B58EF31D4C702C00E74E9C /* NSObject+MJCoding.m in Sources */,
 				E1920B0B1D8FD447003AD139 /* HWStatusesTableViewCellFrame.m in Sources */,
 				E1B58EF41D4C702C00E74E9C /* NSObject+MJKeyValue.m in Sources */,

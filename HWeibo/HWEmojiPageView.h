@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #define HWEmojiListViewScrollViewMaxClos 7
 #define HWEmojiListViewScrollViewMaxRows 3
-#define HWEmojiListViewScrollViewMaxEmojiCout 20
+#define HWEmojiListViewScrollViewMaxEmojiCout ((HWEmojiListViewScrollViewMaxClos*HWEmojiListViewScrollViewMaxRows)-1)
 #define HWEmojiListViewScrollViewMargin 10
 /** 存放表情的控件*/
 @interface HWEmojiPageView : UIView

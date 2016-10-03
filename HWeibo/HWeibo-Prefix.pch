@@ -44,6 +44,11 @@
 
 #define weakSelf(weakSelf)  __weak __typeof(&*self)weakSelf = self;
 
+#define WINDOWFirst        [[[UIApplication sharedApplication] windows] firstObject]
+#define WINDOWLast       [[[UIApplication sharedApplication] windows] lastObject]
+#define HWselectedEmojiModelKey @"selectedEmojiModel"
+#define HWdidSelectedEmojiNofificationName @"HWdidSelectedEmojiNofificationName"
+
 
 #endif
 #endif /* HWeibo_Prefix_pch */

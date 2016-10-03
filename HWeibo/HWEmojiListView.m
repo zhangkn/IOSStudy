@@ -7,7 +7,7 @@
 //
 
 #import "HWEmojiListView.h"
-#import "HWEmojiPageView.h"
+//#import "HWEmojiPageView.h"
 
 
 
@@ -131,7 +131,14 @@
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     self.pageControl.currentPage =  (int)(self.scrollView.contentOffset.x/self.scrollView.width+0.5);//四舍五入
+//    //，当页数即将发生改变时 通知keyboard 进行tabbar按钮的切换
+//    CGFloat width =self.scrollView.contentSize.width;
+//    if ( (self.scrollView.contentOffset.x-width) > width*0.5) {
+//        //通知代理对象进行按钮的切换到下一个按钮
+//    }
     
 }
+
+
 
 @end

@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 #import "HWEmojiKeyboardEmojiTool.h"
-
+#import "NSString+Emoji.h"
 
 @interface HWEmotionModel : NSObject
 
@@ -47,9 +47,8 @@
 /** 获取全局变量的模型数组*/
 + (NSArray *)getSituationListModelWithType:(HWEmotionModelType)emotionModelType;
 
-//定义初始化方法 KVC的使用
-//- (instancetype) initWithDictionary:(NSDictionary *) dict;
-//+ (instancetype) <#name#>WithDictionary:(NSDictionary *) dict;
+
++ (NSMutableAttributedString*)emotionMutableAttributedStringWithModel:(HWEmotionModel*)model font:(UIFont*)font;
 
 
 

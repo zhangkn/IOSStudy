@@ -15,6 +15,29 @@ NSArray *tmpemojiModelArray;
 NSArray *tmpDefaultModelArray;
 NSArray *tmpHuahuaModelAray;
 
++ (NSMutableAttributedString *)emotionMutableAttributedStringWithModel:(HWEmotionModel *)model font:(UIFont *)font{
+    NSMutableAttributedString *str= [[NSMutableAttributedString alloc]init];
+    NSAttributedString *tmp;//模型表情数据
+    if ([model.type isEqualToString:@"0"]) {
+        //图片数据
+        NSTextAttachment *textAttachment = [[NSTextAttachment alloc]init];
+        textAttachment.image = [UIImage imageNamed:model.png];
+//        textAttachment.bounds = CGRectMake(0, 0,font.pointSize, font.pointSize);
+        textAttachment.bounds = CGRectMake(0, -3.5,font.lineHeight, font.lineHeight);
+        tmp =  [NSAttributedString attributedStringWithAttachment:textAttachment] ;
+    }else if([model.type isEqualToString:@"1"]){//emoji
+        NSString *stremoji =[model.code emoji];
+        tmp = [[NSMutableAttributedString alloc]initWithString:stremoji];
+    }
+    //合并数据
+    [str appendAttributedString:tmp];
+    NSRange range ;
+    range.location = 0;
+    range.length = str.length;
+   [str addAttribute:NSFontAttributeName value:font range:range];
+    return str ;
+}
+
 + (NSArray*)getTmpemojiModelArray{
     if (!tmpemojiModelArray) {
         tmpemojiModelArray = [self arrayModelWithDictArray:[HWEmojiKeyboardEmojiTool dictArrayListWithtype:HWEmotionModelTypeEmoji]];

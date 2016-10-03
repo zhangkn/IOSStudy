@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="HWEmojiMagnifierView">
+            <rect key="frame" x="0.0" y="0.0" width="64" height="92"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="emoticon_keyboard_magnifier" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-pk-NHc"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zx9-dO-UZ5" customClass="HWEmojiButton">
+                    <fontDescription key="fontDescription" type="system" pointSize="38"/>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="yCh-pk-NHc" secondAttribute="trailing" id="4uF-se-P8A"/>
+                <constraint firstAttribute="bottom" secondItem="yCh-pk-NHc" secondAttribute="bottom" id="BF6-0H-PQP"/>
+                <constraint firstItem="zx9-dO-UZ5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="MKg-Zg-8s0"/>
+                <constraint firstItem="yCh-pk-NHc" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="TNp-L0-pup"/>
+                <constraint firstItem="zx9-dO-UZ5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bkV-mf-btd"/>
+                <constraint firstAttribute="trailing" secondItem="zx9-dO-UZ5" secondAttribute="trailing" id="d7B-jn-biZ"/>
+                <constraint firstItem="yCh-pk-NHc" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="i1f-68-e2B"/>
+                <constraint firstAttribute="bottom" secondItem="zx9-dO-UZ5" secondAttribute="bottom" constant="28" id="ltb-FB-1jj"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="emojiMagnifierButton" destination="zx9-dO-UZ5" id="Tvf-RB-0QL"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="emoticon_keyboard_magnifier" width="64" height="91"/>
+    </resources>
+</document>

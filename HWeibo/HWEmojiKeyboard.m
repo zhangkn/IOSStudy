@@ -140,10 +140,10 @@
 
 - (void)showListView:(HWEmojiListView*)selectedListView{
     self.selectedListView.hidden = YES;
+//    [self.selectedListView removeFromSuperview];
     self.selectedListView = selectedListView;
     self.selectedListView.hidden = NO;
-    
-
+//    [self addSubview:self.selectedListView];
 }
 #warning w hen you want to adjust the layout of a view’s subviews. [self setNeedsLayout]; 会在恰当的时候进行layoutSubviews
 /** //    self updateFocusIfNeeded
