@@ -14,7 +14,7 @@
 
 #import "HWEmojiButton.h"
 
-@interface HWEmojiPageView ()<HWEmojiButtonDelegate>
+@interface HWEmojiPageView ()<UIGestureRecognizerDelegate>
 
 @property (nonatomic,strong) HWEmojiMagnifierView *emojiMagnifierView;
 
@@ -42,22 +42,21 @@
     
     NSLog(@"%ld",emotions.count);
     for (int i=0; i<emotions.count+1; i++) {
-        HWEmojiButton *tmp = [[HWEmojiButton alloc]init];
         //设置表情
         if (i == emotions.count) {
+            UIButton *tmp = [[UIButton alloc]init];
             [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete"] forState:UIControlStateNormal];
             [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete_highlighted"] forState:UIControlStateHighlighted];
             [tmp addTarget:self action:@selector(clickDeleteEmojiButton:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:tmp];
             return;
         }
+        HWEmojiButton *tmp = [[HWEmojiButton alloc]init];
         HWEmotionModel *model = emotions[i];
         tmp.emotionModel = model;
         tmp.titleLabel.font = [UIFont systemFontOfSize:32];
         //监听按钮事件：处理表情的放大、通知保存最近使用的表情
         [tmp addTarget:self action:@selector(clickEmojiButton:) forControlEvents:UIControlEventTouchUpInside];
-        
-        tmp.delegate = self;
         
         [self addSubview:tmp];
     }
@@ -75,19 +74,10 @@
 
 #pragma mark  HWEmojiButtonDelegate -监听按钮事件：处理表情的放大
 - (void)emojiButton:(HWEmojiButton *)btn btnLongBegan:(UILongPressGestureRecognizer *)gestureRecognizer{
-    NSLog(@"长按事件");
-    self.emojiMagnifierView.centerX = btn.centerX;
-    self.emojiMagnifierView.y = btn.centerY - self.emojiMagnifierView.height;
-    //坐标系转换,从 btn.superview 转换到 WINDOWLast
-    self.emojiMagnifierView.frame = [btn.superview convertRect:self.emojiMagnifierView.frame toView:WINDOWLast];
-    //设置放大镜数据
-    self.emojiMagnifierView.emotionModel =btn.emotionModel;
-    [WINDOWLast addSubview:self.emojiMagnifierView];
-}
+    [self.emojiMagnifierView showFormButton:btn];
+  }
 /** 与点击事件一样，将文字上送给textview 通知保存最近使用的表情*/
 - (void)emojiButton:(HWEmojiButton *)btn btnLongEnd:(UILongPressGestureRecognizer *)gestureRecognizer{
-    NSLog(@"长按事件  取消%@",btn.emotionModel.chs);
-
     [self processChooseEmojiEvent:btn];
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.01 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.emojiMagnifierView removeFromSuperview];
@@ -109,7 +99,8 @@
     NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
     userInfo[HWselectedEmojiModelKey]= btn.emotionModel;
     [[NSNotificationCenter defaultCenter]postNotificationName:HWdidSelectedEmojiNofificationName object:nil userInfo:userInfo];
-    
+    //保存最近使用的表情
+    [HWEmojiKeyboardEmojiTool saveEmotionModel:btn.emotionModel];
 }
 
 
@@ -119,11 +110,7 @@
     [super layoutSubviews];
     CGFloat wh = (self.width-2*HWEmojiListViewScrollViewMargin)/HWEmojiListViewScrollViewMaxClos;
     CGFloat h = (self.height- HWEmojiListViewScrollViewMargin)/HWEmojiListViewScrollViewMaxRows;
-    for (int i=0; i<self.subviews.count; i++) {
-        UIView *view = self.subviews[i];
-        if ([view isKindOfClass:[HWEmojiMagnifierView class]]) {//self.subviews.count-1 放大镜
-            return;//不计算放大镜的frame
-        }
+    for (int i=0; i<self.subviews.count; i++) {        
         HWEmojiButton *tmp = self.subviews[i];
         if ([self.subviews containsObject:self.emojiMagnifierView]) {
             if (i == self.subviews.count-2) {//删除按钮
@@ -145,7 +132,82 @@
     }
     
     
-    
 }
+
+
+- (instancetype)initWithFrame:(CGRect)frame{
+    self = [super initWithFrame:frame];
+    if (self) {
+        //button长按事件
+        UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
+//        longPress.minimumPressDuration = 0.1; //定义按的时间
+        [self addGestureRecognizer:longPress];
+        longPress.delegate = self;
+    }
+    return self;
+}
+
+
+-(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
+    
+    switch (gestureRecognizer.state) {
+        case UIGestureRecognizerStateEnded:
+        case UIGestureRecognizerStateCancelled:
+        {
+//            结束长按             //获取最终结束的位置
+            weakSelf(weakSelf);
+            [self processGestureRecognizerState:gestureRecognizer successFindBtnWithPointBlock:^(HWEmojiButton *btn, UILongPressGestureRecognizer *gestureRecognizer) {
+                [weakSelf emojiButton:btn btnLongEnd:gestureRecognizer];//取消放大镜的同时，将表情添加到textview
+            }];
+            
+        }
+            break;
+            
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStateChanged:
+        {
+            weakSelf(weakSelf);
+            [self processGestureRecognizerState:gestureRecognizer successFindBtnWithPointBlock:^(HWEmojiButton *btn, UILongPressGestureRecognizer *gestureRecognizer) {
+                [weakSelf emojiButton:btn btnLongBegan:gestureRecognizer];//            //只需要展示放大镜子
+
+            }];
+            
+        }
+            break;
+            
+            
+        default:
+            break;
+    }
+}
+/** 成功找到手势对应的按钮，立即执行successFindBtnWithPointBlock*/
+- (void)processGestureRecognizerState:(UILongPressGestureRecognizer*)gestureRecognizer successFindBtnWithPointBlock:(void(^)(HWEmojiButton* btn ,UILongPressGestureRecognizer* gestureRecognizer))successFindBtnWithPointBlock{
+    // 获取对应的子空间按钮
+    CGPoint point = [gestureRecognizer locationInView:self];
+    HWEmojiButton *btn = [self btnWithPoint:point];
+    if (btn) {//找到对应的表情按钮，根据state进行处理
+        if (successFindBtnWithPointBlock) {
+            successFindBtnWithPointBlock(btn,gestureRecognizer);
+        }
+    }else{//手势没有对应表情按钮
+        NSLog(@"%s",__func__);
+        //取消放大镜
+        [self.emojiMagnifierView removeFromSuperview];
+    }
+}
+
+
+- (HWEmojiButton *)btnWithPoint:(CGPoint)point{
+    for (UIView *obj in self.subviews) {
+        if (![obj isKindOfClass:[HWEmojiButton class]]) {
+            return nil;
+        }
+        if (CGRectContainsPoint(obj.frame, point)) {
+            return (HWEmojiButton*)obj;
+        }
+    }
+    return nil;
+}
+
 
 @end

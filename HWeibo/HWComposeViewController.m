@@ -16,6 +16,7 @@
 #import "HWEmojiKeyboard.h"
 #import "HWEmotionModel.h"
 
+
 @interface HWComposeViewController ()<UITextViewDelegate,HWComposeToolBarDelegete,UIImagePickerControllerDelegate,UINavigationControllerDelegate,HWComposePhotosViewDelegate,HWEmotionTextViewDelegate>
 /** 输入控件*/
 @property (nonatomic,weak) HWEmotionTextView *textView;

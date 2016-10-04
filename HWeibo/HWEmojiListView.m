@@ -97,14 +97,14 @@
     _emotions = emotions;
     //装配数据 到子控件
     NSLog(@"%lu",(unsigned long)emotions.count);
-
     
     [self setupDataPageControl:emotions];
     [self setupDataScrollView:emotions];
     
 }
 - (void)setupDataScrollView:(NSArray*)emotions{
-    //创建用于容纳表情的控件
+    //创建用于容纳表情的控件 //根据新的数据，重新布局HWEmojiPageView的子控件
+    [[self.scrollView subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     for (int i = 0; i<self.pageControl.numberOfPages; i++) {
         HWEmojiPageView *tmp  = [[HWEmojiPageView alloc]init];
         //设置 HWEmojiPageView 的模型数据
@@ -119,6 +119,8 @@
         tmp.backgroundColor = [UIColor whiteColor];
         [self.scrollView addSubview:tmp];
     }
+//    [self setNeedsDisplay];//重新计算HWEmojiPageView 的大小
+    [self layoutSubviews];
     
 }
 

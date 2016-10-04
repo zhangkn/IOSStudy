@@ -19,8 +19,11 @@
     NSMutableAttributedString *str = [[NSMutableAttributedString alloc]init];
     
     [str appendAttributedString:self.attributedText];
-    [str deleteCharactersInRange:self.selectedRange];//删除选中内容
-    [str insertAttributedString:tmp atIndex:self.selectedRange.location];//插入到当前光标的位置
+    //方法一：
+//    [str deleteCharactersInRange:self.selectedRange];//删除选中内容
+//    [str insertAttributedString:tmp atIndex:self.selectedRange.location];//插入到当前光标的位置
+//方法二：
+    [str replaceCharactersInRange:self.selectedRange withAttributedString:tmp];
     
     NSRange tmpSelectedRange = self.selectedRange;
     //执行特定的代码

@@ -10,6 +10,9 @@
 #import "HWEmojiTabbar.h"
 #import "HWEmojiListView.h"
 #import "HWEmotionModel.h"
+
+#import "HWEmojiKeyboardEmojiTool.h"
+
 @interface HWEmojiKeyboard ()<HWEmojiTabbarDelegate>
 
 @property (nonatomic,weak) HWEmojiTabbar *emojiTabbar;
@@ -73,7 +76,6 @@
         HWEmojiListView *tmpView = [[HWEmojiListView alloc]init];
         _recentListView = tmpView;
         tmpView.hidden = YES;
-//        tmpView.backgroundColor = [UIColor blackColor];
         [self addSubview:_recentListView];
     }
     return _recentListView;
@@ -128,7 +130,8 @@
         }
         case HWEmojiTabbarButtonTypeRecent:{
             [self showListView:self.recentListView];
-           
+            //调用此方法，才会创建子控件 HWEmojiPageView 、pageController 
+            self.recentListView.emotions = [HWEmojiKeyboardEmojiTool motionModels];
             break;
         }
         case HWEmojiTabbarButtonTypeDefault:{

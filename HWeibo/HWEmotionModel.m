@@ -80,4 +80,53 @@ NSArray *tmpHuahuaModelAray;
 }
 
 
+/**
+ Encodes the receiver using a given archiver. 归档的时候调用
+ 说明这个对象的哪些属性进行归档
+ */
+- (void)encodeWithCoder:(NSCoder *)aCoder{
+    
+    [aCoder encodeObject:self.chs forKey:@"chs"];
+    [aCoder encodeObject:self.code forKey:@"code"];
+    [aCoder encodeObject:self.png forKey:@"png"];
+    [aCoder encodeObject:self.type forKey:@"type"];
+    
+}
+- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
+    self = [super init];
+    if (self) {
+        self.chs=[aDecoder decodeObjectForKey:@"chs"];
+        self.png=[aDecoder decodeObjectForKey:@"png"];
+        self.code=[aDecoder decodeObjectForKey:@"code"];
+        self.type=[aDecoder decodeObjectForKey:@"type"];
+    }
+    return self;
+}// NS_DESIGNATED_INITIALIZER
+
+
+- (BOOL)isEqual:(id)object{
+    if (!object) {
+        return NO;
+    }
+   
+    HWEmotionModel *tmp = (HWEmotionModel*)object;
+    BOOL BTmptype = ([self.type isEqualToString:tmp.type]);
+    if ([self.type isEqualToString:@"1"]) {//分成两类别进行比较
+       BOOL BTmpCode =  ([self.code isEqualToString: tmp.code]);
+        return BTmpCode && BTmptype ;
+    }
+    BOOL bTmpPng = ( [self.png  isEqualToString: tmp.png]);
+    BOOL BTmpChs = ([self.chs isEqualToString:tmp. chs]);
+    return bTmpPng  && BTmptype && BTmpChs;
+    
+   
+}
+
+
+//- (NSUInteger)hash{
+//    return [self.png hash]+[self.code hash]+[self.type hash]+[self.type hash];
+//}
+
+
+
 @end

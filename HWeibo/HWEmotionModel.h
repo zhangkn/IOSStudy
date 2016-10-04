@@ -11,7 +11,7 @@
 #import "HWEmojiKeyboardEmojiTool.h"
 #import "NSString+Emoji.h"
 
-@interface HWEmotionModel : NSObject
+@interface HWEmotionModel : NSObject<NSCoding>
 
 
 

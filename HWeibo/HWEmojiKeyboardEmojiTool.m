@@ -7,8 +7,37 @@
 //
 
 #import "HWEmojiKeyboardEmojiTool.h"
+#import "HWEmotionModel.h"
+
+#define HWEmotionArchivePath  [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES)lastObject] stringByAppendingPathComponent:@"emotion.archive"]
+
 /** 负责加载表情数据*/
 @implementation HWEmojiKeyboardEmojiTool
+
++ (void)saveEmotionModel:(HWEmotionModel *)model{
+    //保存到沙盒
+    //先添加到数组，再保存数组
+    NSMutableArray *tmp = [NSMutableArray array];
+    NSMutableArray *motionModels = [self motionModels];
+    if (motionModels) {
+        tmp = [self motionModels];
+    }
+    if ([tmp containsObject:model]) {
+        return;
+    }
+    [tmp insertObject:model atIndex:0];
+    [NSKeyedArchiver archiveRootObject:tmp toFile:HWEmotionArchivePath];
+}
+
+#pragma mark - 获取帐号信息
++ (NSMutableArray *)motionModels{
+    //    NSDictionary *accountDict = [NSDictionary dictionaryWithContentsOfFile:path];
+    NSMutableArray *motionModels = [NSKeyedUnarchiver unarchiveObjectWithFile:HWEmotionArchivePath];
+    NSLog(@"%@",HWEmotionArchivePath);
+    return motionModels;
+}
+
+
 
 + (NSArray *)dictArrayListWithtype:(HWEmotionModelType)type{
     switch (type) {

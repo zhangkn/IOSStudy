@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "HWEmojiKeyboardEmojiTool.h"
 #define HWEmojiListViewScrollViewMaxClos 7
 #define HWEmojiListViewScrollViewMaxRows 3
 #define HWEmojiListViewScrollViewMaxEmojiCout ((HWEmojiListViewScrollViewMaxClos*HWEmojiListViewScrollViewMaxRows)-1)

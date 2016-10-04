@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+
 typedef enum {
     HWEmotionModelTypeEmoji =1,
     HWEmotionModelTypeDefault ,
@@ -14,6 +15,7 @@ typedef enum {
     
 }HWEmotionModelType;
 
+@class HWEmotionModel;
 @interface HWEmojiKeyboardEmojiTool : NSObject
 
 /**
@@ -26,5 +28,10 @@ typedef enum {
 + (NSArray *) huahuaList;
 
 + (NSArray *) dictArrayListWithtype:(HWEmotionModelType)type;
+
+/** 保存最近使用的表情*/
++ (void)saveEmotionModel:(HWEmotionModel*)model;
++ (NSMutableArray *)motionModels;
+
 
 @end

@@ -19,8 +19,10 @@
     _emotionModel = emotionModel;
     if ([emotionModel.type isEqualToString:@"0"]) {
         [self setImage:[UIImage imageNamed:emotionModel.png] forState:UIControlStateNormal];
+        [self  setTitle:nil forState:UIControlStateNormal];
     }else if([emotionModel.type isEqualToString:@"1"]){
         [self  setTitle:[emotionModel.code emoji]forState:UIControlStateNormal];
+        [self setImage:nil forState:UIControlStateNormal];
     }
 }
 
@@ -43,23 +45,23 @@
 - (void)setup{
     [self setAdjustsImageWhenHighlighted:NO];
     //button长按事件
-    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
-    longPress.minimumPressDuration = 0.1; //定义按的时间
-    [self addGestureRecognizer:longPress];
+//    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(btnLong:)];
+//    longPress.minimumPressDuration = 0.1; //定义按的时间
+//    [self addGestureRecognizer:longPress];
 }
 
--(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
-    
-    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
-        if ([self.delegate respondsToSelector:@selector(emojiButton:btnLongBegan:)]) {
-            [self.delegate emojiButton:self btnLongBegan:gestureRecognizer];
-        }
-    }else if(UIGestureRecognizerStateEnded == [gestureRecognizer state]){
-        if ([self.delegate respondsToSelector:@selector(emojiButton:btnLongEnd:)]) {
-            [self.delegate emojiButton:self btnLongEnd:gestureRecognizer];
-        }
-    }
-}
+//-(void)btnLong:(UILongPressGestureRecognizer *)gestureRecognizer{
+//    
+//    if ([gestureRecognizer state] == UIGestureRecognizerStateBegan) {
+//        if ([self.delegate respondsToSelector:@selector(emojiButton:btnLongBegan:)]) {
+//            [self.delegate emojiButton:self btnLongBegan:gestureRecognizer];
+//        }
+//    }else if(UIGestureRecognizerStateEnded == [gestureRecognizer state]){
+//        if ([self.delegate respondsToSelector:@selector(emojiButton:btnLongEnd:)]) {
+//            [self.delegate emojiButton:self btnLongEnd:gestureRecognizer];
+//        }
+//    }
+//}
 
 
 @end

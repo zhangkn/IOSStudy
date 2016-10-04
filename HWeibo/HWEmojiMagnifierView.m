@@ -20,10 +20,16 @@
 
 @implementation HWEmojiMagnifierView
 
-- (void)setEmotionModel:(HWEmotionModel *)emotionModel{
-    _emotionModel = emotionModel;
-    self.emojiMagnifierButton.emotionModel = emotionModel;
+- (void)showFormButton:(HWEmojiButton*)btn{
+    self.centerX = btn.centerX;
+    self.y = btn.centerY - self.height;
+    //坐标系转换,从 btn.superview 转换到 WINDOWLast
+    self.frame = [btn.superview convertRect:self.frame toView:WINDOWLast];
+    //设置放大镜数据
+    self.emojiMagnifierButton.emotionModel =btn.emotionModel;
+    [WINDOWLast addSubview:self];
 }
+
 
 
 + (instancetype)emojiMagnifierView{
