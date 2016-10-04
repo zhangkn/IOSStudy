@@ -17,9 +17,15 @@
 @end
 
 @interface HWEmotionTextView : HWPlaceholderTextView
+
+@property (nonatomic,assign) id<HWEmotionTextViewDelegate> emotionTextViewDelegate;
+
 /** 将表情添加到textView*/
 - (void)insertEmotions:(HWEmotionModel*)model;
 
-@property (nonatomic,assign) id<HWEmotionTextViewDelegate> emotionTextViewDelegate;
+/** 将表情等文本信息统一翻译成普通文本信息*/
+- (NSString*)fullText;
+
+
 
 @end

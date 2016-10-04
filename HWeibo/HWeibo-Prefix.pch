@@ -20,6 +20,8 @@
 #import "UIBarButtonItem+Extension.h"
 #import "UIWindow+Extension.h"
 #import "NSString+Extension.h"
+#import "NSString+Emoji.h"
+#import "UITextView+Extension.h"
 
 
 
@@ -48,6 +50,11 @@
 #define WINDOWLast       [[[UIApplication sharedApplication] windows] lastObject]
 #define HWselectedEmojiModelKey @"selectedEmojiModel"
 #define HWdidSelectedEmojiNofificationName @"HWdidSelectedEmojiNofificationName"
+
+#define HWdidClickDeleteEmojiButtonNofificationName @"HWdidClickDeleteEmojiButtonNofificationName"
+
+
+
 
 
 #endif

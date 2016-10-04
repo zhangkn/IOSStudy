@@ -34,6 +34,12 @@
     [self textViewTextDidChangeNotification];
 }
 
+- (void)setAttributedText:(NSAttributedString *)attributedText{
+    [super setAttributedText:attributedText];
+    //处理占位符是否隐藏
+    [self textViewTextDidChangeNotification];
+}
+
 
 - (void)setTextViewPalceHolderColor:(UIColor *)textViewPalceHolderColor{
     _textViewPalceHolderColor = textViewPalceHolderColor;

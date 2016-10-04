@@ -8,6 +8,7 @@
 
 #import "HWEmotionModel.h"
 #import "MJExtension.h"
+#import "HWEmotionTextAttachment.h"
 
 @implementation HWEmotionModel
 
@@ -20,9 +21,7 @@ NSArray *tmpHuahuaModelAray;
     NSAttributedString *tmp;//模型表情数据
     if ([model.type isEqualToString:@"0"]) {
         //图片数据
-        NSTextAttachment *textAttachment = [[NSTextAttachment alloc]init];
-        textAttachment.image = [UIImage imageNamed:model.png];
-//        textAttachment.bounds = CGRectMake(0, 0,font.pointSize, font.pointSize);
+        HWEmotionTextAttachment *textAttachment = [HWEmotionTextAttachment initWithEmotionModel:model];
         textAttachment.bounds = CGRectMake(0, -3.5,font.lineHeight, font.lineHeight);
         tmp =  [NSAttributedString attributedStringWithAttachment:textAttachment] ;
     }else if([model.type isEqualToString:@"1"]){//emoji

@@ -47,6 +47,7 @@
         if (i == emotions.count) {
             [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete"] forState:UIControlStateNormal];
             [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete_highlighted"] forState:UIControlStateHighlighted];
+            [tmp addTarget:self action:@selector(clickDeleteEmojiButton:) forControlEvents:UIControlEventTouchUpInside];
             [self addSubview:tmp];
             return;
         }
@@ -62,6 +63,15 @@
     }
     
 }
+
+- (void)clickDeleteEmojiButton:(UIButton*)btn{
+    NSMutableDictionary *userInfo = [NSMutableDictionary dictionary];
+//    userInfo[HWselectedEmojiModelKey]= btn.emotionModel;
+    [[NSNotificationCenter defaultCenter]postNotificationName:HWdidClickDeleteEmojiButtonNofificationName object:nil userInfo:userInfo];
+
+    
+}
+
 
 #pragma mark  HWEmojiButtonDelegate -监听按钮事件：处理表情的放大
 - (void)emojiButton:(HWEmojiButton *)btn btnLongBegan:(UILongPressGestureRecognizer *)gestureRecognizer{

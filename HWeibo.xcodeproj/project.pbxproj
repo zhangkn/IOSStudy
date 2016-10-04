@@ -35,6 +35,8 @@
 		E120AB8D1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E120AB8C1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib */; };
 		E120AB911DA24AB400A6FA28 /* HWEmojiButton.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB901DA24AB400A6FA28 /* HWEmojiButton.m */; };
 		E120AB941DA2A98900A6FA28 /* HWEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB931DA2A98900A6FA28 /* HWEmotionTextView.m */; };
+		E120AB971DA341F400A6FA28 /* UITextView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB961DA341F400A6FA28 /* UITextView+Extension.m */; };
+		E120AB9A1DA37A8400A6FA28 /* HWEmotionTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB991DA37A8400A6FA28 /* HWEmotionTextAttachment.m */; };
 		E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */; };
 		E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D41D97794300394ACF /* HWCreatedAtTool.m */; };
 		E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D81D97B82300394ACF /* HWStatuePhotosView.m */; };
@@ -156,6 +158,10 @@
 		E120AB901DA24AB400A6FA28 /* HWEmojiButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmojiButton.m; sourceTree = "<group>"; };
 		E120AB921DA2A98900A6FA28 /* HWEmotionTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmotionTextView.h; sourceTree = "<group>"; };
 		E120AB931DA2A98900A6FA28 /* HWEmotionTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmotionTextView.m; sourceTree = "<group>"; };
+		E120AB951DA341F400A6FA28 /* UITextView+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextView+Extension.h"; sourceTree = "<group>"; };
+		E120AB961DA341F400A6FA28 /* UITextView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Extension.m"; sourceTree = "<group>"; };
+		E120AB981DA37A8400A6FA28 /* HWEmotionTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmotionTextAttachment.h; sourceTree = "<group>"; };
+		E120AB991DA37A8400A6FA28 /* HWEmotionTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmotionTextAttachment.m; sourceTree = "<group>"; };
 		E12300181D9B5CC80061E8A3 /* HWComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeViewController.h; sourceTree = "<group>"; };
 		E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeViewController.m; sourceTree = "<group>"; };
 		E12E47D31D97794300394ACF /* HWCreatedAtTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCreatedAtTool.h; sourceTree = "<group>"; };
@@ -386,6 +392,8 @@
 			children = (
 				E120AB791DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.h */,
 				E120AB7A1DA1100F00A6FA28 /* HWEmojiKeyboardEmojiTool.m */,
+				E120AB981DA37A8400A6FA28 /* HWEmotionTextAttachment.h */,
+				E120AB991DA37A8400A6FA28 /* HWEmotionTextAttachment.m */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -759,6 +767,8 @@
 			children = (
 				E120AB821DA1FBD000A6FA28 /* NSString+Emoji.h */,
 				E120AB831DA1FBD000A6FA28 /* NSString+Emoji.m */,
+				E120AB951DA341F400A6FA28 /* UITextView+Extension.h */,
+				E120AB961DA341F400A6FA28 /* UITextView+Extension.m */,
 				E139D91D1D49F7570052815A /* Foundation+Log.m */,
 				E10C645B1D211A980023E642 /* UIView+Extension.h */,
 				E139D91A1D49D7D40052815A /* UIWindow+Extension.h */,
@@ -919,6 +929,7 @@
 				E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */,
 				E13155511D9CFACB00CAD5D9 /* NSString+Extension.m in Sources */,
 				E1E901101D484BDE001F78C3 /* AFURLConnectionOperation.m in Sources */,
+				E120AB971DA341F400A6FA28 /* UITextView+Extension.m in Sources */,
 				E1B58EF21D4C702C00E74E9C /* NSObject+MJClass.m in Sources */,
 				E1B58EF11D4C702C00E74E9C /* MJPropertyType.m in Sources */,
 				E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */,
@@ -946,6 +957,7 @@
 				E10C645D1D211A980023E642 /* UIView+Extension.m in Sources */,
 				E1E9010F1D484BDE001F78C3 /* AFSecurityPolicy.m in Sources */,
 				E13C3A2E1D4B49200026221C /* SDWebImageCompat.m in Sources */,
+				E120AB9A1DA37A8400A6FA28 /* HWEmotionTextAttachment.m in Sources */,
 				E1B58EED1D4C702C00E74E9C /* MJExtensionConst.m in Sources */,
 				E13C3A301D4B49200026221C /* SDWebImageDownloader.m in Sources */,
 				E13C3A311D4B49200026221C /* SDWebImageDownloaderOperation.m in Sources */,

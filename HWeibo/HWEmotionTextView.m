@@ -8,12 +8,29 @@
 
 #import "HWEmotionTextView.h"
 #import "HWEmotionModel.h"
+#import "HWEmotionTextAttachment.h"
 
 @implementation HWEmotionTextView
 
+- (NSString *)fullText{
+    NSMutableString *tmp= [NSMutableString string];
+    [self.attributedText enumerateAttributesInRange:NSMakeRange(0, self.attributedText.length) options:0 usingBlock:^(NSDictionary<NSString *,id> * _Nonnull attrs, NSRange range, BOOL * _Nonnull stop) {
+        // 获取对应的attributedSubstring
+        NSAttributedString *attributedSubstring = [self.attributedText attributedSubstringFromRange:range];
+        //判断文字类型
+        HWEmotionTextAttachment *attachment = (HWEmotionTextAttachment*)attrs[@"NSAttachment"];
+        if (attachment) {
+            [tmp appendString:[attachment getChs]];
+        }else{
+            [tmp appendString:[attributedSubstring string]];
+        }
+    }];
+    return tmp;
+}
+
+
 - (void)insertEmotions:(HWEmotionModel *)model{
     
-    NSMutableAttributedString *str= [[NSMutableAttributedString alloc]init];
     NSMutableAttributedString *tmp = [HWEmotionModel emotionMutableAttributedStringWithModel:model font:self.font];//表情数据
     //2. 调用代理方法，通知自定义键盘即将文字
     NSRange range = self.selectedRange;
@@ -26,20 +43,24 @@
     }
     //3.执行添加文字信息动作
     //合并数据
+    weakSelf(weakSelf);
+    [self insertAttributedString:tmp attributedStringBlock:^(NSMutableAttributedString *attributedString) {
+        //执行特定代码  设置文字属性
+        [attributedString addAttribute:NSFontAttributeName value:weakSelf.font range:NSMakeRange(0, attributedString.length)];
+    }];
+    //4.设置文字属性
+//    [self setupAttributedTextAttribute];
+  
+}
+
+- (void)setupAttributedTextAttribute{
+    NSMutableAttributedString *str= [[NSMutableAttributedString alloc]init];
     [str appendAttributedString:self.attributedText];
-    //    [str appendAttributedString:tmp];
-    [str deleteCharactersInRange:self.selectedRange];//删除选中内容
-    [str insertAttributedString:tmp atIndex:self.selectedRange.location];//插入到当前光标的位置
     NSRange strRange;
     strRange.length = str.length;
     strRange.location = 0;
     [str addAttribute:NSFontAttributeName value:self.font range:strRange];
-    NSRange tmpSelectedRange = self.selectedRange;
-    self.attributedText =  str;
-    [self insertText:@""];//发出通知UITextViewTextDidChangeNotification
-    //4.调整光标位置
-    self.selectedRange = NSMakeRange(tmpSelectedRange.location+tmp.length, 0);/** the length of the selection range is always 0, indicating that the selection is actually an insertion point*///
-    //        [self.textView insertText: [str string]];//UITextViewTextDidChangeNotification 此方法才会发出通知    
+    self.attributedText = str;
 }
 
 @end

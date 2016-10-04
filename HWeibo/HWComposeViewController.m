@@ -26,6 +26,9 @@
 @property (nonatomic,assign) BOOL isTextViewHasChar;
 /** 用户是否选择了上传图片*/
 @property (nonatomic,assign) BOOL hasComposePhotos;
+/** 是否跟随键盘的frame改变，工具条的frame随之改变：此变量的目的是减少工具条的上下移动的次数*/
+@property (nonatomic,assign) BOOL isChangeToolbarFrame;
+
 
 
 /** HWComposeToolBar 工具条*/
@@ -82,11 +85,31 @@
          //方法二： 工具条永远都在,并且在监听键盘的通知
         tmpView.x = 0;
         tmpView.y = self.view.height - tmpView.height;
+        //监听UIKeyboardWillChangeFrameNotification
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillChangeFrameNotification:) name:UIKeyboardWillChangeFrameNotification object:nil];
         [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didSelectedEmojiNofificationName:) name:HWdidSelectedEmojiNofificationName object:nil];
+        [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didClickDeleteEmojiButtonNofificationName:) name:HWdidClickDeleteEmojiButtonNofificationName object:nil];
+        
         [self.view addSubview:_composeToolBar];
     }
     return _composeToolBar;
+}
+/** 删除光标之前的一个文字*/
+- (void)didClickDeleteEmojiButtonNofificationName:(NSNotification*)notification{
+//    [self.textView deleteText];
+    [self.textView deleteBackward];
+    /**      
+     @protocol UIKeyInput <UITextInputTraits>
+     
+     #if UIKIT_DEFINE_AS_PROPERTIES
+     @property(nonatomic, readonly) BOOL hasText;
+     #else
+     - (BOOL)hasText;
+     #endif
+     - (void)insertText:(NSString *)text;
+     - (void)deleteBackward;
+     
+     @end*/
 }
 #pragma mark - 根据将表情添加到textview
 
@@ -108,13 +131,16 @@
      }}
 
 //     */
+    if (!self.isChangeToolbarFrame) {
+        return;
+    }
     weakSelf(weakSelf);
     NSTimeInterval  keyboardAnimationDuration = [(NSNumber*)notification.userInfo[UIKeyboardAnimationDurationUserInfoKey] doubleValue];
     NSTimeInterval  keyboardAnimationCurveUserInfoKey = [(NSNumber*)notification.userInfo[UIKeyboardAnimationCurveUserInfoKey] doubleValue];
      CGRect keyboardFrame = [(NSValue*)notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
     [UIView animateWithDuration:(keyboardAnimationDuration) delay:0.0 options:keyboardAnimationCurveUserInfoKey animations:^{
         CGFloat tmp = 0;
-        if (keyboardFrame.origin.y<= KMainScreenHeight) {
+        if (keyboardFrame.origin.y<= KMainScreenHeight) {//处理键盘隐藏得太深的问题
             tmp =keyboardFrame.origin.y ;
         }else{
             tmp = KMainScreenHeight;
@@ -127,6 +153,7 @@
 }
 
 - (void)viewDidLoad {
+    self.isChangeToolbarFrame = YES;//默认可以改变工具条的frame
     [super viewDidLoad];
     //设置发布微博控制器的导航栏
     [self setupNavigationItem];
@@ -353,22 +380,23 @@
     self.emojiKeyboard.hidden = YES;
     self.textView.inputView = nil;
     //使键盘生效代码
-    [self.textView endEditing:YES];
-    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-        [self.textView becomeFirstResponder];        
-    });
+    [self takeEffectInputViewChange];
 }
 - (void)processHWComposeToolBarButtonTypeComposeEmoticonbutton{
     //展示表情键盘
     self.emojiKeyboard.hidden = NO;
     self.textView.inputView = self.emojiKeyboard;
     //使键盘生效代码
+    [self takeEffectInputViewChange];
+}
+/**     //使键盘生效代码 */
+- (void)takeEffectInputViewChange{
+    self.isChangeToolbarFrame = NO;
     [self.textView endEditing:YES];
+    self.isChangeToolbarFrame = YES;
     dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [self.textView becomeFirstResponder];
     });
-    
-    
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -613,10 +641,12 @@
     //2.拼接请求参数
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"access_token"]=[HWAccountTool account].access_token;
-    if (self.textView.text.length ==0 || [self.textView.text isEqualToString:@""]) {
+    /*获取包含表情文字的text*/
+    NSString *fulltext = [self.textView fullText];
+    if (fulltext.length ==0 || [fulltext isEqualToString:@""]) {
         paramters[@"status"]= @"share pictures for test，Please disregard/ignore the  message！";
     }else{
-        paramters[@"status"]= [self.textView.text stringByAppendingString:@"\r\n---test app，Please ignore the  message!"];
+        paramters[@"status"]= [fulltext stringByAppendingString:@"\r\n---test app，Please ignore the  message!"];
     }
     //    3.发送请求
     if (self.isTextViewHasChar && !self.hasComposePhotos) {
