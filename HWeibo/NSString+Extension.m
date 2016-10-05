@@ -11,19 +11,23 @@
 @implementation NSString (Extension)
 
 
--(CGSize) sizeWithFont:(UIFont *)font{
+-(CGSize) sizeWithTextFont:(UIFont *)font{
     /** 方式一*/
     //    NSDictionary *tmpDict = @{NSFontAttributeName: font};
-    //   return  [text sizeWithAttributes:tmpDict];
+//       return  [self sizeWithAttributes:tmpDict];
     /** 方式2*/
-    //    CGFloat nameW = [statues.text sizeWithFont:HWNameLabelFont].width;
+//    return    [self sizeWithFont:font];//过期，表示不再更新潜在bug，但还是仍可使用
     /** 方式3*/
     return  [self sizeWithFont:font maxW:CGFLOAT_MAX];
 }
 -(CGSize) sizeWithFont:(UIFont *)font maxW:(CGFloat)maxW{
-    NSDictionary *tmpDict = @{NSFontAttributeName: font};
     CGSize maxSize = CGSizeMake(maxW, CGFLOAT_MAX);
-    return  [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:tmpDict context:nil].size;
+    if (IOSSystemVersion>=7.0) {
+        NSDictionary *tmpDict = @{NSFontAttributeName: font};
+        return  [self boundingRectWithSize:maxSize options:NSStringDrawingUsesLineFragmentOrigin attributes:tmpDict context:nil].size;//NS_AVAILABLE(10_11, 7_0); 7.0  才支持
+    }else{
+        return [self sizeWithFont:font constrainedToSize:maxSize];
+    }
 }
 
 @end

@@ -43,7 +43,7 @@
     /** 时间*/
     CGFloat timeX = self.nameLabelFrame.origin.x;
     CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame)+HWStatusCellBorderW;
-    CGSize timeSize = [_statues.created_at sizeWithFont:HWTimeLabelFont];
+    CGSize timeSize = [_statues.created_at sizeWithTextFont:HWTimeLabelFont];
     _timeLabelFrame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height);
     return _timeLabelFrame;
 }
@@ -52,7 +52,7 @@
     CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame)+HWStatusCellContentViewSpaceW;
     CGFloat sourceY = self.timeLabelFrame.origin.y;
     //<a href="http://app.weibo.com/t/feed/PBP2P" rel="nofollow">微博 weibo.com</a>
-    CGSize sourceSize = [[NSString stringWithFormat:@"from %@",_statues.source] sizeWithFont:HWTimeLabelFont];
+    CGSize sourceSize = [[NSString stringWithFormat:@"from %@",_statues.source] sizeWithTextFont:HWTimeLabelFont];
     _sourceLabelFrame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height);
     return _sourceLabelFrame;
 }
@@ -71,7 +71,7 @@
     /** 昵称*/
     CGFloat nameX = CGRectGetMaxX(self.iconViewFrame)+HWStatusCellBorderW;
     CGFloat nameY = HWStatusCellBorderW;
-    CGSize nameSize = [statues.user.name sizeWithFont:HWNameLabelFont];
+    CGSize nameSize = [statues.user.name sizeWithTextFont:HWNameLabelFont];
     CGFloat nameH = nameSize.height;
     CGFloat nameW= nameSize.width;
     self.nameLabelFrame = CGRectMake(nameX, nameY, nameW, nameH);
@@ -89,7 +89,7 @@
     /** 时间*/
     CGFloat timeX = nameX;
     CGFloat timeY = CGRectGetMaxY(self.nameLabelFrame)+HWStatusCellBorderW;
-    CGSize timeSize = [statues.created_at sizeWithFont:HWTimeLabelFont];
+    CGSize timeSize = [statues.created_at sizeWithTextFont:HWTimeLabelFont];
     
     self.timeLabelFrame = CGRectMake(timeX, timeY, timeSize.width, timeSize.height);
     
@@ -97,7 +97,7 @@
     CGFloat sourceX = CGRectGetMaxX(self.timeLabelFrame)+HWStatusCellContentViewSpaceW;
     CGFloat sourceY = timeY;
     //<a href="http://app.weibo.com/t/feed/PBP2P" rel="nofollow">微博 weibo.com</a>
-    CGSize sourceSize = [[NSString stringWithFormat:@"from %@",statues.source] sizeWithFont:HWTimeLabelFont];
+    CGSize sourceSize = [[NSString stringWithFormat:@"from %@",statues.source] sizeWithTextFont:HWTimeLabelFont];
     self.sourceLabelFrame = CGRectMake(sourceX, sourceY, sourceSize.width, sourceSize.height);
     
     /** 正文*/

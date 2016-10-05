@@ -65,6 +65,7 @@
 		E13C3A391D4B49200026221C /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A281D4B49200026221C /* UIImageView+WebCache.m */; };
 		E13C3A3A1D4B49200026221C /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */; };
 		E140CA971D9DF6660015741D /* HWPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E140CA961D9DF6660015741D /* HWPlaceholderTextView.m */; };
+		E142AE2C1DA4DE5300CC9C92 /* HWHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E142AE2B1DA4DE5300CC9C92 /* HWHttpTool.m */; };
 		E14506011D9EA80B00A561ED /* HWComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E14506001D9EA80B00A561ED /* HWComposeToolBar.m */; };
 		E15D7E471D94FEFB005B45DA /* HWStatuesToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E15D7E461D94FEFB005B45DA /* HWStatuesToolbar.m */; };
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
@@ -219,6 +220,8 @@
 		E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		E140CA951D9DF6660015741D /* HWPlaceholderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWPlaceholderTextView.h; sourceTree = "<group>"; };
 		E140CA961D9DF6660015741D /* HWPlaceholderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWPlaceholderTextView.m; sourceTree = "<group>"; };
+		E142AE2A1DA4DE5300CC9C92 /* HWHttpTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWHttpTool.h; sourceTree = "<group>"; };
+		E142AE2B1DA4DE5300CC9C92 /* HWHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWHttpTool.m; sourceTree = "<group>"; };
 		E14505FF1D9EA80B00A561ED /* HWComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeToolBar.h; sourceTree = "<group>"; };
 		E14506001D9EA80B00A561ED /* HWComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeToolBar.m; sourceTree = "<group>"; };
 		E15D7E451D94FEFB005B45DA /* HWStatuesToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatuesToolbar.h; sourceTree = "<group>"; };
@@ -349,6 +352,7 @@
 			isa = PBXGroup;
 			children = (
 				E1BB11DF1D2275690030EC5C /* Category */,
+				E142AE2D1DA4ED7C00CC9C92 /* HttpTool */,
 			);
 			name = Tool;
 			sourceTree = "<group>";
@@ -524,6 +528,15 @@
 				E13C3A2A1D4B49200026221C /* UIView+WebCacheOperation.m */,
 			);
 			path = SDWebImage;
+			sourceTree = "<group>";
+		};
+		E142AE2D1DA4ED7C00CC9C92 /* HttpTool */ = {
+			isa = PBXGroup;
+			children = (
+				E142AE2A1DA4DE5300CC9C92 /* HWHttpTool.h */,
+				E142AE2B1DA4DE5300CC9C92 /* HWHttpTool.m */,
+			);
+			name = HttpTool;
 			sourceTree = "<group>";
 		};
 		E17066B61D41C40900E6625B /* NewFeature(新特性) */ = {
@@ -939,6 +952,7 @@
 				E13C3A381D4B49200026221C /* UIImageView+HighlightedWebCache.m in Sources */,
 				E1E901131D484BDE001F78C3 /* AFURLSessionManager.m in Sources */,
 				E139D91C1D49D7D40052815A /* UIWindow+Extension.m in Sources */,
+				E142AE2C1DA4DE5300CC9C92 /* HWHttpTool.m in Sources */,
 				E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */,
 				E13155511D9CFACB00CAD5D9 /* NSString+Extension.m in Sources */,
 				E1E901101D484BDE001F78C3 /* AFURLConnectionOperation.m in Sources */,

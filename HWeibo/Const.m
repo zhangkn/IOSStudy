@@ -16,4 +16,6 @@ NSString * const HWRedirectUri = @"https://www.baidu.com";//确保HWRedirectUri 
 //#define HWClientSecret @"713f7438c3dc731b87d8a9624e7e8ab9"
 NSString * const HWClientSecret = @"713f7438c3dc731b87d8a9624e7e8ab9";
 
+
+
 BOOL const HWUAT = 1;

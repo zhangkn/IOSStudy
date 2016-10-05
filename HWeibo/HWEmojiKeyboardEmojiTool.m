@@ -19,6 +19,7 @@ static NSMutableArray *_emotionModelArray;
 + (void)initialize{
     //第一次使用这个类的时候，才加载一次沙盒文件
     _emotionModelArray = [NSKeyedUnarchiver unarchiveObjectWithFile:HWEmotionArchivePath];
+    NSLog(@"%@",HWEmotionArchivePath);
     if (_emotionModelArray == nil) {
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{

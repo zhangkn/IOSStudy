@@ -58,12 +58,6 @@
 }
 #pragma mark - 获取access_token:一个用户给一个应用授权，就会获取到一个access_token
 - (void)getAccessTokenWithCode:(NSString*)code{
-    //请求管理器
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-//    [mgr setResponseSerializer:[AFJSONResponseSerializer serializer]];//afn 默认的解析器
-    /** 可以修改源代码，来支持更多的ContentTypes
-     self.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"application/json", @"text/json", @"text/javascript", nil];
-*/
     //拼接请求参数
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"client_id"]=HWClientId;//申请应用时分配的AppKey。
@@ -71,19 +65,18 @@
     paramters[@"grant_type"]= @"authorization_code";//请求的类型，填写authorization_code
     paramters[@"code"]= code;//调用authorize获得的code值。
     paramters[@"redirect_uri"]= HWRedirectUri;//	回调地址，需需与注册应用里的回调地址一致。
+    NSString *strUrl = @"https://api.weibo.com/oauth2/access_token";
     //发送请求
-    [mgr POST:@"https://api.weibo.com/oauth2/access_token" parameters:paramters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        [MBProgressHUD hideHUD];
+    [HWHttpTool POST:strUrl parameters:paramters success:^(id responseObject) {
         HWAccountModel *account = [HWAccountModel accountWithDictionary:responseObject];
         //存储帐号信息
         [HWAccountTool saveAccount:account];
         //切换窗口的根控制器
         [[UIApplication sharedApplication].keyWindow switchRootViewController];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [MBProgressHUD hideHUD];
+    } failure:^(NSError *error) {
+        
     }];
 }
-
 
 
 @end

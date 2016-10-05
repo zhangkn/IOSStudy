@@ -633,12 +633,6 @@
  */
 - (void)sendCompose{
     [self.textView resignFirstResponder];
-    //1.请求管理器
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
-    //    [mgr setResponseSerializer:[AFJSONResponseSerializer serializer]];//afn 默认的解析器
-    /** 可以修改源代码，来支持更多的ContentTypes
-     self.acceptableContentTypes = [NSSet setWithObjects:@"text/plain", @"application/json", @"text/json", @"text/javascript", nil];
-     */
     //2.拼接请求参数
     NSMutableDictionary *paramters = [NSMutableDictionary dictionary];
     paramters[@"access_token"]=[HWAccountTool account].access_token;
@@ -652,10 +646,10 @@
     //    3.发送请求
     if (self.isTextViewHasChar && !self.hasComposePhotos) {
         NSString *strUrl = @"https://api.weibo.com/2/statuses/update.json";
-        [self updateJsonWithUrl:strUrl paramters:paramters mgr:mgr];
+        [self updateJsonWithUrl:strUrl paramters:paramters];
     }else{
         NSString *strUrl = @"https://upload.api.weibo.com/2/statuses/upload.json";
-        [self uploadJsonWithUrl:strUrl paramters:paramters mgr:mgr];
+        [self uploadJsonWithUrl:strUrl paramters:paramters];
     }
    
     //4. dismissViewControllerAnimated
@@ -663,20 +657,17 @@
 
 }
 
-- (void)updateJsonWithUrl:(NSString*)strUrl paramters:(NSDictionary*)paramters mgr:(AFHTTPRequestOperationManager*)mgr{
-        [mgr POST:strUrl parameters:paramters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+- (void)updateJsonWithUrl:(NSString*)strUrl paramters:(NSDictionary*)paramters {
+        [HWHttpTool POST:strUrl parameters:paramters success:^(NSDictionary *responseObject) {
             [MBProgressHUD showSuccess:@"send"];
-            //切换窗口的根控制器
-//            [[UIApplication sharedApplication].keyWindow switchRootViewController];
-        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        } failure:^( NSError *error) {
             [MBProgressHUD showError:@"failed"];
         }];
-    
 }
 
-- (void)uploadJsonWithUrl:(NSString*)strUrl paramters:(NSDictionary*)paramters mgr:(AFHTTPRequestOperationManager*)mgr{
+- (void)uploadJsonWithUrl:(NSString*)strUrl paramters:(NSDictionary*)paramters {
     NSArray *datas =[self.composePhotosView getphotos];
-    [mgr POST:strUrl parameters:paramters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
+    [HWHttpTool POST:strUrl parameters:paramters constructingBodyWithBlock:^(id<HWMultipartFormData> formData) {
         //处理文件上传
         /**
          pic	true	binary	要上传的图片，仅支持JPEG、GIF、PNG格式，图片大小小于5M。
@@ -684,13 +675,10 @@
          目前支持一张图片
          */
         [formData appendPartWithFileData:datas.lastObject name:@"pic" fileName:@"test.jpg" mimeType:@"multipart/form-data"];
-        NSLog(@"%lu",(unsigned long)datas.lastObject);
-        
-    } success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    } success:^(id responseObject) {
         [MBProgressHUD showSuccess:@"send success"];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         [MBProgressHUD showError:@"failed"];
-        NSLog(@"%@",error);
     }];
 }
 

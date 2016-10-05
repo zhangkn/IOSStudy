@@ -58,7 +58,12 @@
 //    vc1.navigationItem.title = title;//设置导航栏的标题
     childVC.title = title;//同时设置tabBar 和导航栏的标题
     childVC.tabBarItem.image = [UIImage imageNamed:imageName];
-    childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectwsImageName]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//图片按照原样显示，不要自动渲染成其他颜色
+    
+    if (IOSSystemVersion>=7.0) {
+        childVC.tabBarItem.selectedImage = [[UIImage imageNamed:selectwsImageName]imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal];//图片按照原样显示，不要自动渲染成其他颜色
+    }else{
+        childVC.tabBarItem.selectedImage = [UIImage imageNamed:selectwsImageName];
+    }
     //设置文字样式
     NSMutableDictionary *textAttr = [NSMutableDictionary dictionary];
     textAttr[NSForegroundColorAttributeName] = HWColor(123, 123, 123);

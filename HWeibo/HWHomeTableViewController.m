@@ -83,8 +83,6 @@
  msgbox	int	{{{3}}}
  */
 - (void)setupUnreadCount{
-    NSLog(@"%s",__func__);
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     //设置请求参数
     NSString *url =@"https://rm.api.weibo.com/2/remind/unread_count.json";
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
@@ -92,7 +90,7 @@
     parameters[@"access_token"] = account.access_token;
     parameters[@"uid"] = account.uid;
     parameters[@"unread_message"] = @"1";
-    [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
         //处理json数据
         //使用模型进程存储
         //将NSnumber 对象转化为字符串description
@@ -105,9 +103,7 @@
             self.tabBarItem.badgeValue = status;
             [UIApplication sharedApplication].applicationIconBadgeNumber = status.intValue;
         }
-        NSLog(@"status:%@",status);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"%@",error);
+    } failure:^( NSError *error) {
     }];
 }
 
@@ -141,8 +137,6 @@
 }
 #pragma mark - 加载数据，加载完毕隐藏tableFooterView
 - (void)loadMoreStatus{
-    //创建管理器
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
@@ -157,7 +151,7 @@
     //    parameters[@"count"]= @20;
     NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
     //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
-    [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
         NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         if (tmpArray.count !=0) {
             NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
@@ -168,7 +162,7 @@
         //隐藏tableFooterView
         self.tableView.tableFooterView.hidden= YES;
         
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         NSLog(@"%@",error);
     }];
 }
@@ -202,7 +196,6 @@
  trim_user	false	int	返回值中user字段开关，0：返回完整user字段、1：user字段仅返回user_id，默认为0。**/
 
 - (void)refreshHomeTimeline:(UIRefreshControl*)refreshControl{
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
@@ -219,7 +212,7 @@
     //    parameters[@"count"]= @1;
     NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
     //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
-    [mgr GET:url parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
         NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
         if (tmpArray.count !=0) {
 //            [self.statusesFrame removeAllObjects];//后台成功返回的时候才进行清空
@@ -234,7 +227,7 @@
         }
         NSLog(@"%@",[(HWStatuses*)[self.statusesFrame[0] statues] text]);
         [refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(  NSError *error) {
         NSLog(@"%@",error);
         [refreshControl endRefreshing];
     }];
@@ -313,12 +306,11 @@
 
  */
 - (void) getUserInfo{
-    AFHTTPRequestOperationManager *mgr = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *parameters = [NSMutableDictionary dictionary];
     HWAccountModel *account = [HWAccountTool account];
     parameters[@"access_token"]= account.access_token;
     parameters[@"uid"]= account.uid;
-    [mgr GET:@"https://api.weibo.com/2/users/show.json" parameters:parameters success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+    [HWHttpTool GET:@"https://api.weibo.com/2/users/show.json" parameters:parameters success:^(NSDictionary *responseObject) {
         //设置首页标题文字
 //        NSLog(@"%@",responseObject);
         UIButton *titleButton = (UIButton*)self.navigationItem.titleView;
@@ -326,7 +318,7 @@
         [titleButton setTitle:account.name forState:UIControlStateNormal];
         //存储昵称
         [HWAccountTool  saveAccount:account];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+    } failure:^(NSError *error) {
         //
         NSLog(@"%@",error);
     }];
