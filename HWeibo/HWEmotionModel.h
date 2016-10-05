@@ -11,6 +11,7 @@
 #import "HWEmojiKeyboardEmojiTool.h"
 #import "NSString+Emoji.h"
 
+
 @interface HWEmotionModel : NSObject<NSCoding>
 
 
@@ -49,6 +50,8 @@
 
 
 + (NSMutableAttributedString*)emotionMutableAttributedStringWithModel:(HWEmotionModel*)model font:(UIFont*)font;
+
+
 
 
 

@@ -38,17 +38,26 @@
   
 }
 
+- (void)setupDeleteButton{
+    UIButton *tmp = [[UIButton alloc]init];
+    [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete"] forState:UIControlStateNormal];
+    [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete_highlighted"] forState:UIControlStateHighlighted];
+    [tmp addTarget:self action:@selector(clickDeleteEmojiButton:) forControlEvents:UIControlEventTouchUpInside];
+    [self addSubview:tmp];
+}
+
 - (void) setupbuttonWithEmotion:(NSArray*)emotions{
     
-    NSLog(@"%ld",emotions.count);
+//    NSLog(@"%ld",emotions.count);
+//    if (emotions.count == 0) {
+//        [self setupDeleteButton];
+//        return;
+//    }
+    
     for (int i=0; i<emotions.count+1; i++) {
         //设置表情
         if (i == emotions.count) {
-            UIButton *tmp = [[UIButton alloc]init];
-            [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete"] forState:UIControlStateNormal];
-            [tmp setImage:[UIImage imageNamed:@"compose_emotion_delete_highlighted"] forState:UIControlStateHighlighted];
-            [tmp addTarget:self action:@selector(clickDeleteEmojiButton:) forControlEvents:UIControlEventTouchUpInside];
-            [self addSubview:tmp];
+            [self setupDeleteButton];           
             return;
         }
         HWEmojiButton *tmp = [[HWEmojiButton alloc]init];

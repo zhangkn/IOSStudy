@@ -15,17 +15,33 @@
 
 @property (nonatomic,weak) UIScrollView *scrollView;
 @property (nonatomic,weak) UIPageControl *pageControl;
+/** 用于展示其他信息*/
+@property (nonatomic,weak) UILabel *tmppageControl;
+
 
 @end
 
 @implementation HWEmojiListView
 
+- (UILabel *)tmppageControl{
+    if (nil == _tmppageControl) {
+        UILabel *tmpView = [[UILabel alloc]init];
+        _tmppageControl = tmpView;
+        tmpView.textAlignment = NSTextAlignmentCenter;
+        tmpView.font = [UIFont systemFontOfSize:12];
+        tmpView.textColor = [UIColor grayColor];
+        tmpView.hidden = YES;
+        [self addSubview:_tmppageControl];
+    }
+    return _tmppageControl;
+}
 - (UIPageControl *)pageControl{
     if (nil == _pageControl) {
         UIPageControl *tmpView = [[UIPageControl alloc]init];
         _pageControl = tmpView;
         UIImage *selectedImage = [UIImage imageNamed:@"compose_keyboard_dot_selected"];
         UIImage *normalImage = [UIImage imageNamed:@"compose_keyboard_dot_normal"];
+        tmpView.hidesForSinglePage = YES;
 
 //        [tmpView setCurrentPageIndicatorTintColor:[UIColor colorWithPatternImage:selectedImage]];
 //        [tmpView setPageIndicatorTintColor:[UIColor colorWithPatternImage:normalImage]];
@@ -70,12 +86,13 @@
 - (void)layoutSubviews{
     [super layoutSubviews];
     
-    //计算frame
+    //计算 pageControl frame
     self.pageControl.height = 44;
     self.pageControl.x = 0;
     self.pageControl.width = self.width;
     self.pageControl.y = self.height - self.pageControl.height;
-    //计算scrollview
+    self.tmppageControl.frame =  self.pageControl.frame;
+    //计算scrollview 的frame
     self.scrollView.x =0;
     self.scrollView.width = self.width;
     self.scrollView.y = 0;
@@ -83,6 +100,7 @@
     
     self.scrollView.contentSize = CGSizeMake(self.pageControl.numberOfPages*self.scrollView.width, self.scrollView.height);
     
+    //计算scrollview 的子控件 的frame
     for (int i = 0; i<self.scrollView.subviews.count; i++) {//设置了tmpView.showsHorizontalScrollIndicator = NO; //        tmpView.showsVerticalScrollIndicator = NO; 对应的UIimageView 将消息
         HWEmojiPageView *view = self.scrollView.subviews[i];
         view.x =i*self.scrollView.width;
@@ -127,6 +145,25 @@
 - (void)setupDataPageControl:(NSArray*)emotions{
     CGFloat pageCout =(emotions.count+ HWEmojiListViewScrollViewMaxEmojiCout-1)/(HWEmojiListViewScrollViewMaxEmojiCout);
     self.pageControl.numberOfPages = pageCout;
+    if (pageCout >1) {
+        //        self.pageControl.hidden = NO;  使用这个属性代替       self.pageControl.hidesForSinglePage = YES;
+        self.tmppageControl.hidden = YES;
+    }else if(pageCout == 1){
+//        self.pageControl.hidden = YES;
+        self.tmppageControl.hidden = NO;
+        self.tmppageControl.text = @"Recently used Stickers";
+    }{
+//        //只创建一个pageView;
+//        for (int i = 0; i<1; i++) {
+//            self.pageControl.numberOfPages = 1;
+//            HWEmojiPageView *tmp  = [[HWEmojiPageView alloc]init];
+//            //设置 HWEmojiPageView 的模型数据
+//            NSArray *tmpArray = [NSArray array];
+//            tmp.emotions = tmpArray;
+//            tmp.backgroundColor = [UIColor redColor];
+//            [self.scrollView addSubview:tmp];
+//        }
+    }
 
 }
 #pragma mark - //UIScrollViewDelegate

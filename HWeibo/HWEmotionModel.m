@@ -9,6 +9,7 @@
 #import "HWEmotionModel.h"
 #import "MJExtension.h"
 #import "HWEmotionTextAttachment.h"
+//#import "NSObject+MJCoding.h"
 
 @implementation HWEmotionModel
 
@@ -84,24 +85,43 @@ NSArray *tmpHuahuaModelAray;
  Encodes the receiver using a given archiver. 归档的时候调用
  说明这个对象的哪些属性进行归档
  */
-- (void)encodeWithCoder:(NSCoder *)aCoder{
-    
-    [aCoder encodeObject:self.chs forKey:@"chs"];
-    [aCoder encodeObject:self.code forKey:@"code"];
-    [aCoder encodeObject:self.png forKey:@"png"];
-    [aCoder encodeObject:self.type forKey:@"type"];
-    
-}
-- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
-    self = [super init];
-    if (self) {
-        self.chs=[aDecoder decodeObjectForKey:@"chs"];
-        self.png=[aDecoder decodeObjectForKey:@"png"];
-        self.code=[aDecoder decodeObjectForKey:@"code"];
-        self.type=[aDecoder decodeObjectForKey:@"type"];
-    }
-    return self;
-}// NS_DESIGNATED_INITIALIZER
+//- (void)encodeWithCoder:(NSCoder *)aCoder{
+//    
+////    [aCoder encodeObject:self.chs forKey:@"chs"];
+////    [aCoder encodeObject:self.code forKey:@"code"];
+////    [aCoder encodeObject:self.png forKey:@"png"];
+////    [aCoder encodeObject:self.type forKey:@"type"];
+//    
+//}
+//- (nullable instancetype)initWithCoder:(NSCoder *)aDecoder{
+//    self = [super init];
+//    if (self) {
+////        self.chs=[aDecoder decodeObjectForKey:@"chs"];
+////        self.png=[aDecoder decodeObjectForKey:@"png"];
+////        self.code=[aDecoder decodeObjectForKey:@"code"];
+////        self.type=[aDecoder decodeObjectForKey:@"type"];
+//        
+//    }
+//    return self;
+//}// NS_DESIGNATED_INITIALIZER
+
+/**
+ 归档的实现
+ */
+MJExtensionCodingImplementation
+
+//- (id)initWithCoder:(NSCoder *)decoder 
+//{
+//    if (self = [super init]) {
+//        [self mj_decode:decoder];
+//    }
+//    return self;
+//}
+//
+//- (void)encodeWithCoder:(NSCoder *)encoder
+//{
+//    [self mj_encode:encoder];
+//}
 
 
 - (BOOL)isEqual:(id)object{

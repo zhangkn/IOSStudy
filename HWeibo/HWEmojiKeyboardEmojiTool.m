@@ -14,27 +14,34 @@
 /** 负责加载表情数据*/
 @implementation HWEmojiKeyboardEmojiTool
 
+static NSMutableArray *_emotionModelArray;
+
++ (void)initialize{
+    //第一次使用这个类的时候，才加载一次沙盒文件
+    _emotionModelArray = [NSKeyedUnarchiver unarchiveObjectWithFile:HWEmotionArchivePath];
+    if (_emotionModelArray == nil) {
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            _emotionModelArray = [NSMutableArray array];//只创建一次
+        });
+    }
+}
+/** 时时保存信息到沙盒*/
 + (void)saveEmotionModel:(HWEmotionModel *)model{
     //保存到沙盒
     //先添加到数组，再保存数组
-    NSMutableArray *tmp = [NSMutableArray array];
-    NSMutableArray *motionModels = [self motionModels];
-    if (motionModels) {
-        tmp = [self motionModels];
+    _emotionModelArray = [self motionModels];
+    if ([_emotionModelArray containsObject:model]) {
+        //将当前的表情移动到第一个
+        [_emotionModelArray removeObject:model];
     }
-    if ([tmp containsObject:model]) {
-        return;
-    }
-    [tmp insertObject:model atIndex:0];
-    [NSKeyedArchiver archiveRootObject:tmp toFile:HWEmotionArchivePath];
+    [_emotionModelArray insertObject:model atIndex:0];
+    [NSKeyedArchiver archiveRootObject:_emotionModelArray toFile:HWEmotionArchivePath];
 }
-
-#pragma mark - 获取帐号信息
+/** 返回全局变量的最近表情数组*/
+#pragma mark - /** 返回全局变量的最近表情数组*/
 + (NSMutableArray *)motionModels{
-    //    NSDictionary *accountDict = [NSDictionary dictionaryWithContentsOfFile:path];
-    NSMutableArray *motionModels = [NSKeyedUnarchiver unarchiveObjectWithFile:HWEmotionArchivePath];
-    NSLog(@"%@",HWEmotionArchivePath);
-    return motionModels;
+    return _emotionModelArray;
 }
 
 
