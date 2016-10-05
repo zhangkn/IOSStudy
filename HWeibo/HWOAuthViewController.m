@@ -12,10 +12,6 @@
 #import "MBProgressHUD+MJ.h"
 #import "HWAccountTool.h"
 
-//#define HWClientId @"647592779"
-NSString * const HWClientId = @"647592779";
-#define HWRedirectUri @"https://www.baidu.com"
-#define HWClientSecret @"713f7438c3dc731b87d8a9624e7e8ab9"
 
 
 @interface HWOAuthViewController ()<UIWebViewDelegate>

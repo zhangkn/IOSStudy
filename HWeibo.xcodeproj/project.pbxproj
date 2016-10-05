@@ -37,6 +37,7 @@
 		E120AB941DA2A98900A6FA28 /* HWEmotionTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB931DA2A98900A6FA28 /* HWEmotionTextView.m */; };
 		E120AB971DA341F400A6FA28 /* UITextView+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB961DA341F400A6FA28 /* UITextView+Extension.m */; };
 		E120AB9A1DA37A8400A6FA28 /* HWEmotionTextAttachment.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB991DA37A8400A6FA28 /* HWEmotionTextAttachment.m */; };
+		E120AB9E1DA49AE100A6FA28 /* Const.m in Sources */ = {isa = PBXBuildFile; fileRef = E120AB9D1DA49AE100A6FA28 /* Const.m */; };
 		E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */; };
 		E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D41D97794300394ACF /* HWCreatedAtTool.m */; };
 		E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */ = {isa = PBXBuildFile; fileRef = E12E47D81D97B82300394ACF /* HWStatuePhotosView.m */; };
@@ -162,6 +163,8 @@
 		E120AB961DA341F400A6FA28 /* UITextView+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextView+Extension.m"; sourceTree = "<group>"; };
 		E120AB981DA37A8400A6FA28 /* HWEmotionTextAttachment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWEmotionTextAttachment.h; sourceTree = "<group>"; };
 		E120AB991DA37A8400A6FA28 /* HWEmotionTextAttachment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWEmotionTextAttachment.m; sourceTree = "<group>"; };
+		E120AB9C1DA49AE100A6FA28 /* Const.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Const.h; sourceTree = "<group>"; };
+		E120AB9D1DA49AE100A6FA28 /* Const.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Const.m; sourceTree = "<group>"; };
 		E12300181D9B5CC80061E8A3 /* HWComposeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeViewController.h; sourceTree = "<group>"; };
 		E12300191D9B5CC80061E8A3 /* HWComposeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeViewController.m; sourceTree = "<group>"; };
 		E12E47D31D97794300394ACF /* HWCreatedAtTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWCreatedAtTool.h; sourceTree = "<group>"; };
@@ -317,6 +320,7 @@
 		E10C64441D20D10B0023E642 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				E120AB9B1DA49AD100A6FA28 /* Const */,
 				E10C64431D20D0FB0023E642 /* Controller */,
 				E10C645A1D211A3C0023E642 /* Tool */,
 				E11471541D0E58FA00107A3E /* AppDelegate.h */,
@@ -405,6 +409,15 @@
 				E120AB7D1DA114AE00A6FA28 /* HWEmotionModel.m */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		E120AB9B1DA49AD100A6FA28 /* Const */ = {
+			isa = PBXGroup;
+			children = (
+				E120AB9C1DA49AE100A6FA28 /* Const.h */,
+				E120AB9D1DA49AE100A6FA28 /* Const.m */,
+			);
+			name = Const;
 			sourceTree = "<group>";
 		};
 		E12300171D9B5C980061E8A3 /* Compose(发布微博) */ = {
@@ -971,6 +984,7 @@
 				E10C64581D2118EC0023E642 /* HWTest1ViewController.m in Sources */,
 				E1E9010C1D484BDE001F78C3 /* AFHTTPRequestOperationManager.m in Sources */,
 				E11471531D0E58FA00107A3E /* main.m in Sources */,
+				E120AB9E1DA49AE100A6FA28 /* Const.m in Sources */,
 				E1B58EF01D4C702C00E74E9C /* MJPropertyKey.m in Sources */,
 				E19F34F21D9800310009F550 /* HWStatuePhotoView.m in Sources */,
 				E13C3A3A1D4B49200026221C /* UIView+WebCacheOperation.m in Sources */,
