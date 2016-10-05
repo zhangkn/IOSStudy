@@ -881,7 +881,7 @@
 			attributes = {
 				CLASSPREFIX = HW;
 				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = hisun;
+				ORGANIZATIONNAME = DevKevin;
 				TargetAttributes = {
 					E114714D1D0E58FA00107A3E = {
 						CreatedOnToolsVersion = 7.2.1;
