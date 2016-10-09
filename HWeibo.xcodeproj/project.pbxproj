@@ -67,6 +67,7 @@
 		E140CA971D9DF6660015741D /* HWPlaceholderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E140CA961D9DF6660015741D /* HWPlaceholderTextView.m */; };
 		E142AE2C1DA4DE5300CC9C92 /* HWHttpTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E142AE2B1DA4DE5300CC9C92 /* HWHttpTool.m */; };
 		E14506011D9EA80B00A561ED /* HWComposeToolBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E14506001D9EA80B00A561ED /* HWComposeToolBar.m */; };
+		E15D63301DA9F45800C9935F /* 30day-40day 新浪微博(项目实践)－－Sealed version - 张坤楠 - 通联学苑.webarchive in Resources */ = {isa = PBXBuildFile; fileRef = E15D632F1DA9F45800C9935F /* 30day-40day 新浪微博(项目实践)－－Sealed version - 张坤楠 - 通联学苑.webarchive */; };
 		E15D7E471D94FEFB005B45DA /* HWStatuesToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = E15D7E461D94FEFB005B45DA /* HWStatuesToolbar.m */; };
 		E17066BB1D41C50C00E6625B /* HWNewFeatureViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E17066BA1D41C50C00E6625B /* HWNewFeatureViewController.m */; };
 		E18353461D55A7D6009B694A /* HWLoadMoreDateFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = E18353451D55A7D6009B694A /* HWLoadMoreDateFooterView.m */; };
@@ -224,6 +225,7 @@
 		E142AE2B1DA4DE5300CC9C92 /* HWHttpTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWHttpTool.m; sourceTree = "<group>"; };
 		E14505FF1D9EA80B00A561ED /* HWComposeToolBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWComposeToolBar.h; sourceTree = "<group>"; };
 		E14506001D9EA80B00A561ED /* HWComposeToolBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWComposeToolBar.m; sourceTree = "<group>"; };
+		E15D632F1DA9F45800C9935F /* 30day-40day 新浪微博(项目实践)－－Sealed version - 张坤楠 - 通联学苑.webarchive */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = "30day-40day 新浪微博(项目实践)－－Sealed version - 张坤楠 - 通联学苑.webarchive"; sourceTree = "<group>"; };
 		E15D7E451D94FEFB005B45DA /* HWStatuesToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatuesToolbar.h; sourceTree = "<group>"; };
 		E15D7E461D94FEFB005B45DA /* HWStatuesToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatuesToolbar.m; sourceTree = "<group>"; };
 		E17066B91D41C50C00E6625B /* HWNewFeatureViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWNewFeatureViewController.h; sourceTree = "<group>"; };
@@ -385,6 +387,7 @@
 		E11471511D0E58FA00107A3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				E15D632F1DA9F45800C9935F /* 30day-40day 新浪微博(项目实践)－－Sealed version - 张坤楠 - 通联学苑.webarchive */,
 				E120AB751DA10CFC00A6FA28 /* EmotionIcons */,
 				E114715D1D0E58FA00107A3E /* Assets.xcassets */,
 				E114715F1D0E58FA00107A3E /* LaunchScreen.storyboard */,
@@ -934,6 +937,7 @@
 				E120AB8D1DA2344D00A6FA28 /* HWEmojiMagnifierView.xib in Resources */,
 				E18353481D55A7E8009B694A /* HWLoadMoreDateFooterView.xib in Resources */,
 				E1E9011F1D48A49D001F78C3 /* MBProgressHUD.bundle in Resources */,
+				E15D63301DA9F45800C9935F /* 30day-40day 新浪微博(项目实践)－－Sealed version - 张坤楠 - 通联学苑.webarchive in Resources */,
 				E11471611D0E58FA00107A3E /* LaunchScreen.storyboard in Resources */,
 				E120AB761DA10CFC00A6FA28 /* EmotionIcons in Resources */,
 				E1B58EEC1D4C702C00E74E9C /* Info.plist in Resources */,
