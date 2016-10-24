@@ -15,6 +15,9 @@
 /**text	string	微博信息内容*/
 @property (nonatomic,copy) NSString *text;
 
+/**text	string	微博信息内容  使用于图文混排*/
+@property (nonatomic,copy) NSAttributedString *attributedText;
+
 /**	string	微博创建时间*/
 @property (nonatomic,copy) NSString *created_at;
 

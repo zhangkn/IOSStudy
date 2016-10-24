@@ -11,6 +11,49 @@
 #import "HWCreatedAtTool.h"
 
 @implementation HWStatuses
+
+
+
+//- (void)setAttributedText:(NSAttributedString *)attributedText{
+//    
+//}
+
+- (void)setText:(NSString *)text{
+    _text = [text copy];
+    [self setAttributedTextWithText:text];
+}
+
+
+- (void)setAttributedTextWithText:(NSString *)text{
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]initWithString:text];
+//    处理特殊文字
+    //表情【英文+中文】
+//    [self matchesInStringWithRegularExpression:@"\\[[a-zA-Z\u4e00-\u9fa5]+\\]" text:text];
+    //@用户昵称
+//    [self matchesInStringWithRegularExpression:@"@[0-9a-zA-Z\u4e00-\u9fa5]+" text:text];
+    //话题##
+//    [self matchesInStringWithRegularExpression:@"#[0-9a-zA-Z\u4e00-\u9fa5]+#" text:text];
+    //超找表情、话题、用户昵称
+//    [self matchesInStringWithRegularExpression:@"#[0-9a-zA-Z\u4e00-\u9fa5]+#|@[0-9a-zA-Z\u4e00-\u9fa5]+|\\[[a-zA-Z\u4e00-\u9fa5]+\\]" text:text];
+    //匹配链接
+    NSString *pattern = @"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]";//? 代表0 或者1个
+    [self matchesInStringWithRegularExpression:pattern text:text];
+    
+    self.attributedText = attributedText;
+
+}
+
+- (void)matchesInStringWithRegularExpression:(NSString *)pattern  text:(NSString*)text{
+    NSRegularExpression *regularExpression = [[NSRegularExpression alloc]initWithPattern:pattern options:0 error:nil];
+    NSArray *results = [regularExpression matchesInString:text options:0 range:NSMakeRange(0, text.length)];
+    for (NSTextCheckingResult *obj in results) {
+        NSLog(@"%@",[text  substringWithRange:obj.range]);
+    }
+    
+}
+
+
+
 /**
  *  数组中需要转换的模型类
  *

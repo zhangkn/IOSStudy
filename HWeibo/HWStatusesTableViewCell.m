@@ -288,7 +288,13 @@
     self.sourceLabel.text = frameModel.statues.source;
     // 正文
     self.contentLabel.frame = frameModel.contentLabelFrame;
-    self.contentLabel.text = frameModel.statues.text;
+    [self setContentLabelText:frameModel];
+}
+#pragma mark - 图文混排
+- (void) setContentLabelText:(HWStatusesTableViewCellFrame*)frameModel{
+//    self.contentLabel.text = frameModel.statues.text;
+//   使用 NSAttributedString 来代替普通文本
+    self.contentLabel.attributedText =frameModel.statues.attributedText;    
 }
 
 #pragma mark - 装配转发微博控件
