@@ -10,6 +10,7 @@
 #import "MJExtension.h"
 #import "HWCreatedAtTool.h"
 #import "HWStatusTextPartModel.h"
+#import "HWEmotionModel.h"
 
 @implementation HWStatuses
 
@@ -46,27 +47,43 @@
     //2.拼接属性文本信息
     return [self processStatusTextPartModels:statusTextPartModels];
 }
+#define HWSpecialStringColor HWColor(138, 186, 244)
 /** 分文本的种类进行处理*/
 - (NSMutableAttributedString*)processStatusTextPartModels:(NSMutableArray*)statusTextPartModels{
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]init];
     for (HWStatusTextPartModel *obj in statusTextPartModels) {
-        NSMutableAttributedString *attributedString= [[NSMutableAttributedString alloc]initWithString:obj.text];
+        NSMutableAttributedString *substr;
         if (obj.isEmotion) {
             //处理表情
-            attributedString = [self processEmotionWithHWStatusTextPartModel:obj];
+            substr = [self processEmotionWithHWStatusTextPartModel:obj];
         }else if(obj.isspecial){
             //处理颜色
-            [attributedString addAttribute:NSForegroundColorAttributeName value:HWColor(138, 186, 244) range:NSMakeRange(0, obj.text.length)];
+            substr = [self setNSMutableAttributedStringColor:obj.text color:HWSpecialStringColor];
+        }else{
+           substr =[self setNSMutableAttributedStringColor:obj.text color:nil];
         }
-        [attributedText appendAttributedString:attributedString];
+        [attributedText appendAttributedString:substr];
     }
     return attributedText;
 }
+
+- (NSMutableAttributedString*)setNSMutableAttributedStringColor:(NSString*)text color:(UIColor*)color{
+    NSMutableAttributedString *attributedString= [[NSMutableAttributedString alloc]initWithString:text];
+    if (color) {
+        [attributedString addAttribute:NSForegroundColorAttributeName value:color range:NSMakeRange(0,text.length)];
+    }
+    return attributedString;
+}
+
 /** 处理表情文字*/
 - (NSMutableAttributedString*)processEmotionWithHWStatusTextPartModel:(HWStatusTextPartModel *)obj {
     NSTextAttachment *textAttachment = [[NSTextAttachment alloc]init];
-    textAttachment.image = [UIImage imageNamed:@"d_aini"];
-    textAttachment.bounds = CGRectMake(0, -3, 15, 15);//设置表情的位置
+    NSString *imageName = [HWEmotionModel getModelWithChs:obj.text].png;
+    if (!imageName) {
+        return [self setNSMutableAttributedStringColor:obj.text color:HWSpecialStringColor];
+    }
+    textAttachment.image = [UIImage imageNamed:imageName];
+    textAttachment.bounds = CGRectMake(0, -3, HWNameLabelFont.lineHeight, HWNameLabelFont.lineHeight);//设置表情的位置
     NSAttributedString *textAttachmentattributedString = [NSAttributedString attributedStringWithAttachment:textAttachment];
      NSMutableAttributedString *substr = [[NSMutableAttributedString alloc]initWithAttributedString:textAttachmentattributedString];
     return substr;

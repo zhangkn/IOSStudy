@@ -48,8 +48,10 @@
 /** 获取全局变量的模型数组*/
 + (NSArray *)getSituationListModelWithType:(HWEmotionModelType)emotionModelType;
 
-
+/** 根据字体属性 返回模型对应的NSMutableAttributedString*/
 + (NSMutableAttributedString*)emotionMutableAttributedStringWithModel:(HWEmotionModel*)model font:(UIFont*)font;
+/** 根据chs  获取对应的模型*/
++ (HWEmotionModel *)getModelWithChs:(NSString*)chs;
 
 
 

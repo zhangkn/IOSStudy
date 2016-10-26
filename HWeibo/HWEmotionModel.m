@@ -17,6 +17,20 @@ NSArray *tmpemojiModelArray;
 NSArray *tmpDefaultModelArray;
 NSArray *tmpHuahuaModelAray;
 
++(HWEmotionModel *)getModelWithChs:(NSString *)chs{
+    for (HWEmotionModel *obj in [self ListModelWithType:HWEmotionModelTypeDefault]) {
+        if ([obj.chs isEqualToString:chs]) {
+            return obj;
+        }
+    }
+    for (HWEmotionModel *obj in [self ListModelWithType:HWEmotionModelTypeHuaHua]) {
+        if ([obj.chs isEqualToString:chs]) {
+            return obj;
+        }
+    }
+    return nil;
+}
+
 + (NSMutableAttributedString *)emotionMutableAttributedStringWithModel:(HWEmotionModel *)model font:(UIFont *)font{
     NSMutableAttributedString *str= [[NSMutableAttributedString alloc]init];
     NSAttributedString *tmp;//模型表情数据
