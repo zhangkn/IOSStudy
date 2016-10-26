@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "HWUser.h"
 #import "HWPhoto.h"
+#define HWNameLabelFont [UIFont systemFontOfSize:12]
 @interface HWStatuses : NSObject
 /**idstr	string	字符串型的微博ID*/
 @property (nonatomic,copy) NSString *idstr;

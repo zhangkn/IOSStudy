@@ -103,7 +103,7 @@
     /** 正文*/
     CGFloat contentX = HWStatusCellBorderW;
     CGFloat contentY = MAX(CGRectGetMaxY(self.iconViewFrame),CGRectGetMaxY(self.timeLabelFrame))+HWStatusCellBorderW;
-    CGSize contentSize = [statues.text sizeWithFont:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
+    CGSize contentSize = [statues.attributedText boundingRectWithSize:CGSizeMake(KMainScreenWidth-2*HWStatusCellBorderW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;
     self.contentLabelFrame = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
     /** 配图*/
     if (statues.pic_urls.count>0) {
@@ -129,8 +129,9 @@
         //转发微博的文本信息
         CGFloat retweetedContentX = HWStatusCellBorderW;
         CGFloat retweetedContentY =HWStatusCellBorderW;
-        NSString *tmp = [NSString stringWithFormat:@"@%@:%@",statues.retweeted_status.user.name,statues.retweeted_status.text];
-        CGSize retweetedContentSize = [tmp sizeWithFont:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
+        NSAttributedString *tmp = statues.retweeted_status.attributedText;
+//        CGSize retweetedContentSize = [tmp sizeWithFont:HWNameLabelFont maxW:KMainScreenWidth-2*HWStatusCellBorderW];
+        CGSize retweetedContentSize = [tmp boundingRectWithSize:CGSizeMake(KMainScreenWidth-2*HWStatusCellBorderW, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil].size;//记得设置NSAttributedString的字体
         self.repostContentLabelFrame = CGRectMake(retweetedContentX, retweetedContentY, retweetedContentSize.width, retweetedContentSize.height);
         //转发微博的配图信息
         if (statues.retweeted_status.pic_urls.count>0) {

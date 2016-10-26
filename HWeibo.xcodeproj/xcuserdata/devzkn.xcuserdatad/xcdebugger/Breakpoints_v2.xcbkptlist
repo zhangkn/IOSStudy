@@ -580,11 +580,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/HWStatuses.m"
-            timestampString = "498995584.937204"
+            timestampString = "499162571.165301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
+            startingLineNumber = "136"
+            endingLineNumber = "136"
             landmarkName = "-setSource:"
             landmarkType = "7">
          </BreakpointContent>
@@ -596,11 +596,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/HWStatuses.m"
-            timestampString = "498995584.937204"
+            timestampString = "499162571.165301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "79"
-            endingLineNumber = "79"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "-setSource:"
             landmarkType = "7">
          </BreakpointContent>
@@ -692,11 +692,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/HWStatuses.m"
-            timestampString = "498995584.937204"
+            timestampString = "499162571.165301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
             landmarkName = "-created_at"
             landmarkType = "7">
          </BreakpointContent>
@@ -2738,11 +2738,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/HWStatuses.m"
-            timestampString = "498992857.451275"
+            timestampString = "499145784.118151"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "-setAttributedTextWithText:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2754,11 +2754,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/HWStatuses.m"
-            timestampString = "498972383.866495"
+            timestampString = "499145784.118151"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
             landmarkName = "-setAttributedTextWithText:"
             landmarkType = "7">
          </BreakpointContent>
@@ -2770,11 +2770,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HWeibo/HWStatuses.m"
-            timestampString = "498995584.937204"
+            timestampString = "499162571.165301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
             landmarkName = "-matchesInStringWithRegularExpression:text:"
             landmarkType = "7">
          </BreakpointContent>

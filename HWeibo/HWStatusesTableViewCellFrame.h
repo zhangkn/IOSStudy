@@ -10,7 +10,6 @@
 #import "HWStatuses.h"
 
 #define HWStatusCellContentViewSpaceW 5
-#define HWNameLabelFont [UIFont systemFontOfSize:12]
 #define HWTimeLabelFont [UIFont systemFontOfSize:10]
 
 

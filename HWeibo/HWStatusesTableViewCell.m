@@ -305,8 +305,7 @@
         self.repostPhotosView.hidden = NO;
         self.repostView.frame = frameModel.repostViewFrame;
         self.repostContentLabel.frame = frameModel.repostContentLabelFrame;
-        NSString *tmp = [NSString stringWithFormat:@"@%@:%@",frameModel.statues.retweeted_status.user.name,frameModel.statues.retweeted_status.text];
-        self.repostContentLabel.text = tmp;
+        self.repostContentLabel.attributedText =  frameModel.statues.retweeted_status.attributedText;
         //转发微币的配图
         if (frameModel.statues.retweeted_status.pic_urls.count>0) {
             self.repostPhotosView.hidden = NO;

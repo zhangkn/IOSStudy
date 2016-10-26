@@ -91,6 +91,8 @@
 		E1B58EF51D4C702C00E74E9C /* NSObject+MJProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B58EE91D4C702C00E74E9C /* NSObject+MJProperty.m */; };
 		E1B58EF61D4C702C00E74E9C /* NSString+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = E1B58EEB1D4C702C00E74E9C /* NSString+MJExtension.m */; };
 		E1BB11DD1D2274FF0030EC5C /* UIBarButtonItem+Extension.m in Sources */ = {isa = PBXBuildFile; fileRef = E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */; };
+		E1C0DD311DBEF37000F6ED4D /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = E1C0DD301DBEF37000F6ED4D /* RegexKitLite.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		E1C0DD341DBEF3FF00F6ED4D /* libicucore.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E1C0DD331DBEF3FF00F6ED4D /* libicucore.tbd */; };
 		E1E2205F1D40B9E200BC090B /* HWTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E2205E1D40B9E200BC090B /* HWTabBar.m */; };
 		E1E9010B1D484BDE001F78C3 /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E900F91D484BDE001F78C3 /* AFHTTPRequestOperation.m */; };
 		E1E9010C1D484BDE001F78C3 /* AFHTTPRequestOperationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E900FB1D484BDE001F78C3 /* AFHTTPRequestOperationManager.m */; };
@@ -105,6 +107,7 @@
 		E1E9011E1D48A49D001F78C3 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E9011A1D48A49D001F78C3 /* MBProgressHUD+MJ.m */; };
 		E1E9011F1D48A49D001F78C3 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1E9011B1D48A49D001F78C3 /* MBProgressHUD.bundle */; };
 		E1E901201D48A49D001F78C3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E9011D1D48A49D001F78C3 /* MBProgressHUD.m */; };
+		E1E99A181DC053060019932B /* HWStatusTextPartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E99A171DC053060019932B /* HWStatusTextPartModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -271,6 +274,9 @@
 		E1B58EEB1D4C702C00E74E9C /* NSString+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+MJExtension.m"; sourceTree = "<group>"; };
 		E1BB11DB1D2274FF0030EC5C /* UIBarButtonItem+Extension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIBarButtonItem+Extension.h"; sourceTree = "<group>"; };
 		E1BB11DC1D2274FF0030EC5C /* UIBarButtonItem+Extension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIBarButtonItem+Extension.m"; sourceTree = "<group>"; };
+		E1C0DD2F1DBEF37000F6ED4D /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
+		E1C0DD301DBEF37000F6ED4D /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
+		E1C0DD331DBEF3FF00F6ED4D /* libicucore.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libicucore.tbd; path = usr/lib/libicucore.tbd; sourceTree = SDKROOT; };
 		E1E2205D1D40B9E200BC090B /* HWTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWTabBar.h; sourceTree = "<group>"; };
 		E1E2205E1D40B9E200BC090B /* HWTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWTabBar.m; sourceTree = "<group>"; };
 		E1E900F81D484BDE001F78C3 /* AFHTTPRequestOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPRequestOperation.h; sourceTree = "<group>"; };
@@ -299,6 +305,8 @@
 		E1E9011B1D48A49D001F78C3 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		E1E9011C1D48A49D001F78C3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E1E9011D1D48A49D001F78C3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E1E99A161DC053060019932B /* HWStatusTextPartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusTextPartModel.h; sourceTree = "<group>"; };
+		E1E99A171DC053060019932B /* HWStatusTextPartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusTextPartModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +314,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E1C0DD341DBEF3FF00F6ED4D /* libicucore.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -364,6 +373,7 @@
 			children = (
 				E11471501D0E58FA00107A3E /* HWeibo */,
 				E114714F1D0E58FA00107A3E /* Products */,
+				E1C0DD321DBEF3FE00F6ED4D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -716,6 +726,8 @@
 				E1B58EAC1D4C460D00E74E9C /* HWUser.h */,
 				E11749101D935DEE00B89DFE /* HWPhoto.h */,
 				E11749111D935DEE00B89DFE /* HWPhoto.m */,
+				E1E99A161DC053060019932B /* HWStatusTextPartModel.h */,
+				E1E99A171DC053060019932B /* HWStatusTextPartModel.m */,
 				E1B58EAF1D4C496D00E74E9C /* HWStatuses.h */,
 				E1B58EB01D4C496D00E74E9C /* HWStatuses.m */,
 				E1920B091D8FD447003AD139 /* HWStatusesTableViewCellFrame.h */,
@@ -811,9 +823,27 @@
 			name = Category;
 			sourceTree = "<group>";
 		};
+		E1C0DD2E1DBEF37000F6ED4D /* RegexKitLite */ = {
+			isa = PBXGroup;
+			children = (
+				E1C0DD2F1DBEF37000F6ED4D /* RegexKitLite.h */,
+				E1C0DD301DBEF37000F6ED4D /* RegexKitLite.m */,
+			);
+			path = RegexKitLite;
+			sourceTree = "<group>";
+		};
+		E1C0DD321DBEF3FE00F6ED4D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E1C0DD331DBEF3FF00F6ED4D /* libicucore.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E1E900F61D484BD1001F78C3 /* lib */ = {
 			isa = PBXGroup;
 			children = (
+				E1C0DD2E1DBEF37000F6ED4D /* RegexKitLite */,
 				E1B58ED51D4C702C00E74E9C /* MJExtension */,
 				E13C3A091D4B49200026221C /* SDWebImage */,
 				E1E901181D48A49D001F78C3 /* MBProgressHUD */,
@@ -970,6 +1000,7 @@
 				E1B58EEE1D4C702C00E74E9C /* MJFoundation.m in Sources */,
 				E1E9010E1D484BDE001F78C3 /* AFNetworkReachabilityManager.m in Sources */,
 				E11749121D935DEE00B89DFE /* HWPhoto.m in Sources */,
+				E1C0DD311DBEF37000F6ED4D /* RegexKitLite.m in Sources */,
 				E12E47D51D97794300394ACF /* HWCreatedAtTool.m in Sources */,
 				E139D9161D49AA060052815A /* HWAccountTool.m in Sources */,
 				E13C3A341D4B49200026221C /* UIButton+WebCache.m in Sources */,
@@ -1028,6 +1059,7 @@
 				E120AB711DA0CABD00A6FA28 /* HWEmojiListView.m in Sources */,
 				E13C3A371D4B49200026221C /* UIImage+WebP.m in Sources */,
 				E10C644B1D20D14B0023E642 /* HWDiscoverTableViewController.m in Sources */,
+				E1E99A181DC053060019932B /* HWStatusTextPartModel.m in Sources */,
 				E140CA971D9DF6660015741D /* HWPlaceholderTextView.m in Sources */,
 				E1E901111D484BDE001F78C3 /* AFURLRequestSerialization.m in Sources */,
 				E1E9010B1D484BDE001F78C3 /* AFHTTPRequestOperation.m in Sources */,
