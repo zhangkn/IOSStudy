@@ -12,8 +12,7 @@
 
 - (void)setText:(NSString *)text{
     _text = text;
-    NSString *emojiPattern = @"\\[[a-zA-Z\u4e00-\u9fa5]+\\]";
-    self.isEmotion = [text isMatchedByRegex:emojiPattern];
+    self.isEmotion = [text isMatchedByRegex:HWemojiPattern];
 }
 
 
@@ -58,6 +57,20 @@
         }
         return (NSComparisonResult)NSOrderedSame;
     }]];
+    return statusTextPartModels;
+}
+
+
++ (NSMutableArray *)statusTextPartModelsWithPattern:(NSString*)specialPattern text:(NSString*)text{
+    NSMutableArray *statusTextPartModels = [NSMutableArray arrayWithCapacity:11];
+    //1.获取分块的文本信息数组
+    [text enumerateStringsMatchedByRegex:specialPattern usingBlock:^(NSInteger captureCount, NSString *const __unsafe_unretained *capturedStrings, const NSRange *capturedRanges, volatile BOOL *const stop) {
+        if ((*capturedRanges).length == 0) {
+            return ;
+        }
+        [statusTextPartModels addObject:[HWStatusTextPartModel statusTextPartModelWithText:*capturedStrings range:*capturedRanges isspecial:YES]];
+    }];
+   
     return statusTextPartModels;
 }
 

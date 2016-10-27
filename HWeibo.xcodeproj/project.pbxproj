@@ -107,6 +107,8 @@
 		E1E9011E1D48A49D001F78C3 /* MBProgressHUD+MJ.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E9011A1D48A49D001F78C3 /* MBProgressHUD+MJ.m */; };
 		E1E9011F1D48A49D001F78C3 /* MBProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = E1E9011B1D48A49D001F78C3 /* MBProgressHUD.bundle */; };
 		E1E901201D48A49D001F78C3 /* MBProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E9011D1D48A49D001F78C3 /* MBProgressHUD.m */; };
+		E1E994A41DC18BA80091DCF0 /* HWStatueTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E994A31DC18BA80091DCF0 /* HWStatueTextView.m */; };
+		E1E994A71DC1DE380091DCF0 /* HWSpecialTextPart.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E994A61DC1DE380091DCF0 /* HWSpecialTextPart.m */; };
 		E1E99A181DC053060019932B /* HWStatusTextPartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E99A171DC053060019932B /* HWStatusTextPartModel.m */; };
 /* End PBXBuildFile section */
 
@@ -305,6 +307,10 @@
 		E1E9011B1D48A49D001F78C3 /* MBProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MBProgressHUD.bundle; sourceTree = "<group>"; };
 		E1E9011C1D48A49D001F78C3 /* MBProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MBProgressHUD.h; sourceTree = "<group>"; };
 		E1E9011D1D48A49D001F78C3 /* MBProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MBProgressHUD.m; sourceTree = "<group>"; };
+		E1E994A21DC18BA80091DCF0 /* HWStatueTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatueTextView.h; sourceTree = "<group>"; };
+		E1E994A31DC18BA80091DCF0 /* HWStatueTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatueTextView.m; sourceTree = "<group>"; };
+		E1E994A51DC1DE380091DCF0 /* HWSpecialTextPart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWSpecialTextPart.h; sourceTree = "<group>"; };
+		E1E994A61DC1DE380091DCF0 /* HWSpecialTextPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWSpecialTextPart.m; sourceTree = "<group>"; };
 		E1E99A161DC053060019932B /* HWStatusTextPartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusTextPartModel.h; sourceTree = "<group>"; };
 		E1E99A171DC053060019932B /* HWStatusTextPartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusTextPartModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -705,6 +711,8 @@
 			children = (
 				E13C3A051D4AF2160026221C /* HWTitleButton.h */,
 				E19F34F01D9800310009F550 /* HWStatuePhotoView.h */,
+				E1E994A21DC18BA80091DCF0 /* HWStatueTextView.h */,
+				E1E994A31DC18BA80091DCF0 /* HWStatueTextView.m */,
 				E19F34F11D9800310009F550 /* HWStatuePhotoView.m */,
 				E15D7E451D94FEFB005B45DA /* HWStatuesToolbar.h */,
 				E15D7E461D94FEFB005B45DA /* HWStatuesToolbar.m */,
@@ -727,6 +735,8 @@
 				E11749101D935DEE00B89DFE /* HWPhoto.h */,
 				E11749111D935DEE00B89DFE /* HWPhoto.m */,
 				E1E99A161DC053060019932B /* HWStatusTextPartModel.h */,
+				E1E994A51DC1DE380091DCF0 /* HWSpecialTextPart.h */,
+				E1E994A61DC1DE380091DCF0 /* HWSpecialTextPart.m */,
 				E1E99A171DC053060019932B /* HWStatusTextPartModel.m */,
 				E1B58EAF1D4C496D00E74E9C /* HWStatuses.h */,
 				E1B58EB01D4C496D00E74E9C /* HWStatuses.m */,
@@ -1052,6 +1062,7 @@
 				E10C64481D20D1390023E642 /* HWHomeTableViewController.m in Sources */,
 				E120AB6E1DA0C9A000A6FA28 /* HWEmojiTabbar.m in Sources */,
 				E1E901171D489633001F78C3 /* HWAccountModel.m in Sources */,
+				E1E994A71DC1DE380091DCF0 /* HWSpecialTextPart.m in Sources */,
 				E120AB741DA0F73100A6FA28 /* HWEmojiTabbarButton.m in Sources */,
 				E13C37FE1D8F96970032D49D /* HWStatusesTableViewCell.m in Sources */,
 				E13C3A2C1D4B49200026221C /* NSData+ImageContentType.m in Sources */,
@@ -1064,6 +1075,7 @@
 				E1E901111D484BDE001F78C3 /* AFURLRequestSerialization.m in Sources */,
 				E1E9010B1D484BDE001F78C3 /* AFHTTPRequestOperation.m in Sources */,
 				E1E901121D484BDE001F78C3 /* AFURLResponseSerialization.m in Sources */,
+				E1E994A41DC18BA80091DCF0 /* HWStatueTextView.m in Sources */,
 				E12E47D91D97B82300394ACF /* HWStatuePhotosView.m in Sources */,
 				E19D87C91D3F79840050D822 /* HWDropDown.m in Sources */,
 				E120AB871DA20CCF00A6FA28 /* HWEmojiMagnifierView.m in Sources */,

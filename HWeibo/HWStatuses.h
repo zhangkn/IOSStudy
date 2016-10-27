@@ -15,6 +15,8 @@
 @property (nonatomic,copy) NSString *idstr;
 /**text	string	微博信息内容*/
 @property (nonatomic,copy) NSString *text;
+/** 存储正文的特殊字符串在attributedText的range数组*/
+@property (nonatomic,strong) NSMutableArray *specialRannges;
 
 /**text	string	微博信息内容  使用于图文混排*/
 @property (nonatomic,copy) NSAttributedString *attributedText;

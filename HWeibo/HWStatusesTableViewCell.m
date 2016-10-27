@@ -29,7 +29,7 @@
 /** 来源*/
 @property (nonatomic,weak) UILabel *sourceLabel;
 /** 正文*/
-@property (nonatomic,weak) UILabel *contentLabel;
+@property (nonatomic,weak) HWStatueTextView *contentLabel;
 
 /**2. 转发微博控件 */
 /** 转发微博整体*/
@@ -37,7 +37,7 @@
 /** 转发配图*/
 @property (nonatomic,weak) HWStatuePhotosView *repostPhotosView;
 /** 转发文本*/
-@property (nonatomic,weak) UILabel *repostContentLabel;
+@property (nonatomic,weak) HWStatueTextView *repostContentLabel;
 
 /**3. 转发微博控件 */
 /** 工具条微博整体*/
@@ -66,11 +66,10 @@
     return _repostView;
 }
 
-- (UILabel *)repostContentLabel{
+- (HWStatueTextView *)repostContentLabel{
     if (nil == _repostContentLabel) {
-        UILabel *tmpView = [[UILabel alloc]init];
+        HWStatueTextView *tmpView = [[HWStatueTextView alloc]init];
         _repostContentLabel = tmpView;
-        _repostContentLabel.numberOfLines = 0;
         [self.repostView addSubview:_repostContentLabel];
     }
     return _repostContentLabel;
@@ -150,11 +149,10 @@
     return _sourceLabel;
 }
 
-- (UILabel *)contentLabel{
+- (HWStatueTextView *)contentLabel{
     if (nil == _contentLabel) {
-        UILabel *tmpView = [[UILabel alloc]init];
+        HWStatueTextView *tmpView = [[HWStatueTextView alloc]init];
         _contentLabel = tmpView;
-        [tmpView setNumberOfLines:0];
         [self.originalView addSubview:_contentLabel];
     }
     return _contentLabel;
@@ -204,7 +202,7 @@
 - (void) setupRepostView{
     self.repostView.backgroundColor = [UIColor clearColor];
     self.repostContentLabel.font = HWNameLabelFont;
-//    self.repostPhotoView.contentMode =UIViewContentModeScaleAspectFit;
+    self.repostContentLabel.backgroundColor =[UIColor clearColor];
     self.repostPhotosView.backgroundColor = [UIColor whiteColor];
 }
 
@@ -294,7 +292,8 @@
 - (void) setContentLabelText:(HWStatusesTableViewCellFrame*)frameModel{
 //    self.contentLabel.text = frameModel.statues.text;
 //   使用 NSAttributedString 来代替普通文本
-    self.contentLabel.attributedText =frameModel.statues.attributedText;    
+    self.contentLabel.attributedText =frameModel.statues.attributedText;
+    self.contentLabel.specialRannges =frameModel.statues.specialRannges;
 }
 
 #pragma mark - 装配转发微博控件
@@ -306,6 +305,7 @@
         self.repostView.frame = frameModel.repostViewFrame;
         self.repostContentLabel.frame = frameModel.repostContentLabelFrame;
         self.repostContentLabel.attributedText =  frameModel.statues.retweeted_status.attributedText;
+        self.repostContentLabel.specialRannges =frameModel.statues.retweeted_status.specialRannges;
         //转发微币的配图
         if (frameModel.statues.retweeted_status.pic_urls.count>0) {
             self.repostPhotosView.hidden = NO;

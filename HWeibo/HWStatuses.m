@@ -11,6 +11,8 @@
 #import "HWCreatedAtTool.h"
 #import "HWStatusTextPartModel.h"
 #import "HWEmotionModel.h"
+#import "HWSpecialTextPart.h"
+
 
 @implementation HWStatuses
 
@@ -19,6 +21,7 @@
     _retweeted_status = retweeted_status;
     NSString *tmp = [NSString stringWithFormat:@"@%@:%@",retweeted_status.user.name,retweeted_status.text];
     retweeted_status.text = tmp;
+    
 }
 //- (void)setAttributedText:(NSAttributedString *)attributedText{
 //    
@@ -51,6 +54,7 @@
 /** 分文本的种类进行处理*/
 - (NSMutableAttributedString*)processStatusTextPartModels:(NSMutableArray*)statusTextPartModels{
     NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc]init];
+    NSMutableArray *specialRannges = [[NSMutableArray alloc]init];
     for (HWStatusTextPartModel *obj in statusTextPartModels) {
         NSMutableAttributedString *substr;
         if (obj.isEmotion) {
@@ -59,11 +63,15 @@
         }else if(obj.isspecial){
             //处理颜色
             substr = [self setNSMutableAttributedStringColor:obj.text color:HWSpecialStringColor];
+            //确定在attributedText的range
+            NSRange isspecialRannge = NSMakeRange(attributedText.length, obj.text.length);            
+            [specialRannges addObject:[HWSpecialTextPart specialTextPartWithText:obj.text range:isspecialRannge]];
         }else{
            substr =[self setNSMutableAttributedStringColor:obj.text color:nil];
         }
         [attributedText appendAttributedString:substr];
     }
+    self.specialRannges = specialRannges;
     return attributedText;
 }
 
@@ -102,14 +110,13 @@
 
 - (NSString*)specialPattern{
     //表情【英文+中文】
-    NSString *emojiPattern = @"\\[[a-zA-Z\u4e00-\u9fa5]+\\]";
+    NSString *emojiPattern = HWemojiPattern;
     //@用户昵称
-    NSString *userPattern = @"@[0-9a-zA-Z\u4e00-\u9fa5-_-——]+";
+    NSString *userPattern =HWuserPattern;
     //话题##
-    NSString *topicPattern = @"#[0-9a-zA-Z\u4e00-\u9fa5]+#";
+    NSString *topicPattern =HWtopicPattern;
     //匹配链接
-    NSString *urlPattern= @"(https?|ftp|file)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]";
-    //超找表情、话题、用户昵称
+    NSString *urlPattern=  HWurlPattern;   //超找表情、话题、用户昵称
     //    [self matchesInStringWithRegularExpression:@"#[0-9a-zA-Z\u4e00-\u9fa5]+#|@[0-9a-zA-Z\u4e00-\u9fa5]+|\\[[a-zA-Z\u4e00-\u9fa5]+\\]" text:text];
     
     NSString *pattern =[NSString stringWithFormat:@"%@|%@|%@|%@",emojiPattern,userPattern,topicPattern,urlPattern];//? 代表0 或者1个
