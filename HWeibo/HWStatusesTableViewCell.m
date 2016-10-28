@@ -293,7 +293,11 @@
 //    self.contentLabel.text = frameModel.statues.text;
 //   使用 NSAttributedString 来代替普通文本
     self.contentLabel.attributedText =frameModel.statues.attributedText;
-    self.contentLabel.specialRannges =frameModel.statues.specialRannges;
+    if (frameModel.statues.specialRannges.count != 0) {
+        self.contentLabel.specialRannges =frameModel.statues.specialRannges;
+    }else{
+        self.contentLabel.specialRannges = nil;
+    }
 }
 
 #pragma mark - 装配转发微博控件
