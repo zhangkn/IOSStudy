@@ -17,6 +17,7 @@
 #import "MJExtension.h"
 #import "HWLoadMoreDateFooterView.h"
 #import "HWStatusesTableViewCell.h"
+#import "HWStatusesDBtool.h"
 @interface HWHomeTableViewController ()<HWDropDownDelagate>
 /** 微博数组：每一个元素（字典）代表一条微博信息*/
 @property (nonatomic,strong) NSMutableArray *statusesFrame;
@@ -149,22 +150,34 @@
         parameters[@"max_id"] = @(maxId);
     }
     //    parameters[@"count"]= @20;
-    NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
-    //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
-    [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
-        NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        if (tmpArray.count !=0) {
-            NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
-            [self.statusesFrame addObjectsFromArray:tmpFrameArray];
-            //刷新数据
-            [self.tableView reloadData];
-        }
-        //隐藏tableFooterView
-        self.tableView.tableFooterView.hidden= YES;
-        
-    } failure:^(NSError *error) {
-        NSLog(@"%@",error);
-    }];
+    
+    NSArray *dbstatuses = [HWStatusesDBtool statusesWithparameters:parameters];
+    if (dbstatuses.count) {
+        NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:dbstatuses];
+        [self setuploadMoreStatusParameters:tmpArray];
+    }else{
+        NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
+        //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
+        [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
+            NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+            [HWStatusesDBtool  savestatusesWithStatuses:responseObject[@"statuses"]];
+            [self setuploadMoreStatusParameters:tmpArray];
+            
+        } failure:^(NSError *error) {
+            NSLog(@"%@",error);
+        }];
+    }
+}
+
+- (void)setuploadMoreStatusParameters:(NSArray*)tmpArray{
+    if (tmpArray.count !=0) {
+        NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
+        [self.statusesFrame addObjectsFromArray:tmpFrameArray];
+        //刷新数据
+        [self.tableView reloadData];
+    }
+    //隐藏tableFooterView
+    self.tableView.tableFooterView.hidden= YES;
 }
 
 #pragma mark - 添加下拉刷新按钮
@@ -210,28 +223,45 @@
 //    parameters[@"since_id"]=  [[[self.statusesFrame lastObject] statues] idstr];
 #warning  方案3：下拉刷新 ，只保留一条最新的数据，展示一个加载更多的按钮。（cell 判断，如果只有一条数据，就展示加载更多的数据）
     //    parameters[@"count"]= @1;
-    NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
-    //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
-    [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
-        NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        if (tmpArray.count !=0) {
-//            [self.statusesFrame removeAllObjects];//后台成功返回的时候才进行清空
-            NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
-            NSRange range = NSMakeRange(0, tmpArray.count);
-            NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
-            [self.statusesFrame insertObjects:tmpFrameArray atIndexes:set];
-            //刷新数据
-            [self.tableView reloadData];
-            //显示最新微博数量
-            [self showNewStatusesCount:tmpArray.count];
-        }
-        NSLog(@"%@",[(HWStatuses*)[self.statusesFrame[0] statues] text]);
+    
+    NSArray *dbstatuses = [HWStatusesDBtool statusesWithparameters:parameters];
+    if (dbstatuses.count) {
+        NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:dbstatuses];
+        [self setupstatuses:tmpArray];
         [refreshControl endRefreshing];
-    } failure:^(  NSError *error) {
-        NSLog(@"%@",error);
-        [refreshControl endRefreshing];
-    }];
+    }else{
+        //请求网络数据
+        NSString *url = @"https://api.weibo.com/2/statuses/home_timeline.json";
+        //    NSString *url = @"https://api.weibo.com/2/statuses/friends_timeline.json";
+        [HWHttpTool GET:url parameters:parameters success:^( NSDictionary *responseObject) {
+            NSArray *tmpArray  = [HWStatuses mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+            [HWStatusesDBtool  savestatusesWithStatuses:responseObject[@"statuses"]];
+            [self setupstatuses:tmpArray];
+            NSLog(@"%@",[(HWStatuses*)[self.statusesFrame[0] statues] text]);
+            [refreshControl endRefreshing];
+        } failure:^(  NSError *error) {
+            NSLog(@"%@",error);
+            [refreshControl endRefreshing];
+        }];
+    }
+   
 }
+
+/** 模型数据的展示*/
+- (void) setupstatuses:(NSArray*)tmpArray{
+    if (tmpArray.count !=0) {
+        //            [self.statusesFrame removeAllObjects];//后台成功返回的时候才进行清空
+        NSArray *tmpFrameArray = [HWStatusesTableViewCellFrame listWithHWStatusesArray:tmpArray];
+        NSRange range = NSMakeRange(0, tmpArray.count);
+        NSIndexSet *set = [NSIndexSet indexSetWithIndexesInRange:range];
+        [self.statusesFrame insertObjects:tmpFrameArray atIndexes:set];
+        //刷新数据
+        [self.tableView reloadData];
+        //显示最新微博数量
+        [self showNewStatusesCount:tmpArray.count];
+    }
+}
+
 #pragma mark -  显示刷新的微博数量
 - (void)showNewStatusesCount:(long)count{
     if (count==0) {
