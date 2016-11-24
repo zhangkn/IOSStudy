@@ -20,12 +20,26 @@
 #import "HLShareViewController.h"
 #import "HLAboutViewController.h"
 #import "DKUMShareContentViewController.h"
+#import "HWClearCacheView.h"
+
+#import "HLSettingLabeltemModel.h"
 @interface HLSettingTableViewController ()
+
+@property (nonatomic,strong) HLSettingLabeltemModel *settingLabeltemModel;
+@property (nonatomic,strong) HWClearCacheView *clearCacheView;
 
 
 
 @end
 @implementation HLSettingTableViewController
+
+- (HWClearCacheView *)clearCacheView{
+    if (_clearCacheView == nil) {
+        _clearCacheView = [[[NSBundle mainBundle] loadNibNamed:@"HWClearCacheView" owner:self options:nil]firstObject];
+    }
+    return _clearCacheView;
+}
+
 
 - (instancetype)init{
     self = [super init];
@@ -45,7 +59,28 @@
     [self group1];
     
 }
-
+#pragma mark - 构建清理缓存模型
+- (HLSettingLabeltemModel *)settingLabeltemModel{
+    if (_settingLabeltemModel == nil) {
+        HLSettingLabeltemModel *settingLabeltemModel = [HLSettingLabeltemModel itemModelWithTitle:@"Clear cache" icon:@""];
+        if (settingLabeltemModel.text.length == 0) {//        NSString *text =[HLSaveTool objectForKey:labelModel.title]; 放置于setTitle--        //先从偏好设置获取
+#warning 设置cache
+            [settingLabeltemModel setText:@"234M"];
+        }
+        /**
+         定义clear cache的block
+         */
+        __weak HLSettingTableViewController *weakself = self;
+        [settingLabeltemModel setOptionBlock:^{
+           //展示清理缓存的页面
+            [WINDOWFirst addSubview:weakself.clearCacheView];
+        }];
+        
+        _settingLabeltemModel = settingLabeltemModel;
+        
+    }
+    return _settingLabeltemModel;
+}
 
 - (void) group0{
     //第1组模型构建
@@ -53,7 +88,10 @@
     HLSettingArrowItemModel *pushItem = [HLSettingArrowItemModel itemModelWithTitle:@"消息推送和提醒" icon:@"MorePush" destVCClass:[HLPushTableViewController class]];
     HLSettingSwitchItemModel *handShakeItem = [HLSettingSwitchItemModel itemModelWithTitle:@"摇一摇机选" icon:@"handShake"];
     HLSettingSwitchItemModel *sound_EffectItme = [HLSettingSwitchItemModel itemModelWithTitle:@"声音效果" icon:@"sound_Effect"];
-    group0.items = @[pushItem,handShakeItem,sound_EffectItme];
+    
+    HLSettingLabeltemModel *settingLabeltemModel = [self settingLabeltemModel];
+    
+    group0.items = @[pushItem,handShakeItem,sound_EffectItme,settingLabeltemModel];
     [self.dataList addObject:group0];
 }
 
