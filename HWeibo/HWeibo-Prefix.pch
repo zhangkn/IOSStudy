@@ -60,6 +60,7 @@
 #define  IOSSystemVersion [[UIDevice currentDevice].systemVersion doubleValue]
 
 #define  IOS7 ([[UIDevice currentDevice].systemVersion doubleValue]>=7.0) 
+#define IOS9 [UIDevice  currentDevice].systemVersion.floatValue>=9.0
 
 
 

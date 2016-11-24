@@ -11,16 +11,45 @@
 #import "HWAccountModel.h"
 #import "HWAccountTool.h"
 #import "SDWebImageManager.h"
-
+#import <UMSocialCore/UMSocialCore.h>
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        
+    }
+    return result;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url
+{
+    BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
+    if (!result) {
+        
+    }
+    return result;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    //分享到新浪
+//    [application setStatusBarStyle:UIStatusBarStyleLightContent];
+    //打开日志
+    [[UMSocialManager defaultManager] openLog:YES];
+    //设置友盟appkey
+    [[UMSocialManager defaultManager] setUmSocialAppkey:@"57f9a22367e58eb2b9000a22"];
+    
+    // 获取友盟social版本号
+    NSLog(@"UMeng social version: %@", [UMSocialGlobal umSocialSDKVersion]);
+    [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"853742809"  appSecret:@"c3985488af7d15eeb14cc1e5e7aee789" redirectURL:@"http://sns.whalecloud.com/sina2/callback"];
+
+    
     // Override point for customization after application launch.
     //创建窗口
     self.window = [[UIWindow alloc]init];
