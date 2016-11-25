@@ -275,6 +275,7 @@
 		E1E994A41DC18BA80091DCF0 /* HWStatueTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E994A31DC18BA80091DCF0 /* HWStatueTextView.m */; };
 		E1E994A71DC1DE380091DCF0 /* HWSpecialTextPart.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E994A61DC1DE380091DCF0 /* HWSpecialTextPart.m */; };
 		E1E99A181DC053060019932B /* HWStatusTextPartModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E1E99A171DC053060019932B /* HWStatusTextPartModel.m */; };
+		E1FDA0461DE7DA0F00EC01B5 /* HWClearCacheTool.m in Sources */ = {isa = PBXBuildFile; fileRef = E1FDA0451DE7DA0F00EC01B5 /* HWClearCacheTool.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -698,6 +699,8 @@
 		E1E994A61DC1DE380091DCF0 /* HWSpecialTextPart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWSpecialTextPart.m; sourceTree = "<group>"; };
 		E1E99A161DC053060019932B /* HWStatusTextPartModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWStatusTextPartModel.h; sourceTree = "<group>"; };
 		E1E99A171DC053060019932B /* HWStatusTextPartModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWStatusTextPartModel.m; sourceTree = "<group>"; };
+		E1FDA0441DE7DA0F00EC01B5 /* HWClearCacheTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HWClearCacheTool.h; sourceTree = "<group>"; };
+		E1FDA0451DE7DA0F00EC01B5 /* HWClearCacheTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HWClearCacheTool.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1574,6 +1577,7 @@
 		E10FCC6B1DE6CF4000F6BFEF /* clearCacheView */ = {
 			isa = PBXGroup;
 			children = (
+				E1FDA0431DE7D9EA00EC01B5 /* Tool */,
 				E10FCC6D1DE6D0CD00F6BFEF /* HWClearCacheView.h */,
 				E10FCC6E1DE6D0CD00F6BFEF /* HWClearCacheView.m */,
 				E10FCC701DE6D0DF00F6BFEF /* HWClearCacheView.xib */,
@@ -2146,6 +2150,15 @@
 			path = MBProgressHUD;
 			sourceTree = "<group>";
 		};
+		E1FDA0431DE7D9EA00EC01B5 /* Tool */ = {
+			isa = PBXGroup;
+			children = (
+				E1FDA0441DE7DA0F00EC01B5 /* HWClearCacheTool.h */,
+				E1FDA0451DE7DA0F00EC01B5 /* HWClearCacheTool.m */,
+			);
+			name = Tool;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2354,6 +2367,7 @@
 				E142AE2C1DA4DE5300CC9C92 /* HWHttpTool.m in Sources */,
 				E123001A1D9B5CC80061E8A3 /* HWComposeViewController.m in Sources */,
 				E13155511D9CFACB00CAD5D9 /* NSString+Extension.m in Sources */,
+				E1FDA0461DE7DA0F00EC01B5 /* HWClearCacheTool.m in Sources */,
 				E10FCB5E1DE6BD8300F6BFEF /* UMSocialCollectionCell.m in Sources */,
 				E1E901101D484BDE001F78C3 /* AFURLConnectionOperation.m in Sources */,
 				E123455F1DE3F679008B4735 /* FMDatabasePool.m in Sources */,

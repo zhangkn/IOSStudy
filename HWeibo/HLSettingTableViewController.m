@@ -21,9 +21,11 @@
 #import "HLAboutViewController.h"
 #import "DKUMShareContentViewController.h"
 #import "HWClearCacheView.h"
+#import "HWClearCacheTool.h"
+#import "MBProgressHUD+MJ.h"
 
 #import "HLSettingLabeltemModel.h"
-@interface HLSettingTableViewController ()
+@interface HLSettingTableViewController ()<HWClearCacheViewDelegate>
 
 @property (nonatomic,strong) HLSettingLabeltemModel *settingLabeltemModel;
 @property (nonatomic,strong) HWClearCacheView *clearCacheView;
@@ -36,9 +38,24 @@
 - (HWClearCacheView *)clearCacheView{
     if (_clearCacheView == nil) {
         _clearCacheView = [[[NSBundle mainBundle] loadNibNamed:@"HWClearCacheView" owner:self options:nil]firstObject];
+        _clearCacheView.delegate = self;
     }
     return _clearCacheView;
 }
+
+#pragma mark - HWClearCacheViewDelegate
+
+- (void)clearCacheViewDidClickConfirmButon:(HWClearCacheView *)clearCacheView{
+    [MBProgressHUD showMessage:@"clearing cache"];
+    [HWClearCacheTool clearCacheDir];
+    [MBProgressHUD hideHUD];
+    [MBProgressHUD showSuccess:@"cleared cache"];
+    //刷新表格数据
+    [self setupCacheSize];
+}
+
+
+
 
 
 - (instancetype)init{
@@ -59,13 +76,28 @@
     [self group1];
     
 }
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    //显示缓存大小
+    [self setupCacheSize];
+}
+
+- (void)setupCacheSize{
+    double size = [HWClearCacheTool getCacheDirSize];
+    [_settingLabeltemModel setText:[NSString stringWithFormat:@"%0.1fM",size]];
+    //刷新表格
+    [self.tableView reloadData];
+}
+
 #pragma mark - 构建清理缓存模型
 - (HLSettingLabeltemModel *)settingLabeltemModel{
     if (_settingLabeltemModel == nil) {
         HLSettingLabeltemModel *settingLabeltemModel = [HLSettingLabeltemModel itemModelWithTitle:@"Clear cache" icon:@""];
         if (settingLabeltemModel.text.length == 0) {//        NSString *text =[HLSaveTool objectForKey:labelModel.title]; 放置于setTitle--        //先从偏好设置获取
 #warning 设置cache
-            [settingLabeltemModel setText:@"234M"];
+            double size = [HWClearCacheTool getCacheDirSize];
+            [settingLabeltemModel setText:[NSString stringWithFormat:@"%0.1fM",size]];
         }
         /**
          定义clear cache的block

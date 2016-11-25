@@ -7,6 +7,7 @@
 //
 
 #import "HWClearCacheView.h"
+#import "HWClearCacheTool.h"
 
 @interface HWClearCacheView()
 @property (weak, nonatomic) IBOutlet UIView *view;
@@ -34,8 +35,14 @@
     
     
 }
+
+/** 清理缓存*/
 - (IBAction)clickconfirmBtn:(UIButton *)sender {
-    
+    [self close:nil];
+    //通知控制器处理缓存数据
+    if ([self.delegate respondsToSelector:@selector(clearCacheViewDidClickConfirmButon:)]) {
+        [self.delegate clearCacheViewDidClickConfirmButon:self];
+    }
     
 }
 
