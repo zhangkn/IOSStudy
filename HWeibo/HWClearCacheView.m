@@ -30,9 +30,16 @@
 
 
 
+
 - (IBAction)close:(UIButton *)sender {
-    [self removeFromSuperview];
-    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.y = self.height;
+    }completion:^(BOOL finished) {
+        self.y = 0;
+        [self removeFromSuperview];
+    }];
+
+
     
 }
 
@@ -75,9 +82,14 @@
 
 
 
-//-(void)willMoveToSuperview:(UIView *)newSuperview{
-//  
-//}
+-(void)willMoveToSuperview:(UIView *)newSuperview{
+    self.view.y = self.view.height;
+  [UIView  animateWithDuration:0.5 animations:^{
+      self.view.y = 0;
+  } completion:^(BOOL finished) {
+      
+  }];
+}
 
 #pragma mark - 事件拦截的处理：去掉textView的copy功能  先调用 - (BOOL)pointInside:(CGPoint)point withEvent:(UIEvent *)event； 再调用- (UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event
 /** whether the receiver contains the specified point.*/

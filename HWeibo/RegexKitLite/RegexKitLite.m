@@ -2,7 +2,9 @@
 //  RegexKitLite.m
 //  http://regexkit.sourceforge.net/
 //  Licensed under the terms of the BSD License, as specified below.
+
 //
+#warning 需要导入libicucore.tbd
 
 /*
  Copyright (c) 2008-2010, John Engelhart
