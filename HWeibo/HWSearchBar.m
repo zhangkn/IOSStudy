@@ -17,7 +17,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.font = [UIFont systemFontOfSize:12];
-        self.placeholder = @"大家正在搜：霉霉侃爷撕逼";
+        self.placeholder = @"大家正在搜：张坤楠";
         self.background = [UIImage imageNamed:@"searchbar_textfield_background"];
         //设置文本输入框的左视图
         UIImageView *searchIcon = [[UIImageView alloc]init];
